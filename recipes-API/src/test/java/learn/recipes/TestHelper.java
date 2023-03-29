@@ -9,7 +9,7 @@ public class TestHelper {
     static public AppUser makeAppUser(int id) {
         AppUser user = new AppUser();
         user.setAppUserId(id);
-        user.setUserName("TestName");
+        user.setUsername("TestName");
         user.setPasswordHash("Password");
         user.setEnabled(true);
         user.setFirstName("First");

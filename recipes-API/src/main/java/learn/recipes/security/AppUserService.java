@@ -62,7 +62,7 @@ public class AppUserService {
                 return result;
             }
         }
-        if(Validations.isNullOrBlank(user.getUserName())) {
+        if(Validations.isNullOrBlank(user.getUsername())) {
             result.addErr("", "user name is required", ResultType.NOT_FOUND);
         }
         if(Validations.isNullOrBlank(user.getPasswordHash())) {

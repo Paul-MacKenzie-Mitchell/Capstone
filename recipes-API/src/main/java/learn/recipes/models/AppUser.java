@@ -20,7 +20,7 @@ public class AppUser {
     private int appUserId;
     @NonNull
     @NotBlank
-    private String userName;
+    private String username;
     @NonNull
     @NotBlank
     private String passwordHash;
@@ -38,8 +38,8 @@ public class AppUser {
     @Temporal(TemporalType.DATE)
     private LocalDate dob;
 
-    private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+//    private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
 
-    public AppUser(String userName, List<String> authorities) {
-    }
+//    public AppUser(String userName, List<String> authorities) {
+//    }
 }
