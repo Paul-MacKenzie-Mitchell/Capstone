@@ -206,36 +206,36 @@ begin
         (3, 2);
         
 	-- do we want to move the amount and measurement_unit columns into ingredients & meal_components tables?
-	insert into food (food_name, amount, measurement_unit, food_category, food_description)
+	insert into food (food_name, food_category, food_description)
     values
-		('chicken', 1.5, 'lbs', 'meat', 'chicken_description'),
-        ('alfredo sauce', 1.0, 'cup', 'sauce', 'alfredo_description'),
-        ('penne', 16.0, 'oz', 'pasta', 'penne_description'),
-        ('egg', 2.0, null, 'egg', 'egg_description'),
-        ('tomato', 3.0, null, 'vegetable', 'tomato_description'),
-        ('red onion', 3.0, 'tbsp', 'vegetable', 'red_onion_description'),
-        ('dressing', 6.5, 'tbsp', 'sauce', 'dressing_description'),
-        ('fresh basil', 4.0, 'leaves', 'herb', 'basil_description'),
-        ('fresh parsley', 1.0, 'tbsp', 'herb', 'parsley_description'),
-        ('garlic', 4.0, 'cloves', 'vegetable', 'garlic_description'),
-        ('salt', 0.5, 'tsp', 'seasoning', 'salt_description'),
-        ('pepper', 1.0, 'pinch', 'seasoning', 'pepper_description'),
-        ('apple', 1.0, null, 'fruit', 'apple_description');
+		('chicken', 'meat', 'chicken_description'),
+        ('alfredo sauce', 'sauce', 'alfredo_description'),
+        ('penne', 'pasta', 'penne_description'),
+        ('egg', 'egg', 'egg_description'),
+        ('tomato', 'vegetable', 'tomato_description'),
+        ('red onion', 'vegetable', 'red_onion_description'),
+        ('dressing', 'sauce', 'dressing_description'),
+        ('fresh basil', 'herb', 'basil_description'),
+        ('fresh parsley', 'herb', 'parsley_description'),
+        ('garlic', 'vegetable', 'garlic_description'),
+        ('salt', 'seasoning', 'salt_description'),
+        ('pepper', 'seasoning', 'pepper_description'),
+        ('apple', 'fruit', 'apple_description');
         
 	insert into ingredients
     values
-		(1, 1),
-        (1, 2),
-        (1, 3),
-        (2, 4),
-        (3, 5),
-        (3, 6),
-        (3, 7),
-        (3, 8),
-        (3, 9),
-        (3, 10),
-        (3, 11),
-        (3, 12);
+		(1, 1, 1.5, 'lbs'),
+        (1, 2, 1.0, 'cup'),
+        (1, 3, 16.0, 'oz'),
+        (2, 4, 2.0, null),
+        (3, 5, 3.0, null),
+        (3, 6, 3.0, 'tbsp'),
+        (3, 7, 6.5, 'tbsp'),
+        (3, 8, 4.0, 'leaves'),
+        (3, 9, 1.0, 'tbsp'),
+        (3, 10, 4.0, 'cloves'),
+        (3, 11, 0.5, 'tsp'),
+        (3, 12, 1.0, 'pinch');
 	
     -- adding the user_id to the meal? otherwise how do we track whose meal it is?
     -- meal_category currently isn't nullable - do we want to make it nullable?
@@ -247,10 +247,10 @@ begin
 	
     insert into meal_components
     values
-		(1, 1, null),
-        (2, 2, null),
-        (2, null, 13),
-        (3, 3, null);
+		(1, 1, null, 1.0, 'serving'),
+        (2, 2, null, 2.0, 'eggs'),
+        (2, null, 13, 1.0, null),
+        (3, 3, null, 1, 'serving');
         
 
 end //
