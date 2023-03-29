@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-
 @Data
 @NoArgsConstructor
 public class Ingredients {
@@ -13,7 +12,7 @@ public class Ingredients {
     private int recipeId;
     @NonNull
     private int foodId;
-    @NonNull
+
     private double amount;
 
     private String measurementUnit;

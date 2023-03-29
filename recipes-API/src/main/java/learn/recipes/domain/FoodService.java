@@ -63,10 +63,7 @@ public class FoodService {
         if(Validations.isNullOrBlank(food.getFoodName())) {
             result.addErr("", "food name is required", ResultType.NOT_FOUND);
         }
-        if(food.getAmount() <= 0) {
-            result.addErr("", "amount cannot be zero or less", ResultType.NOT_FOUND);
-            return result;
-        }
+
         return result;
     }
 }

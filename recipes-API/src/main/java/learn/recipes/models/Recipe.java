@@ -1,16 +1,16 @@
 package learn.recipes.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.URL;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -38,4 +38,20 @@ public class Recipe {
     private int servings;
     @URL
     private String imageUrl;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "recipe_tags",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tags> tags = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "ingredients",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id")
+    )
+    private Set<Food> foods = new HashSet<>();
+
+
 }

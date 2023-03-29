@@ -27,6 +27,6 @@ class RecipeRepositoryTest {
     @Transactional
     void shouldFind2To4Recipes() {
         List<Recipe> recipes =  repository.findAll();
-        assertTrue(recipes.size() >= 2 || recipes.size() <= 4);
+        assertTrue(recipes.size() >= 2 && recipes.size() <= 4);
     }
 }

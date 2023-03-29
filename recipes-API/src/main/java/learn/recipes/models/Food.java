@@ -21,10 +21,6 @@ public class Food {
     @NonNull
     @NotBlank
     private String foodName;
-    @Min(value = 0)
-    private double amount;
-
-    private String measurementUnit;
 
     private String foodCategory;
 
