@@ -48,7 +48,7 @@ create table food (
 create table meal (
 	meal_id int not null primary key auto_increment,
     `time` time not null,
-    meal_category varchar(50) null
+    meal_category varchar(50) not null
 );
 
 create table app_user_role (
