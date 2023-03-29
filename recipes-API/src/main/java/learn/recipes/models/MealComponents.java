@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.NonNull;
 
-@Entity
+
 @Data
 public class MealComponents {
 

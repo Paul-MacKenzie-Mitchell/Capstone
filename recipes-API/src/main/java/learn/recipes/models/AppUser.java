@@ -9,7 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -35,11 +37,16 @@ public class AppUser {
     @NonNull
     @NotBlank
     private String email;
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private LocalDate dob;
 
-//    private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
 
-//    public AppUser(String userName, List<String> authorities) {
-//    }
+//@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+//    @JoinTable(name = "app_user_role",
+//            joinColumns = @JoinColumn(name = "app_user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "app_role_id")
+//    )
+//    private Set<AppRole> roles = new HashSet<>();
+
+
 }

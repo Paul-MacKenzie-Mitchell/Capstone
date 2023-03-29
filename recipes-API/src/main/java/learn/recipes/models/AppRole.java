@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 public class AppRole {
@@ -17,4 +20,9 @@ public class AppRole {
     @Column(unique=true)
     private String roleName;
 
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<AppUser> users = new HashSet<>();
+//
+//    private AppUser appUser;
 }
+
