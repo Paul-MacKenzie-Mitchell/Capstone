@@ -41,12 +41,17 @@ public class AppUser {
     private LocalDate dob;
 
 
-//@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-//    @JoinTable(name = "app_user_role",
-//            joinColumns = @JoinColumn(name = "app_user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "app_role_id")
-//    )
-//    private Set<AppRole> roles = new HashSet<>();
+@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "app_user_role",
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "app_role_id")
+    )
+    private Set<AppRole> roles = new HashSet<>();
 
-
+@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "recipebook",
+                joinColumns = @JoinColumn(name = "app_user_id"),
+                inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
+    private Set<Recipe> recipes = new HashSet<>();
 }

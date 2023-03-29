@@ -6,11 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
