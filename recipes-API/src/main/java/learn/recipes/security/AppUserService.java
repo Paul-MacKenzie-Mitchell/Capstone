@@ -1,11 +1,14 @@
-package learn.recipes.domain;
+package learn.recipes.security;
 
 import learn.recipes.data.AppUserRepository;
+import learn.recipes.domain.Validations;
 import learn.recipes.models.AppUser;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
+import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,6 +35,19 @@ public class AppUserService {
 
     }
 
+
+    public boolean deleteById(int appUserId) {
+        if (appUserId <= 0) {
+            return false;
+        }
+        if (appUserRepository.findById(appUserId).isEmpty()) {
+            return false;
+        }
+
+        appUserRepository.deleteById(appUserId);
+        return true;
+    }
+
     private Result<AppUser> validate(AppUser user) {
         Result<AppUser> result = new Result<>();
 
@@ -46,25 +62,29 @@ public class AppUserService {
                 return result;
             }
         }
-        if(Validations.isNullOrBlank(user.getUserName())) {
+        if(Validations.isNullOrBlank(user.getUsername())) {
             result.addErr("", "user name is required", ResultType.NOT_FOUND);
         }
+        if(Validations.isNullOrBlank(user.getPasswordHash())) {
+            result.addErr("", "password is required", ResultType.NOT_FOUND);
+        }
+        if(!user.isEnabled() && user.isEnabled()) {
+            result.addErr("", "user must be enabled or not enabled", ResultType.INVALID);
+        }
+        if(Validations.isNullOrBlank(user.getFirstName())) {
+            result.addErr("", "first name is required", ResultType.NOT_FOUND);
+        }
+        if(Validations.isNullOrBlank(user.getLastName())) {
+            result.addErr("", "last name is required", ResultType.NOT_FOUND);
+        }
+        if(Validations.isNullOrBlank(user.getEmail())) {
+            result.addErr("", "email is required", ResultType.NOT_FOUND);
+        }
+        if(user.getDob().isAfter(LocalDate.now())) {
+            result.addErr("", "date of birth cannot be in the future", ResultType.INVALID);
+        }
+
         return result;
     }
 
 }
-//    private int appUserId;
-//
-//    private String userName;
-//
-//    private String passwordHash;
-//
-//    private boolean enabled;
-//
-//    private String firstName;
-//
-//    private String lastName;
-//
-//    private String email;
-//
-//    private LocalDate dob;
