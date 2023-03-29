@@ -1,9 +1,6 @@
 package learn.recipes.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,7 +35,7 @@ public class AppUser {
     @NonNull
     @NotBlank
     private String email;
-
+    @Temporal(TemporalType.DATE)
     private LocalDate dob;
 
     private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
