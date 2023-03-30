@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +43,10 @@ class AppUserRepositoryTest {
     @Test
     @Transactional
     void shouldFindUserById() {
-        Optional<AppUser> user = repository.findById(3);
+        AppUser user = repository.findById(3).orElse(null);
         assertNotNull(user);
+        assertEquals("admin@admin.com", user.getEmail());
+        assertEquals(LocalDate.of(2000, 01, 01), user.getDob());
     }
 
     @Test

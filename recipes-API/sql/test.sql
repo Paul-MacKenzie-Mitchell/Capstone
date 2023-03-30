@@ -172,8 +172,8 @@ begin
         
 	insert into app_user_role
     values
-		(1, 1),
-        (2, 2),
+		(1, 2),
+        (2, 1),
         (3, 1),
         (3, 2);
         
@@ -252,3 +252,6 @@ end //
 delimiter ;
 
 -- actual data (DELETE THIS when it comes time to test)
+-- set sql_safe_updates = 0;
+-- call set_known_good_state();
+-- set sql_safe_updates = 1;
