@@ -31,7 +31,7 @@ public class AuthorityController {
         public ResponseEntity<?> authenticate(@RequestBody AppUser user) {
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(), user.getPassword());
+                    user.getUsername(), user.getPasswordHash());
 
             try {
                 Authentication authentication = manager.authenticate(token);
@@ -40,6 +40,7 @@ public class AuthorityController {
                     String jwt = converter.userToToken(authenticatedUser);
                     HashMap<String, String> map = new HashMap<>();
                     map.put("jwt", jwt);
+                    System.out.println(jwt);
                     return new ResponseEntity<>(map, HttpStatus.OK);
                 }
             } catch (AuthenticationException ex) {

@@ -10,8 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class App {
     public static void main(String[] args) {
         var encoder = new BCryptPasswordEncoder();
-//        System.out.println(encoder.encode("user"));
-//        System.out.println(encoder.encode("admin"));
+        System.out.println(encoder.encode("p@ssw0rd"));
+        System.out.println(encoder.encode("admin"));
         SpringApplication.run(App.class, args);
     }
 

@@ -17,5 +17,5 @@ Content-Type: application/json
 
 {
     "username": "appuser",
-    "passwordHash": "'p@ssw0rd"
+    "passwordHash": "p@ssw0rd"
 }

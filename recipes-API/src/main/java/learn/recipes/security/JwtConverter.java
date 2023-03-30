@@ -48,9 +48,9 @@ public class JwtConverter {
 
             String username = jws.getBody().getSubject();
             int appUserId = jws.getBody().get("appUserId", Integer.class);
-            List<String> roles = jws.getBody().get("authorities", List.class);
+            List<String> authorities = jws.getBody().get("authorities", List.class);
 
-            AppUser user = new AppUser(username, "", roles);
+            AppUser user = new AppUser(username, "", authorities);
             user.setAppUserId(appUserId);
             return user;
 

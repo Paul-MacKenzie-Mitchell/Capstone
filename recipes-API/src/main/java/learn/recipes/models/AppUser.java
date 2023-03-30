@@ -40,25 +40,30 @@ public class AppUser implements UserDetails {
     private LocalDate dob;
 
     private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+
     public AppUser(String username, String passwordHash, Collection<String> authorityNames) {
         this.username = username;
         this.passwordHash = passwordHash;
         addAuthorities(authorityNames);
     }
 
-@ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "app_user_role",
             joinColumns = @JoinColumn(name = "app_user_id"),
             inverseJoinColumns = @JoinColumn(name = "app_role_id")
     )
     private Set<AppRole> roles = new HashSet<>();
 
-@ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "recipebook",
                 joinColumns = @JoinColumn(name = "app_user_id"),
                 inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
+
+    public Set<AppRole> getRoles() {
+        return roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,11 +93,12 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    public void addAuthorities(Set<AppRole> roles) {
+
+    public void addAuthorities(Collection<String> authorityNames) {
         authorities.clear();
-        for (AppRole role : roles) {
-            String name = role.getRoleName();
+        for (String name : authorityNames) {
             authorities.add(new SimpleGrantedAuthority(name));
         }
     }
+
 }

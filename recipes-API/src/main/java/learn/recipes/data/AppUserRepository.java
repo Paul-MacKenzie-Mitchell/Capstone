@@ -11,9 +11,11 @@ import java.util.List;
 public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
     AppUser findByUsername(String lastName);
 
-//    private void addAuthorities(AppUser user) {
-//        Collection<?> authorities = user.getAuthorities();
-//        user.addAuthorities((Collection<String>) authorities);
-//    }
+    private void addAuthorities(AppUser user) {
+
+        List<String> authorities = user.getRoles().stream().map(r -> r.getRoleName()).toList();
+
+        user.addAuthorities(authorities);
+    }
 
 }
