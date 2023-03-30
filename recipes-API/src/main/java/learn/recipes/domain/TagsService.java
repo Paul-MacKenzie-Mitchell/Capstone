@@ -35,9 +35,11 @@ public class TagsService {
     }
 
     public boolean deleteById(int tagId) {
+
         if (tagId <= 0) {
             return false;
         }
+
         if (tagsRepository.findById(tagId).isEmpty()) {
             return false;
         }
@@ -53,15 +55,18 @@ public class TagsService {
             result.addErr("", "tag cannot be null", ResultType.NOT_FOUND);
             return result;
         }
+
         if (tag.getTagId() > 0) {
             if (!tagsRepository.existsById(tag.getTagId())) {
                 result.addErr("", "not found", ResultType.NOT_FOUND);
                 return result;
             }
         }
+
         if(Validations.isNullOrBlank(tag.getTagName())) {
             result.addErr("", "tag name is required", ResultType.NOT_FOUND);
         }
+
         if(Validations.isNullOrBlank(tag.getDefaultImage())) {
             result.addErr("", "an image url is required", ResultType.NOT_FOUND);
         }
