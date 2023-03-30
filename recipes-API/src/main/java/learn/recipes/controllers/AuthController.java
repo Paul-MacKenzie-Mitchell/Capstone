@@ -30,7 +30,7 @@ import java.util.HashMap;
         public ResponseEntity<?> authenticate(@RequestBody AppUser user) {
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(), user.getPasswordHash());
+                    user.getUsername(), user.getPassword());
 
             try {
                 Authentication authentication = manager.authenticate(token);
