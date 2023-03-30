@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class AppRole {
+public class AppRole implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appRoleId;
@@ -23,5 +24,9 @@ public class AppRole {
     private String roleName;
 
 
+    @Override
+    public String getAuthority() {
+        return roleName;
+    }
 }
 

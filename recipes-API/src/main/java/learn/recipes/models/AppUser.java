@@ -24,7 +24,8 @@ public class AppUser implements UserDetails {
     private String username;
     @NonNull
     @NotBlank
-    private String passwordHash;
+    @Column(name = "password_hash")
+    private String password;
 
     private boolean enabled;
     @NonNull
@@ -39,12 +40,6 @@ public class AppUser implements UserDetails {
 //    @Temporal(TemporalType.DATE)
     private LocalDate dob;
 
-    private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-    public AppUser(String username, String passwordHash, Collection<String> authorityNames) {
-        this.username = username;
-        this.passwordHash = passwordHash;
-        addAuthorities(authorityNames);
-    }
 
 @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "app_user_role",
@@ -62,12 +57,12 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return roles;
     }
 
     @Override
     public String getPassword() {
-        return passwordHash;
+        return password;
     }
 
     @Override
@@ -88,11 +83,12 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    public void addAuthorities(Set<AppRole> roles) {
-        authorities.clear();
-        for (AppRole role : roles) {
-            String name = role.getRoleName();
-            authorities.add(new SimpleGrantedAuthority(name));
+    public void addAuthorities(Collection<String> authorityNames) {
+        roles.clear();
+        for (String name : authorityNames) {
+            AppRole role = new AppRole();
+            role.setRoleName(name);
+            roles.add(role);
         }
     }
 }

@@ -63,22 +63,6 @@ public class AppUserService implements UserDetailsService {
         return user;
     }
 
-    private void addAuthorities(AppUser user) {
-
-//        Collection<?> authorities = user.getAuthorities();
-//        user.addAuthorities((Collection<String>) authorities);
-//        String sql = "select a.name "
-//                + "from app_user_authority aua "
-//                + "inner join app_authority a on aua.app_authority_id = a.app_authority_id "
-//                + "where aua.app_user_id = ?";
-//
-//        List<String> authorities = jdbcTemplate.query(
-//                sql,
-//                (rs, i) -> rs.getString("name"),
-//                user.getAppUserId()
-//        );
-//        user.addAuthorities(authorities);
-    }
 
     private Result<AppUser> validate(AppUser user) {
         Result<AppUser> result = new Result<>();
@@ -97,7 +81,7 @@ public class AppUserService implements UserDetailsService {
         if(Validations.isNullOrBlank(user.getUsername())) {
             result.addErr("", "user name is required", ResultType.NOT_FOUND);
         }
-        if(Validations.isNullOrBlank(user.getPasswordHash())) {
+        if(Validations.isNullOrBlank(user.getPassword())) {
             result.addErr("", "password is required", ResultType.NOT_FOUND);
         }
         if(!user.isEnabled() && user.isEnabled()) {

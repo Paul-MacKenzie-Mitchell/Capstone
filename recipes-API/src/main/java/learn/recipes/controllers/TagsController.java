@@ -27,9 +27,9 @@ public class TagsController {
     @GetMapping
     public List<Tags> findAll() {return tagsService.findAll(); }
 
-    @GetMapping("/{recipeId}")
-    public ResponseEntity<Tags> findById(@PathVariable int tagsId) {
-        Tags tag = tagsService.findById(tagsId);
+    @GetMapping("/{tagId}")
+    public ResponseEntity<Tags> findById(@PathVariable int tagId) {
+        Tags tag = tagsService.findById(tagId);
         if(tag == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

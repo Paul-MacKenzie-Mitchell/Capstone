@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-public class AuthorityController {
     @RestController
     public class AuthController {
 
@@ -57,4 +56,3 @@ public class AuthorityController {
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
-}

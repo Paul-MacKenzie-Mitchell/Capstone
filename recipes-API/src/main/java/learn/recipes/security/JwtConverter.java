@@ -22,7 +22,7 @@ public class JwtConverter {
         List<String> authorities = user.getAuthorities().stream()
                 .map(a -> a.getAuthority())
                 .toList();
-
+//TODO add additional claims
         return Jwts.builder()
                 .setIssuer(ISSUER)
                 .setSubject(user.getUsername())
@@ -50,8 +50,11 @@ public class JwtConverter {
             int appUserId = jws.getBody().get("appUserId", Integer.class);
             List<String> roles = jws.getBody().get("authorities", List.class);
 
-            AppUser user = new AppUser(username, "", roles);
+            AppUser user = new AppUser( );
             user.setAppUserId(appUserId);
+            user.setUsername(username);
+            user.setPassword("");
+            user.addAuthorities(roles);
             return user;
 
         } catch (JwtException ex) {

@@ -29,7 +29,7 @@ public class FoodController {
     public List<Food> findAll() {return foodService.findAll(); }
 
 
-    @GetMapping("/{mealId}")
+    @GetMapping("/{foodId}")
     public ResponseEntity<Food> findById(@PathVariable int foodId) {
         Food food = foodService.findById(foodId);
         if(food == null){
