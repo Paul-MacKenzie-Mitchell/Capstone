@@ -6,17 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class AppUser {
+public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appUserId;
@@ -40,6 +39,12 @@ public class AppUser {
 //    @Temporal(TemporalType.DATE)
     private LocalDate dob;
 
+    private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+    public AppUser(String username, String passwordHash, Collection<String> authorityNames) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        addAuthorities(authorityNames);
+    }
 
 @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "app_user_role",
@@ -54,4 +59,40 @@ public class AppUser {
                 inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    public void addAuthorities(Set<AppRole> roles) {
+        authorities.clear();
+        for (AppRole role : roles) {
+            String name = role.getRoleName();
+            authorities.add(new SimpleGrantedAuthority(name));
+        }
+    }
 }

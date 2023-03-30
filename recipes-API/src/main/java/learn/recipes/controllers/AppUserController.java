@@ -15,6 +15,7 @@ import java.util.List;
 import static learn.recipes.controllers.ErrMapper.mapErrs;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/appUser")
 public class AppUserController {
 

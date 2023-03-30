@@ -22,11 +22,6 @@ public class AppRole {
 //    @Column(unique=true)
     private String roleName;
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(name = "app_user_role",
-//            joinColumns = @JoinColumn(name = "app_role_id"),
-//            inverseJoinColumns = @JoinColumn(name = "app_user_id")
-//    )
-//    private Set<AppUser> roles = new HashSet<>();
+
 }
 

@@ -6,14 +6,20 @@ import learn.recipes.models.AppUser;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.aspectj.weaver.loadtime.Agent;
+import org.hibernate.sql.ast.tree.expression.Collation;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
     private final AppUserRepository appUserRepository;
+
 
     public AppUserService(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
@@ -46,6 +52,32 @@ public class AppUserService {
 
         appUserRepository.deleteById(appUserId);
         return true;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AppUser user = appUserRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("%s not found", username));
+        }
+        return user;
+    }
+
+    private void addAuthorities(AppUser user) {
+
+//        Collection<?> authorities = user.getAuthorities();
+//        user.addAuthorities((Collection<String>) authorities);
+//        String sql = "select a.name "
+//                + "from app_user_authority aua "
+//                + "inner join app_authority a on aua.app_authority_id = a.app_authority_id "
+//                + "where aua.app_user_id = ?";
+//
+//        List<String> authorities = jdbcTemplate.query(
+//                sql,
+//                (rs, i) -> rs.getString("name"),
+//                user.getAppUserId()
+//        );
+//        user.addAuthorities(authorities);
     }
 
     private Result<AppUser> validate(AppUser user) {
@@ -86,5 +118,6 @@ public class AppUserService {
 
         return result;
     }
+
 
 }
