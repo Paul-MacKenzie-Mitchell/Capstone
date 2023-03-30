@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class AppRole {
+public class AppRole implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appRoleId;
@@ -22,11 +23,10 @@ public class AppRole {
 //    @Column(unique=true)
     private String roleName;
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(name = "app_user_role",
-//            joinColumns = @JoinColumn(name = "app_role_id"),
-//            inverseJoinColumns = @JoinColumn(name = "app_user_id")
-//    )
-//    private Set<AppUser> roles = new HashSet<>();
+
+    @Override
+    public String getAuthority() {
+        return roleName;
+    }
 }
 

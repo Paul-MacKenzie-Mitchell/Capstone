@@ -6,14 +6,20 @@ import learn.recipes.models.AppUser;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.aspectj.weaver.loadtime.Agent;
+import org.hibernate.sql.ast.tree.expression.Collation;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
     private final AppUserRepository appUserRepository;
+
 
     public AppUserService(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
@@ -48,6 +54,16 @@ public class AppUserService {
         return true;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AppUser user = appUserRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("%s not found", username));
+        }
+        return user;
+    }
+
+
     private Result<AppUser> validate(AppUser user) {
         Result<AppUser> result = new Result<>();
 
@@ -65,7 +81,7 @@ public class AppUserService {
         if(Validations.isNullOrBlank(user.getUsername())) {
             result.addErr("", "user name is required", ResultType.NOT_FOUND);
         }
-        if(Validations.isNullOrBlank(user.getPasswordHash())) {
+        if(Validations.isNullOrBlank(user.getPassword())) {
             result.addErr("", "password is required", ResultType.NOT_FOUND);
         }
         if(!user.isEnabled() && user.isEnabled()) {
@@ -86,5 +102,6 @@ public class AppUserService {
 
         return result;
     }
+
 
 }

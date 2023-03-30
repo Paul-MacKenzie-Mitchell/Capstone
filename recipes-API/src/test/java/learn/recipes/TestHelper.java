@@ -11,7 +11,7 @@ public class TestHelper {
         AppUser user = new AppUser();
         user.setAppUserId(id);
         user.setUsername("TestName");
-        user.setPasswordHash("Password");
+        user.setPassword("Password");
         user.setEnabled(true);
         user.setFirstName("First");
         user.setLastName("Last");
