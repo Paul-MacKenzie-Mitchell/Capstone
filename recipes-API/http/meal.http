@@ -27,7 +27,7 @@ GET {{base-url}} HTTP/1.1
 ###
 //find good id
 
-GET {{base-url}}/1 HTTP/1.1
+GET {{base-url}}/5 HTTP/1.1
 Authorization: Bearer {{jwt}}
 ###
 
