@@ -2,7 +2,7 @@ const links = [
     { name: 'Open roles', href: '#' },
     { name: 'Internship program', href: '#' },
     { name: 'Our values', href: '#' },
-    { name: 'Meet our leadership', href: '#' },
+    { name: 'Meet our leadership', href: '/meetus' },
   ]
   const stats = [
     { name: 'Offices worldwide', value: '12' },
@@ -11,7 +11,7 @@ const links = [
     { name: 'Paid time off', value: 'Unlimited' },
   ]
   
-  export default function Example() {
+  export default function AboutUs() {
     return (
       <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
         <img
