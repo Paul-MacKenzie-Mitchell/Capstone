@@ -73,8 +73,8 @@ public class AppUserServiceTest {
         assertFalse(service.deleteById(missingUser.getAppUserId()));
     }
 
-    // TODO: do we want emails to be unique? or do we want people to be able to sign up for multiple accounts with the same email address?
-    // also: do we want users to be a certain age?
+    // TODO: update email address in SQL and repository to be unique (add findByEmail method for repo)
+        // add validation to the Service class as well
 
     @Test
     void shouldNotSaveNullUser() {
@@ -98,19 +98,17 @@ public class AppUserServiceTest {
     // TODO: again with @NonNull and @NonBlank exceptions for this test below
         // so I didn't run the fields marked with those annotations:
         // username, password, firstName, lastName, email
-    // TODO: also, we don't want a user to have a null enabled status, but that's not even possible rn
-        // the isEnabled function in the model gives it a default value of true
 
-//    @Test
-//    void shouldNotSaveUserWithNullUsername() {
-//        AppUser nullUsernameUser = TestHelper.makeAppUser(0);
-//        nullUsernameUser.setUsername(null);
-//
-//        Result<AppUser> result = service.save(nullUsernameUser);
-//
-//        assertFalse(result.isSuccess());
-//        assertEquals("username is required", result.getErrs().get(0).getMessage());
-//    }
+    @Test
+    void shouldNotSaveUserWithNullUsername() {
+        AppUser nullUsernameUser = TestHelper.makeAppUser(0);
+        nullUsernameUser.setUsername(null);
+
+        Result<AppUser> result = service.save(nullUsernameUser);
+
+        assertFalse(result.isSuccess());
+        assertEquals("username is required", result.getErrs().get(0).getMessage());
+    }
 
     @Test
     void shouldNotSaveUserWithExistingUsername() {

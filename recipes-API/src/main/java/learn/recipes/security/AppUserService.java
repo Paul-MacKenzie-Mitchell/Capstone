@@ -87,9 +87,7 @@ public class AppUserService implements UserDetailsService {
         if(Validations.isNullOrBlank(user.getPassword())) {
             result.addErr("", "password is required", ResultType.NOT_FOUND);
         }
-        if(!user.isEnabled() && user.isEnabled()) {
-            result.addErr("", "user must be enabled or not enabled", ResultType.INVALID);
-        }
+
         if(Validations.isNullOrBlank(user.getFirstName())) {
             result.addErr("", "first name is required", ResultType.NOT_FOUND);
         }

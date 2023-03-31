@@ -69,8 +69,6 @@ public class MealServiceTest {
         assertFalse(service.deleteById(missingMeal.getMealId()));
     }
 
-    // TODO: add blank/null meal category validation if we decide we want it to be required (do we want it to be required?)
-    // if so, then make sure to uncomment validation in MealService class
     @Test
     void shouldNotSaveNullMeal() {
         Result<Meal> result = service.save(null);
@@ -90,7 +88,6 @@ public class MealServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
-    // TODO ... which equal do I use??
     @Test
     void shouldNotSaveMealWithNoTimestamp() {
         Meal noTimestampMeal = TestHelper.makeMeal(0);

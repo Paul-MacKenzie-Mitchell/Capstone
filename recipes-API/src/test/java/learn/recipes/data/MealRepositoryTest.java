@@ -56,6 +56,7 @@ class MealRepositoryTest {
     @Test
     @Transactional
     void shouldUpdateExistingMeal() {
+        List<Meal> meals = repository.findAll();
         Meal meal = repository.findById(1).orElse(null);
         meal.setTime(LocalTime.of(12, 00, 00));
         meal.setMealCategory("Test Meal Category Update");

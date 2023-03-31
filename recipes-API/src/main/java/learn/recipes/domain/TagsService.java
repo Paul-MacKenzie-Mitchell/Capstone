@@ -51,7 +51,7 @@ public class TagsService {
     private Result<Tags> validate(Tags tag) {
         Result<Tags> result = new Result<>();
 
-        // TODO: do we want to change some of these not founds into INVALID types? or is there a reason for all of them being NOT_FOUNDs
+        // TODO: double-check resultTypes
         if (tag == null) {
             result.addErr("", "tag cannot be null", ResultType.NOT_FOUND);
             return result;
@@ -68,7 +68,7 @@ public class TagsService {
             result.addErr("", "tag name is required", ResultType.NOT_FOUND);
         }
 
-        // TODO: either add findByTagName method in repository, or remove unique requirement in database/SQL
+        // TODO: add findByTagName method to repository
 //        if(tagsRepository.findByTagName(tag.getTagName())) {
 //            result.addErr("", "tag name must be unique", ResultType.INVALID);
 //        }

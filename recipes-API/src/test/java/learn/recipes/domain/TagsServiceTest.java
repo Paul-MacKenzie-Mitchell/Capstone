@@ -24,13 +24,6 @@ public class TagsServiceTest {
     @MockBean
     TagsRepository repository;
 
-    /* CRUD:
-    Create/add
-    Read/find
-    Update/edit
-    Delete
-     */
-
     @Test
     void shouldAddTag() {
         Tags validNewTag = TestHelper.makeTag(0);
@@ -42,8 +35,7 @@ public class TagsServiceTest {
         assertEquals(ResultType.SUCCESS, result.getType());
     }
 
-    // TODO: should I be using the numbers directly with the mock? or grabbing the value from the item?
-        // eg below in existsById should I put validUpdateTag.getTagId instead of the number
+    // TODO: update to use the getter
     @Test
     void shouldUpdateTag() {
         Tags validUpdateTag = TestHelper.makeTag(1);
@@ -86,9 +78,6 @@ public class TagsServiceTest {
         assertEquals("tag cannot be null", result.getErrs().get(0).getMessage());
     }
 
-    // TODO: is there ever a risk of updating a record instead of adding a new one?
-        // eg if you ever tried to enter a new item (add) with an existing ID
-        // would it end up just updating the old item with that ID?
     @Test
     void shouldNotUpdateMissingTag() {
         Tags missingTag = TestHelper.makeTag(7);
@@ -100,7 +89,7 @@ public class TagsServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
-    // TODO: should I be testing the null and blanks in the same test?
+    // TODO: add both null and blank instances
     @Test
     void shouldNotSaveTagWithBlankName() {
         Tags blankNameTag = TestHelper.makeTag(0);
