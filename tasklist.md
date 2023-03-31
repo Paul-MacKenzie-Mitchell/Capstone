@@ -66,7 +66,103 @@ _Task list w/ estimated time per item_
 
 ## React App
 
-- [x] Set up and test the backend
-  - [x] Create the database
-  - [x] Start the API and send a test HTTP request
-- [x]
+- [x] Set up React App
+  - [x] clean out unused files
+- [x] Set up pertinent routes
+  - [x] home
+  - [x] contact
+  - [x] recipes
+    - [] have back end populate
+  - [x] recipes add form
+    - [] populate form appropriately
+  - [x] recipes delete
+  - [x] login
+  - [x] NavBar
+
+## Wire Frame Layout
+
+## NavBar
+
+- [] home page
+- [] login
+- [] about
+- [] contact
+- [] all Recipes
+- [] user profile/user recipes
+
+## Home
+
+- [] splash page image (self changing carousel ?)
+- [] Title
+
+## UserProfile/User Recipe Book
+
+- [] Profile Picture ?
+- [] Meals
+- [] individual Recipes
+- [] make individual recipe book searchable
+- [] Button to add recipe
+- [] edit recipe
+- [] Button to delete recipe from individual recipe book
+
+## Site Recipe List
+
+- [] How are recipes listed (alphabetically, by tag?)
+- [] search by name
+- [] search by tag
+- [] recipes presented as a grid of cards ?
+- [] how many recipes presented at once? do we do pages?
+
+## Recipe Card
+
+- [] url based image
+- [] title
+- [] click on a card to go to its detail
+
+## Recipe Details
+
+- [] Title
+  - [] serving size
+  - [] prep time
+  - [] cook time
+  - [] tags
+- [] Ingrediants
+- [] image
+- [] instructions
+
+## Meal Card
+
+- []
+
+## Add a Recipe Form
+
+- [] Complete Form
+  - [] Have all fields represented
+  - [] cancel button
+  - [] submit button
+
+## Admin Fucntionality
+
+- [] delete user
+- [] view user list
+- [] edit user
+- [] delete recipe
+- [] delete food
+
+## Add DML data
+
+- [] recipes
+- [] food
+- [] users
+- [] roles
+
+## Implement Front End Security
+
+- [] login
+  - [] login form
+    - [] username
+    - [] password
+    - [] login button
+    - [] cancel button
+    - [] give generic fail message if credentials not good
+- []
