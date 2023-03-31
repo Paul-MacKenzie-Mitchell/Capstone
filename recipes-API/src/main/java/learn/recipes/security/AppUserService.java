@@ -65,7 +65,7 @@ public class AppUserService implements UserDetailsService {
         Result<AppUser> result = new Result<>();
 
         if (user == null) {
-            result.addErr("", "User cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "user cannot be null", ResultType.NOT_FOUND);
             return result;
         }
 
@@ -75,9 +75,15 @@ public class AppUserService implements UserDetailsService {
                 return result;
             }
         }
+
         if(Validations.isNullOrBlank(user.getUsername())) {
-            result.addErr("", "user name is required", ResultType.NOT_FOUND);
+            result.addErr("", "username is required", ResultType.NOT_FOUND);
         }
+
+        if(appUserRepository.findByUsername(user.getUsername()) != null) {
+            result.addErr("", "username already exists", ResultType.NOT_FOUND);
+        }
+
         if(Validations.isNullOrBlank(user.getPassword())) {
             result.addErr("", "password is required", ResultType.NOT_FOUND);
         }

@@ -3,6 +3,7 @@ package learn.recipes.domain;
 import learn.recipes.TestHelper;
 import learn.recipes.data.RecipeRepository;
 import learn.recipes.models.Recipe;
+import learn.recipes.models.Tags;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,25 @@ public class RecipeServiceTest {
         when(repository.findById(7)).thenReturn(Optional.empty());
 
         assertFalse(service.deleteById(missingRecipe.getRecipeId()));
+    }
+
+    @Test
+    void shouldNotSaveNullRecipe() {
+        Result<Recipe> result = service.save(null);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe cannot be null", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotUpdateMissingRecipe() {
+        Recipe missingRecipe = TestHelper.makeRecipe(7);
+        when(repository.existsById(7)).thenReturn(false);
+
+        Result<Recipe> result = service.save(missingRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
 }
