@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/appUser
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzMzYwNH0.Gp8DMzAhBdb3IRacHM05DQLA2fMmr_vsmDK8RdSd7Ew
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDI3OTYyNX0.nXHPALS9ev8oN7fp9e2WPq0aic-mnvhYPSuNq7wM8qc
 
 // findAll
 GET {{base-url}} HTTP/1.1

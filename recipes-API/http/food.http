@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/food
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzNDEyNX0.mvuYwhU-apeLx5TGSYgpAiKuwrODo7VlM2FxtZY99zY
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDI3OTYyNX0.nXHPALS9ev8oN7fp9e2WPq0aic-mnvhYPSuNq7wM8qc
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1
@@ -54,7 +54,7 @@ Authorization: Bearer {{jwt}}
 
 {
   "foodId": 14,
-  "foodName": "Salmon",
+  "foodName": "Red Snapper",
   "foodCategory": "fish",
   "foodDescription": "red_snapper_description"
 }
@@ -71,5 +71,5 @@ Authorization: Bearer {{jwt}}
   "foodDescription": "red_snapper_description"
 }
 ###
-DELETE {{base-url}}/10 HTTP/1.1
+DELETE {{base-url}}/14 HTTP/1.1
 Authorization: Bearer {{jwt}}
