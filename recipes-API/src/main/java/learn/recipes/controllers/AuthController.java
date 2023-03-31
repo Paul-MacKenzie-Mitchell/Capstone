@@ -2,6 +2,7 @@ package learn.recipes.controllers;
 
 import learn.recipes.models.AppUser;
 import learn.recipes.security.JwtConverter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
+    @ConditionalOnWebApplication
     @RestController
     public class AuthController {
 
@@ -30,7 +32,7 @@ import java.util.HashMap;
         public ResponseEntity<?> authenticate(@RequestBody AppUser user) {
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(), user.getPasswordHash());
+                    user.getUsername(), user.getPassword());
 
             try {
                 Authentication authentication = manager.authenticate(token);

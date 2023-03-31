@@ -64,13 +64,17 @@ public class MealService {
                 return result;
             }
         }
-        if(Validations.isNullOrBlank(meal.getMealCategory())) {
-            result.addErr("", "meal category is required", ResultType.NOT_FOUND);
-        }
-        //TODO can a meal time be anything ???
-//        if(meal.getTime().isBefore(LocalTime.now())) {
-//            result.addErr("", "meal time cannot be in the past", ResultType.INVALID);
+
+        // just in case we want to make meal category required
+//        if(Validations.isNullOrBlank(meal.getMealCategory())) {
+//            result.addErr("", "meal category is required", ResultType.NOT_FOUND);
 //        }
+
+        if(meal.getTime() == null) {
+            result.addErr("", "meal must have a timestamp in hh:mm:ss form", ResultType.NOT_FOUND);
+            return result;
+        }
+
         return result;
     }
 }

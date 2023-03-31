@@ -4,7 +4,7 @@ use recipes;
 
 create table app_user (
 	app_user_id int not null primary key auto_increment,
-    username varchar(50) not null,
+    username varchar(50) not null unique,
     password_hash varchar(2048) not null,
     enabled bit not null default 1,
     first_name varchar(75) not null,
