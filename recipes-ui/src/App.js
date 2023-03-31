@@ -12,6 +12,7 @@ import Contact from "./components/Contact";
 import Home from "./components/Home";
 import HttpStatus from "./components/HttpStatus";
 import NavBar from "./components/NavBar";
+import MeetUs from "./components/MeetUs";
 import Profile from "./components/Profile";
 import RecipeCard from "./components/RecipeCard";
 import RecipeDelete from "./components/RecipeDelete";
@@ -77,6 +78,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/meetus" element={<MeetUs />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/recipecard" element={<RecipeCard />} />
           <Route path="/recipe/delete/:id" element={<RecipeDelete />} />

@@ -160,20 +160,20 @@ begin
     
     insert into app_user (username, password_hash, first_name, last_name, email, dob)
 	values
-		('appuser', 'p@ssw0rd', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
-        ('appadmin', 'p@ssw0rd', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
-        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'adminuser@adminuser.com', '2000-01-01'); -- find
+		('appuser', '$2a$10$/Ltp.l1Z4JDEgI8OpOwWo.8x7MEUYAwqqnbYt8sfxIezigmyh9ADS', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
+        ('appadmin', '$2a$10$M7zdZA/n26txoefFMQF8ZeNXuarS2IwqxnbXHdD1n.CgeTpoyunpe', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
+        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin@admin.com', '2000-01-01'); -- find
         -- add
         
 	insert into app_role (role_name)
     values
-		('ADMIN'),
-        ('USER');
+        ('USER'),
+        ('ADMIN');
         
 	insert into app_user_role
     values
-		(1, 2),
-        (2, 1),
+		(1, 1),
+        (2, 2),
         (3, 1),
         (3, 2);
         
