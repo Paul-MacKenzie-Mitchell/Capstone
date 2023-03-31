@@ -61,18 +61,3 @@ public class TestHelper {
 
 
 }
-//    private int appUserId;
-//
-//    private String userName;
-//
-//    private String passwordHash;
-//
-//    private boolean enabled;
-//
-//    private String firstName;
-//
-//    private String lastName;
-//
-//    private String email;
-//
-//    private LocalDate dob;

@@ -5,11 +5,9 @@ import learn.recipes.TestHelper;
 import learn.recipes.models.AppUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,18 +21,17 @@ class AppUserRepositoryTest {
     AppUserRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     void setup() {
-        knownGoodState.set();
+        jdbcTemplate.update("call set_known_good_state();");
     }
 
 
-    // something weird is happening here where if I run this test individually, it passes, but when I try to run the entire test class, it fails
     @Test
     @Transactional
-    void shouldFind2To4Users() {
+    void shouldFindAll2To4Users() {
         List<AppUser> allUsers = repository.findAll();
         assertNotNull(allUsers);
         assertTrue(allUsers.size() >= 2 && allUsers.size() <= 4);
@@ -43,32 +40,62 @@ class AppUserRepositoryTest {
     @Test
     @Transactional
     void shouldFindUserById() {
-        AppUser user = repository.findById(3).orElse(null);
-        assertNotNull(user);
-        assertEquals("admin@admin.com", user.getEmail());
-        assertEquals(LocalDate.of(2000, 01, 01), user.getDob());
+        AppUser existingUser = repository.findById(3).orElse(null);
+        assertNotNull(existingUser);
+        assertEquals("adminuser@adminuser.com", existingUser.getEmail());
+        assertEquals(LocalDate.of(2000, 01, 01), existingUser.getDob());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingUserById() {
+        assertNull(repository.findById(7).orElse(null));
     }
 
     @Test
     @Transactional
     void shouldFindUserByUsername() {
-        AppUser user = repository.findByUsername("adminuser");
-        assertNotNull(user);
-        assertEquals(3, user.getAppUserId());
-        assertEquals("adminuserlast", user.getLastName());
+        AppUser existingUser = repository.findByUsername("adminuser");
+        assertNotNull(existingUser);
+        assertEquals(3, existingUser.getAppUserId());
+        assertEquals("adminuserlast", existingUser.getLastName());
     }
 
-    // TODO when we add an AppUser, we should add roles for them as well (see addAuthorities method example in board-game-api)
+    @Test
+    @Transactional
+    void shouldNotFindMissingUserByUsername() {
+        assertNull(repository.findByUsername("missing user"));
+    }
+
+    @Test
+    @Transactional
+    void shouldFindUserByEmail() {
+        AppUser existingUser = repository.findByEmail("adminuser@adminuser.com");
+        assertNotNull(existingUser);
+        assertEquals(3, existingUser.getAppUserId());
+        assertEquals("adminuserlast", existingUser.getLastName());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingUserByEmail() {
+        assertNull(repository.findByUsername("email@email.com"));
+    }
+
     @Test
     @Transactional
     void shouldAddAppUser() {
-        AppUser newUser = TestHelper.makeAppUser(0);
-        AppUser actual = repository.save(newUser);
-        assertEquals(4, actual.getAppUserId());
+        AppUser createdNewUser = TestHelper.makeAppUser(0);
+        AppUser newUser = repository.save(createdNewUser);
+        assertEquals(4, newUser.getAppUserId());
 
         AppUser expectedNewUser = TestHelper.makeAppUser(4);
-        actual = repository.findById(4).orElse(null);
+        AppUser actual = repository.findById(4).orElse(null);
+
         assertEquals(expectedNewUser, actual);
+        assertEquals("Password", expectedNewUser.getPassword());
+        assertEquals("TestEmail@email.com", expectedNewUser.getEmail());
+        assertTrue(expectedNewUser.isEnabled());
     }
 
     @Test
@@ -79,7 +106,6 @@ class AppUserRepositoryTest {
         assertNull(repository.findByUsername("admin"));
     }
 
-    // same problem as findAll method: passes individually, but not with the entire class (returns null user variable for line 93)
     @Test
     @Transactional
     void shouldUpdateExistingAppUser() {

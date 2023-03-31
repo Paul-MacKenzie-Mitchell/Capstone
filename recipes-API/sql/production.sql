@@ -9,7 +9,7 @@ create table app_user (
     enabled bit not null default 1,
     first_name varchar(75) not null,
     last_name varchar(75) not null,
-    email varchar(320) not null,
+    email varchar(320) not null unique,
     dob date not null
 );
 
