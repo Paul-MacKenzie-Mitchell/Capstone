@@ -45,7 +45,7 @@ public class FoodController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (food.getFoodId() != 0) {
+        if (food.getFoodId() == 0) {
             return new ResponseEntity<>(mapErrs("foodId", "food Id has not been set"), HttpStatus.BAD_REQUEST);
         }
 

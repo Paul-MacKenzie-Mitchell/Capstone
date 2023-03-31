@@ -45,7 +45,7 @@ public class RecipeController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (recipe.getRecipeId() != 0) {
+        if (recipe.getRecipeId() == 0) {
             return new ResponseEntity<>(mapErrs("recipeId", "recipe Id has not been set"), HttpStatus.BAD_REQUEST);
         }
 
