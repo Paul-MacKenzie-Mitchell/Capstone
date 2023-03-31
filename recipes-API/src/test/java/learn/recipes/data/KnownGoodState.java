@@ -1,5 +1,6 @@
 package learn.recipes.data;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,11 @@ public class KnownGoodState {
 
     static boolean hasRun = false;
 
+    @Transactional
     void set() {
-        if (!hasRun) {
-            hasRun = true;
+//        if (!hasRun) {
+//            hasRun = true;
             jdbcTemplate.update("call set_known_good_state();");
-        }
+//        }
     }
 }

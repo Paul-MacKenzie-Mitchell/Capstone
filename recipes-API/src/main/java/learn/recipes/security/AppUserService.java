@@ -5,15 +5,12 @@ import learn.recipes.domain.Validations;
 import learn.recipes.models.AppUser;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
-import org.aspectj.weaver.loadtime.Agent;
-import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -68,7 +65,7 @@ public class AppUserService implements UserDetailsService {
         Result<AppUser> result = new Result<>();
 
         if (user == null) {
-            result.addErr("", "User cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "user cannot be null", ResultType.NOT_FOUND);
             return result;
         }
 
@@ -78,15 +75,19 @@ public class AppUserService implements UserDetailsService {
                 return result;
             }
         }
+
         if(Validations.isNullOrBlank(user.getUsername())) {
-            result.addErr("", "user name is required", ResultType.NOT_FOUND);
+            result.addErr("", "username is required", ResultType.NOT_FOUND);
         }
+
+        if(appUserRepository.findByUsername(user.getUsername()) != null) {
+            result.addErr("", "username already exists", ResultType.NOT_FOUND);
+        }
+
         if(Validations.isNullOrBlank(user.getPassword())) {
             result.addErr("", "password is required", ResultType.NOT_FOUND);
         }
-        if(!user.isEnabled() && user.isEnabled()) {
-            result.addErr("", "user must be enabled or not enabled", ResultType.INVALID);
-        }
+
         if(Validations.isNullOrBlank(user.getFirstName())) {
             result.addErr("", "first name is required", ResultType.NOT_FOUND);
         }

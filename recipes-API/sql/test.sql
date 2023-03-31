@@ -5,7 +5,7 @@ use recipes_test;
 -- establishing tables and relationships
 create table app_user (
 	app_user_id int not null primary key auto_increment,
-    username varchar(50) not null,
+    username varchar(50) not null unique,
     password_hash varchar(2048) not null,
     enabled bit not null default 1,
     first_name varchar(75) not null,
@@ -170,12 +170,10 @@ begin
 		('ADMIN'),
         ('USER');
         
-	-- now I see why this may be an unnecessary/redundant table - should we make it so that every user can only have one role?
-		-- e.g. no admin/users
 	insert into app_user_role
     values
-		(1, 1),
-        (2, 2),
+		(1, 2),
+        (2, 1),
         (3, 1),
         (3, 2);
         
@@ -205,7 +203,6 @@ begin
         (3, 1),
         (3, 2);
         
-	-- do we want to move the amount and measurement_unit columns into ingredients & meal_components tables?
 	insert into food (food_name, food_category, food_description)
     values
 		('chicken', 'meat', 'chicken_description'),
@@ -237,8 +234,6 @@ begin
         (3, 11, 0.5, 'tsp'),
         (3, 12, 1.0, 'pinch');
 	
-    -- adding the user_id to the meal? otherwise how do we track whose meal it is?
-    -- meal_category currently isn't nullable - do we want to make it nullable?
     insert into meal (`time`, meal_category)
     values
 		('18:00:00', 'dinner'),
@@ -257,6 +252,6 @@ end //
 delimiter ;
 
 -- actual data (DELETE THIS when it comes time to test)
-set sql_safe_updates = 0;
-call set_known_good_state();
-set sql_safe_updates = 1;
+-- set sql_safe_updates = 0;
+-- call set_known_good_state();
+-- set sql_safe_updates = 1;

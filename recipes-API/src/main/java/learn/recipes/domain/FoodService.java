@@ -54,14 +54,24 @@ public class FoodService {
             result.addErr("", "food cannot be null", ResultType.NOT_FOUND);
             return result;
         }
+
         if (food.getFoodId() > 0) {
             if (!foodRepository.existsById(food.getFoodId())) {
                 result.addErr("", "not found", ResultType.NOT_FOUND);
                 return result;
             }
         }
+
         if(Validations.isNullOrBlank(food.getFoodName())) {
             result.addErr("", "food name is required", ResultType.NOT_FOUND);
+        }
+
+        if(Validations.isNullOrBlank(food.getFoodCategory())) {
+            result.addErr("", "food category is required", ResultType.NOT_FOUND);
+        }
+
+        if(Validations.isNullOrBlank(food.getFoodDescription())) {
+            result.addErr("", "food description is required", ResultType.NOT_FOUND);
         }
 
         return result;
