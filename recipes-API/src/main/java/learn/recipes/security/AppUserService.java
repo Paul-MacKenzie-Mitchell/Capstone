@@ -5,15 +5,12 @@ import learn.recipes.domain.Validations;
 import learn.recipes.models.AppUser;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
-import org.aspectj.weaver.loadtime.Agent;
-import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Service

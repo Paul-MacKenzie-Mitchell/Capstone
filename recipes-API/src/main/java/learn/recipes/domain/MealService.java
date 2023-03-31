@@ -64,13 +64,22 @@ public class MealService {
                 return result;
             }
         }
-        if(Validations.isNullOrBlank(meal.getMealCategory())) {
-            result.addErr("", "meal category is required", ResultType.NOT_FOUND);
-        }
-        //TODO can a meal time be anything ???
+
+//        if(Validations.isNullOrBlank(meal.getMealCategory())) {
+//            result.addErr("", "meal category is required", ResultType.NOT_FOUND);
+//        }
+
+        //TODO question: can a meal time be anything ???
+            // answer: for now, yes. when we attach dates, that's when we worry about time constraints
 //        if(meal.getTime().isBefore(LocalTime.now())) {
 //            result.addErr("", "meal time cannot be in the past", ResultType.INVALID);
 //        }
+
+        if(meal.getTime() == null || meal.getTime().equals(null)) {
+            result.addErr("", "meal must have a timestamp in hh:mm:ss form", ResultType.NOT_FOUND);
+            return result;
+        }
+
         return result;
     }
 }

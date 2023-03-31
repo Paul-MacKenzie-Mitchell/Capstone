@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,8 +37,6 @@ class AppUserRepositoryTest {
         assertTrue(allUsers.size() >= 2 && allUsers.size() <= 4);
     }
 
-    // do we need this one? board-game-api doesn't test the findById method, plus we're kind of testing it by using it in all the other tests
-    // plus I'm not sure how to approach it because it returns an Optional thing, and I'm unsure how to work with that
     @Test
     @Transactional
     void shouldFindUserById() {
@@ -51,11 +48,11 @@ class AppUserRepositoryTest {
 
     @Test
     @Transactional
-    void shouldFindUserByLastName() {
-        List<AppUser> users = repository.findByLastNameIgnoreCase("adminuserlast");
-        assertNotNull(users);
-        assertEquals(1, users.size());
-        assertEquals("adminuserlast", users.get(0).getLastName());
+    void shouldFindUserByUsername() {
+        AppUser user = repository.findByUsername("adminuser");
+        assertNotNull(user);
+        assertEquals(3, user.getAppUserId());
+        assertEquals("adminuserlast", user.getLastName());
     }
 
     // TODO when we add an AppUser, we should add roles for them as well (see addAuthorities method example in board-game-api)
@@ -69,15 +66,6 @@ class AppUserRepositoryTest {
         AppUser expectedNewUser = TestHelper.makeAppUser(4);
         actual = repository.findById(4).orElse(null);
         assertEquals(expectedNewUser, actual);
-
-        // test below works as well, but which one is preferable?
-//        AppUser newUser = TestHelper.makeAppUser(4);
-//        AppUser actual = repository.save(newUser);
-//        assertNotNull(actual);
-//        assertEquals(4, actual.getAppUserId());
-//        assertEquals("TestEmail@email.com", actual.getEmail());
-//        assertEquals("Last", repository.findByLastNameIgnoreCase("Last").get(0).getLastName());
-
     }
 
     @Test
@@ -85,7 +73,7 @@ class AppUserRepositoryTest {
     void shouldDeleteAppUser() {
         repository.deleteById(2);
         assertNull(repository.findById(2).orElse(null));
-        assertEquals(0, repository.findByLastNameIgnoreCase("adminlast").size());
+        assertNull(repository.findByUsername("admin"));
     }
 
     // same problem as findAll method: passes individually, but not with the entire class (returns null user variable for line 93)
