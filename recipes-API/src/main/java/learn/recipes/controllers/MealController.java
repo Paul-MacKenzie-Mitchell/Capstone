@@ -47,7 +47,7 @@ public class MealController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (meal.getMealId() != 0) {
+        if (meal.getMealId() == 0) {
             return new ResponseEntity<>(mapErrs("mealId", "meal Id has not been set"), HttpStatus.BAD_REQUEST);
         }
 
@@ -68,7 +68,7 @@ public class MealController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (meal.getMealId() <= 0) {
+        if (meal.getMealId() == 0) {
             return new ResponseEntity<>(mapErrs("mealId", "meal Id must be set"), HttpStatus.BAD_REQUEST);
         }
 

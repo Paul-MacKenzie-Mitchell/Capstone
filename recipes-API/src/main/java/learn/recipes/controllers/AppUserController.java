@@ -42,7 +42,7 @@ public class AppUserController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (user.getAppUserId() != 0) {
+        if (user.getAppUserId() == 0) {
             return new ResponseEntity<>(mapErrs("appUserId", "appUserId has not been set"), HttpStatus.BAD_REQUEST);
         }
 

@@ -1,19 +1,78 @@
 @base-url = http://localhost:8080/api/meal
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcHVzZXIiLCJhcHBVc2VySWQiOjEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImV4cCI6MTY4MDIwODYwNn0.7Im3f1LzqQzpADEkvNkPJg1wqdx9mgZDILBFyZvUnqI
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzNjI3OH0.xqluZJb5GC-JF9YzAMEZjPTi1bV0Wz44msniSKpbHmA
+###
+
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appuser",
+    "password": "user"
+}
 
 ###
 
+POST http://localhost:8080/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "appadmin",
+    "password": "admin"
+}
+
+###
 // findAll
 GET {{base-url}} HTTP/1.1
 
 ###
-// valid findById
-GET {{base-url}}/1 HTTP/1.1
+//find good id
 
+GET {{base-url}}/5 HTTP/1.1
+Authorization: Bearer {{jwt}}
 ###
 
+//find bad id
+
+GET {{base-url}}/99 HTTP/1.1
+Authorization: Bearer {{jwt}}
+###
+//Good Post
 POST {{base-url}} HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
-{}
+{
+  "time": "18:00:00",
+  "mealCategory": "dinner",
+  "recipes": []
+
+}
+###
+//Update Good
+PUT {{base-url}}/5 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "mealId": 5,
+  "time": "18:00:00",
+  "mealCategory": "Snack",
+  "recipes": [],
+  "food": []
+}
+###
+//Update Bad
+PUT {{base-url}}/99 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "mealId": 5,
+  "time": "18:00:00",
+  "mealCategory": "",
+  "recipes": [],
+  "food": []
+}
+###
+DELETE {{base-url}}/5 HTTP/1.1
+Authorization: Bearer {{jwt}}

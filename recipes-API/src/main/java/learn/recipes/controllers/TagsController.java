@@ -43,7 +43,7 @@ public class TagsController {
             return new ResponseEntity<>(mapErrs(bindingResult), HttpStatus.BAD_REQUEST);
         }
 
-        if (tag.getTagId() != 0) {
+        if (tag.getTagId() == 0) {
             return new ResponseEntity<>(mapErrs("tagId", "tag Id has not been set"), HttpStatus.BAD_REQUEST);
         }
 
