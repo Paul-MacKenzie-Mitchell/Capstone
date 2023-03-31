@@ -43,7 +43,7 @@ public class AppUserController {
         }
 
         if (user.getAppUserId() != 0) {
-            return new ResponseEntity<>(mapErrs("appUserId", "appUserId has not been set"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(mapErrs("appUserId", "new appUserId should not be pre-set"), HttpStatus.BAD_REQUEST);
         }
 
         if (!result.isSuccess()) {

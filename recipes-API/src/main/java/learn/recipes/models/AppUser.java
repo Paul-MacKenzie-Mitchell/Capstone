@@ -2,6 +2,7 @@ package learn.recipes.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -19,7 +20,7 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appUserId;
-    @NonNull
+    @NotNull
     @NotBlank
     private String username;
     @NonNull

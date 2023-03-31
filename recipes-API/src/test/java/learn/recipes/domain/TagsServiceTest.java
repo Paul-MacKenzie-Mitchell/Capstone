@@ -24,6 +24,7 @@ public class TagsServiceTest {
     @MockBean
     TagsRepository repository;
 
+
     @Test
     void shouldAddTag() {
         Tags validNewTag = TestHelper.makeTag(0);
@@ -35,12 +36,11 @@ public class TagsServiceTest {
         assertEquals(ResultType.SUCCESS, result.getType());
     }
 
-    // TODO: update to use the getter
     @Test
     void shouldUpdateTag() {
         Tags validUpdateTag = TestHelper.makeTag(1);
 
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(validUpdateTag.getTagId())).thenReturn(true);
         when(repository.save(validUpdateTag)).thenReturn(validUpdateTag);
         Result<Tags> result = service.save(validUpdateTag);
 
@@ -51,7 +51,8 @@ public class TagsServiceTest {
     @Test
     void shouldDeleteTag() {
         Tags tag = TestHelper.makeTag(2);
-        when(repository.findById(2)).thenReturn(Optional.of(tag));
+        when(repository.findById(tag.getTagId())).thenReturn(Optional.of(tag));
+
         assertTrue(service.deleteById(2));
     }
 
@@ -65,7 +66,7 @@ public class TagsServiceTest {
     @Test
     void shouldNotDeleteMissingTag() {
         Tags missingTag = TestHelper.makeTag(7);
-        when(repository.findById(7)).thenReturn(Optional.empty());
+        when(repository.findById(missingTag.getTagId())).thenReturn(Optional.empty());
 
         assertFalse(service.deleteById(missingTag.getTagId()));
     }
@@ -81,7 +82,7 @@ public class TagsServiceTest {
     @Test
     void shouldNotUpdateMissingTag() {
         Tags missingTag = TestHelper.makeTag(7);
-        when(repository.existsById(7)).thenReturn(false);
+        when(repository.existsById(missingTag.getTagId())).thenReturn(false);
 
         Result<Tags> result = service.save(missingTag);
 
@@ -89,16 +90,23 @@ public class TagsServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
-    // TODO: add both null and blank instances
     @Test
-    void shouldNotSaveTagWithBlankName() {
+    void shouldNotSaveTagWithBlankOrNullName() {
         Tags blankNameTag = TestHelper.makeTag(0);
         blankNameTag.setTagName(" ");
 
-        Result<Tags> result = service.save(blankNameTag);
+        Result<Tags> blankResult = service.save(blankNameTag);
 
-        assertFalse(result.isSuccess());
-        assertEquals("tag name is required", result.getErrs().get(0).getMessage());
+        assertFalse(blankResult.isSuccess());
+        assertEquals("tag name is required", blankResult.getErrs().get(0).getMessage());
+
+        Tags nullNameTag = TestHelper.makeTag(0);
+        nullNameTag.setTagName(null);
+
+        Result<Tags> nullResult = service.save(nullNameTag);
+
+        assertFalse(nullResult.isSuccess());
+        assertEquals("tag name is required", nullResult.getErrs().get(0).getMessage());
     }
 
     @Test
@@ -112,5 +120,6 @@ public class TagsServiceTest {
         assertEquals("an image url is required", result.getErrs().get(0).getMessage());
     }
 
+    // TODO: make tagName unique in SQL, add findByTagName method to repository, test in repository, add validation for unique tag name in service
 
 }

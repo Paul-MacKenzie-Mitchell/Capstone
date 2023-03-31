@@ -10,7 +10,7 @@ create table app_user (
     enabled bit not null default 1,
     first_name varchar(75) not null,
     last_name varchar(75) not null,
-    email varchar(320) not null,
+    email varchar(320) not null unique,
     dob date not null
 );
 
@@ -154,7 +154,7 @@ begin
 	-- NOTES: in individual entity tables (NOT bridge tables), test methods on each entry as follows:
 		-- the first item (ID 1) should always be used to test the Update method
         -- the second item (ID 2) should always be used to test the Delete method
-        -- the third itme (ID 3) should always be used to test the Find method
+        -- the third item (ID 3) should always be used to test the Find method
         -- to test your Add method, you can add a fourth item (it should end up with ID 4 if the auto_increment ID field is working correctly)
 	-- see the first individual entity table below (app_user) for an example labeling each entry with the appropriate method it should be used to test\
     
@@ -162,7 +162,7 @@ begin
 	values
 		('appuser', 'p@ssw0rd', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
         ('appadmin', 'p@ssw0rd', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
-        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin@admin.com', '2000-01-01'); -- find
+        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'adminuser@adminuser.com', '2000-01-01'); -- find
         -- add
         
 	insert into app_role (role_name)

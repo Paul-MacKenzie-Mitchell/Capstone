@@ -44,7 +44,7 @@ public class TagsController {
         }
 
         if (tag.getTagId() != 0) {
-            return new ResponseEntity<>(mapErrs("tagId", "tag Id has not been set"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(mapErrs("tagId", "new tag ID should not be pre-set"), HttpStatus.BAD_REQUEST);
         }
 
         if (!result.isSuccess()) {
