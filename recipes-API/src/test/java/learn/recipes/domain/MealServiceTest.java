@@ -32,41 +32,40 @@ public class MealServiceTest {
         Result<Meal> result = service.save(validNewMeal);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validNewMeal, result.getPayload());
     }
 
     @Test
     void shouldUpdateMeal() {
         Meal validUpdateMeal = TestHelper.makeMeal(1);
 
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(validUpdateMeal.getMealId())).thenReturn(true);
         when(repository.save(validUpdateMeal)).thenReturn(validUpdateMeal);
         Result<Meal> result = service.save(validUpdateMeal);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validUpdateMeal, result.getPayload());
     }
 
     @Test
     void shouldDeleteMeal() {
         Meal meal = TestHelper.makeMeal(2);
-        when(repository.findById(2)).thenReturn(Optional.of(meal));
+        when(repository.findById(meal.getMealId())).thenReturn(Optional.of(meal));
+
         assertTrue(service.deleteById(2));
     }
 
     @Test
     void shouldNotDeleteMealWithInvalidId() {
-        Meal invalidIdMeal = TestHelper.makeMeal(0);
-
-        assertFalse(service.deleteById(invalidIdMeal.getMealId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
     void shouldNotDeleteMissingMeal() {
         Meal missingMeal = TestHelper.makeMeal(7);
-        when(repository.findById(7)).thenReturn(Optional.empty());
+        when(repository.findById(missingMeal.getMealId())).thenReturn(Optional.empty());
 
-        assertFalse(service.deleteById(missingMeal.getMealId()));
+        assertFalse(service.deleteById(7));
     }
 
     @Test
@@ -80,7 +79,7 @@ public class MealServiceTest {
     @Test
     void shouldNotUpdateMissingMeal() {
         Meal missingMeal = TestHelper.makeMeal(7);
-        when(repository.existsById(7)).thenReturn(false);
+        when(repository.existsById(missingMeal.getMealId())).thenReturn(false);
 
         Result<Meal> result = service.save(missingMeal);
 
@@ -89,11 +88,22 @@ public class MealServiceTest {
     }
 
     @Test
-    void shouldNotSaveMealWithNoTimestamp() {
-        Meal noTimestampMeal = TestHelper.makeMeal(0);
-        noTimestampMeal.setTime(null);
+    void shouldNotSaveMealWithNoDate() {
+        Meal noDateMeal = TestHelper.makeMeal(0);
+        noDateMeal.setDate(null);
 
-        Result<Meal> result = service.save(noTimestampMeal);
+        Result<Meal> result = service.save(noDateMeal);
+
+        assertFalse(result.isSuccess());
+        assertEquals("meal must have a date in yyyy-mm-dd form", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveMealWithNoTime() {
+        Meal noTimeMeal = TestHelper.makeMeal(0);
+        noTimeMeal.setTime(null);
+
+        Result<Meal> result = service.save(noTimeMeal);
 
         assertFalse(result.isSuccess());
         assertEquals("meal must have a timestamp in hh:mm:ss form", result.getErrs().get(0).getMessage());

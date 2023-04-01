@@ -67,7 +67,7 @@ public class TagsService {
             result.addErr("", "tag name is required", ResultType.INVALID);
         }
         if(tagsRepository.findByTagName(tag.getTagName()) != null) {
-            result.addErr("", "tag name must be unique", ResultType.INVALID);
+            result.addErr("", "tag name must be unique", ResultType.ALREADY_EXISTS);
         }
 
         if(Validations.isNullOrBlank(tag.getDefaultImage())) {

@@ -24,7 +24,6 @@ public class TagsServiceTest {
     @MockBean
     TagsRepository repository;
 
-
     @Test
     void shouldAddTag() {
         Tags validNewTag = TestHelper.makeTag(0);
@@ -53,16 +52,14 @@ public class TagsServiceTest {
     @Test
     void shouldDeleteTag() {
         Tags tag = TestHelper.makeTag(2);
-        when(repository.findById(tag.getTagId())).thenReturn(Optional.of(tag));
+        when(repository.findById(2)).thenReturn(Optional.of(tag));
 
         assertTrue(service.deleteById(2));
     }
 
     @Test
     void shouldNotDeleteTagWithInvalidId() {
-        Tags invalidIdTag = TestHelper.makeTag(0);
-
-        assertFalse(service.deleteById(invalidIdTag.getTagId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
