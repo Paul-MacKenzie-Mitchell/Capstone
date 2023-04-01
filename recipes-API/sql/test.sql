@@ -2,7 +2,6 @@ drop database if exists recipes_test;
 create database recipes_test;
 use recipes_test;
 
--- establishing tables and relationships
 create table app_user (
 	app_user_id int not null primary key auto_increment,
     username varchar(50) not null unique,
@@ -23,10 +22,10 @@ create table recipe (
 	recipe_id int not null primary key auto_increment,
     title varchar(100) not null,
     instructions varchar(2048) not null,
-    recipe_description varchar(500) not null,
+    recipe_description varchar(500) null,
     cook_time integer not null,
     prep_time integer not null,
-    calories integer not null,
+    calories integer null,
     servings integer not null,
     image_url varchar(2048) null
 );
@@ -39,13 +38,14 @@ create table tags (
 
 create table food (
 	food_id int not null primary key auto_increment,
-    food_name varchar(50) not null,
+    food_name varchar(50) not null unique,
     food_category varchar(100) not null,
     food_description varchar(500) not null
 );
 
 create table meal (
 	meal_id int not null primary key auto_increment,
+    `date` date not null,
     `time` time(0) not null,
     meal_category varchar(50) null
 );
@@ -234,11 +234,11 @@ begin
         (3, 11, 0.5, 'tsp'),
         (3, 12, 1.0, 'pinch');
 	
-    insert into meal (`time`, meal_category)
+    insert into meal (`date`,`time`, meal_category)
     values
-		('18:00:00', 'dinner'),
-        ('08:00:00', 'breakfast'),
-        ('12:00:00', 'lunch');
+		(2023-01-16, '18:00:00', 'dinner'),
+        (2023-01-16, '08:00:00', 'breakfast'),
+        (2023-01-16, '12:00:00', null);
 	
     insert into meal_components
     values
