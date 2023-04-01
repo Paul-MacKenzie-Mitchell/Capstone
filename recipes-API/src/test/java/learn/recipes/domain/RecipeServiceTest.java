@@ -40,7 +40,7 @@ public class RecipeServiceTest {
     void shouldUpdateRecipe() {
         Recipe validUpdateRecipe = TestHelper.makeRecipe(1);
 
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(validUpdateRecipe.getRecipeId())).thenReturn(true);
         when(repository.save(validUpdateRecipe)).thenReturn(validUpdateRecipe);
         Result<Recipe> result = service.save(validUpdateRecipe);
 
@@ -51,21 +51,19 @@ public class RecipeServiceTest {
     @Test
     void shouldDeleteRecipe() {
         Recipe recipe = TestHelper.makeRecipe(2);
-        when(repository.findById(2)).thenReturn(Optional.of(recipe));
+        when(repository.findById(recipe.getRecipeId())).thenReturn(Optional.of(recipe));
         assertTrue(service.deleteById(2));
     }
 
     @Test
     void shouldNotDeleteRecipeWithInvalidId() {
-        Recipe invalidIdRecipe = TestHelper.makeRecipe(0);
-
-        assertFalse(service.deleteById(invalidIdRecipe.getRecipeId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
     void shouldNotDeleteMissingRecipe() {
         Recipe missingRecipe = TestHelper.makeRecipe(7);
-        when(repository.findById(7)).thenReturn(Optional.empty());
+        when(repository.findById(missingRecipe.getRecipeId())).thenReturn(Optional.empty());
 
         assertFalse(service.deleteById(missingRecipe.getRecipeId()));
     }
@@ -81,7 +79,7 @@ public class RecipeServiceTest {
     @Test
     void shouldNotUpdateMissingRecipe() {
         Recipe missingRecipe = TestHelper.makeRecipe(7);
-        when(repository.existsById(7)).thenReturn(false);
+        when(repository.existsById(missingRecipe.getRecipeId())).thenReturn(false);
 
         Result<Recipe> result = service.save(missingRecipe);
 
@@ -90,14 +88,113 @@ public class RecipeServiceTest {
     }
 
     @Test
-    void shouldNotSaveRecipeWithBlankName() {
-        Recipe blankNameRecipe = TestHelper.makeRecipe(0);
-        blankNameRecipe.setTitle("");
+    void shouldNotSaveRecipeWithBlankTitle() {
+        Recipe blankTitleRecipe = TestHelper.makeRecipe(0);
+        blankTitleRecipe.setTitle("");
 
-        Result<Recipe> result = service.save(blankNameRecipe);
+        Result<Recipe> result = service.save(blankTitleRecipe);
 
         assertFalse(result.isSuccess());
         assertEquals("recipe title is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithNullTitle() {
+        Recipe nullTitleRecipe = TestHelper.makeRecipe(0);
+        nullTitleRecipe.setTitle(null);
+
+        Result<Recipe> result = service.save(nullTitleRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe title is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithBlankInstructions() {
+        Recipe blankInstructionsRecipe = TestHelper.makeRecipe(0);
+        blankInstructionsRecipe.setInstructions("");
+
+        Result<Recipe> result = service.save(blankInstructionsRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe instructions are required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithNullInstructions() {
+        Recipe nullInstructionsRecipe = TestHelper.makeRecipe(0);
+        nullInstructionsRecipe.setInstructions(null);
+
+        Result<Recipe> result = service.save(nullInstructionsRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe instructions are required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithBlankDescription() {
+        Recipe blankDescriptionRecipe = TestHelper.makeRecipe(0);
+        blankDescriptionRecipe.setRecipeDescription(" ");
+
+        Result<Recipe> result = service.save(blankDescriptionRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe description is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithNullDescription() {
+        Recipe nullDescriptionRecipe = TestHelper.makeRecipe(0);
+        nullDescriptionRecipe.setRecipeDescription(null);
+
+        Result<Recipe> result = service.save(nullDescriptionRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe description is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithInvalidCookTime() {
+        Recipe invalidCookTimeRecipe = TestHelper.makeRecipe(0);
+        invalidCookTimeRecipe.setCookTime(0);
+
+        Result<Recipe> result = service.save(invalidCookTimeRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("cook time must be greater than 0", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithInvalidPrepTime() {
+        Recipe invalidPrepTimeRecipe = TestHelper.makeRecipe(0);
+        invalidPrepTimeRecipe.setPrepTime(0);
+
+        Result<Recipe> result = service.save(invalidPrepTimeRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("prep time must be greater than 0", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithInvalidCalories() {
+        Recipe invalidCaloriesRecipe = TestHelper.makeRecipe(0);
+        invalidCaloriesRecipe.setCalories(0);
+
+        Result<Recipe> result = service.save(invalidCaloriesRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("calories must be greater than 0", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveRecipeWithInvalidServings() {
+        Recipe invalidServingsRecipe = TestHelper.makeRecipe(0);
+        invalidServingsRecipe.setServings(0);
+
+        Result<Recipe> result = service.save(invalidServingsRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("servings must be greater than 0", result.getErrs().get(0).getMessage());
     }
 
 }
