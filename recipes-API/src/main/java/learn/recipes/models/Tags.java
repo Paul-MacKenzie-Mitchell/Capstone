@@ -5,9 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -17,9 +17,10 @@ public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tagId;
-    @NonNull
+    @NotNull
     @NotBlank
     private String tagName;
+    @NotNull
     @NotBlank
     @URL
     private String defaultImage;
