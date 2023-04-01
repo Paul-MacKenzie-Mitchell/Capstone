@@ -55,9 +55,10 @@ public class MealService {
         Result<Meal> result = new Result<>();
 
         if (meal == null) {
-            result.addErr("", "meal cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "meal cannot be null", ResultType.INVALID);
             return result;
         }
+
         if (meal.getMealId() > 0) {
             if (!mealRepository.existsById(meal.getMealId())) {
                 result.addErr("", "not found", ResultType.NOT_FOUND);
@@ -65,13 +66,13 @@ public class MealService {
             }
         }
 
-        // just in case we want to make meal category required
-//        if(Validations.isNullOrBlank(meal.getMealCategory())) {
-//            result.addErr("", "meal category is required", ResultType.NOT_FOUND);
-//        }
+        if(meal.getDate() == null) {
+            result.addErr("", "meal must have a date in yyyy-mm-dd form", ResultType.INVALID);
+            return result;
+        }
 
         if(meal.getTime() == null) {
-            result.addErr("", "meal must have a timestamp in hh:mm:ss form", ResultType.NOT_FOUND);
+            result.addErr("", "meal must have a timestamp in hh:mm:ss form", ResultType.INVALID);
             return result;
         }
 

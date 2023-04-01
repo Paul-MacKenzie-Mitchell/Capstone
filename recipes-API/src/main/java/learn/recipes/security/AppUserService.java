@@ -95,8 +95,6 @@ public class AppUserService implements UserDetailsService {
             result.addErr("", "last name is required", ResultType.INVALID);
         }
 
-        // TODO: do we want to make it so that the user can only enter an email here?
-            // there is a way to do that in Java
         if(Validations.isNullOrBlank(user.getEmail())) {
             result.addErr("", "email is required", ResultType.INVALID);
         }

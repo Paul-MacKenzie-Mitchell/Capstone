@@ -2,16 +2,12 @@ package learn.recipes.data;
 
 import jakarta.transaction.Transactional;
 import learn.recipes.TestHelper;
-import learn.recipes.domain.RecipeService;
-import learn.recipes.domain.TagsService;
 import learn.recipes.models.Recipe;
-import learn.recipes.models.Tags;
-import learn.recipes.validation.Result;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -20,16 +16,34 @@ import static org.junit.jupiter.api.Assertions.*;
 class RecipeRepositoryTest {
 
     @Autowired
-    RecipeService service;
-
-    @MockBean
     RecipeRepository repository;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @BeforeEach
+    void setup() {jdbcTemplate.update("call set_known_good_state();");}
 
     @Test
     @Transactional
     void shouldFind2To4Recipes() {
         List<Recipe> recipes = repository.findAll();
         assertTrue(recipes.size() >= 2 && recipes.size() <= 4);
+    }
+
+    @Test
+    @Transactional
+    void shouldFindRecipeById() {
+        Recipe existingRecipe = repository.findById(3).orElse(null);
+        assertNotNull(existingRecipe);
+        assertEquals("Marinated Italian Tomato Salad", existingRecipe.getTitle());
+        assertEquals(4, existingRecipe.getServings());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingRecipeById() {
+        assertNull(repository.findById(7).orElse(null));
     }
 
     @Test
@@ -62,17 +76,6 @@ class RecipeRepositoryTest {
         Recipe updatedRecipe = repository.findById(1).orElse(null);
         assertEquals("Test Title Update", updatedRecipe.getTitle());
         assertEquals("Test Recipe Description Update", updatedRecipe.getRecipeDescription());
-    }
-
-    @Test
-    void shouldNotSaveRecipeWithBlankName() {
-        Recipe blankNameRecipe = TestHelper.makeRecipe(0);
-        blankNameRecipe.setTitle("");
-
-        Result<Recipe> result = service.save(blankNameRecipe);
-
-        assertFalse(result.isSuccess());
-        assertEquals("recipe title is required", result.getErrs().get(0).getMessage());
     }
 
 }

@@ -3,10 +3,12 @@ package learn.recipes.data;
 import jakarta.transaction.Transactional;
 import learn.recipes.TestHelper;
 import learn.recipes.models.Food;
+import learn.recipes.models.Tags;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -19,12 +21,10 @@ class FoodRepositoryTest {
     FoodRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
-    void setup() {
-        knownGoodState.set();
-    }
+    void setup() {jdbcTemplate.update("call set_known_good_state();");}
 
     @Test
     @Transactional
@@ -36,13 +36,44 @@ class FoodRepositoryTest {
 
     @Test
     @Transactional
+    void shouldFindFoodById() {
+        Food existingFood = repository.findById(1).orElse(null);
+        assertNotNull(existingFood);
+        assertEquals("chicken", existingFood.getFoodName());
+        assertEquals("chicken_description", existingFood.getFoodDescription());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingFoodById() {
+        assertNull(repository.findById(15).orElse(null));
+    }
+
+    @Test
+    @Transactional
+    void shouldFindFoodByName() {
+        Food existingFood = repository.findByFoodName("chicken");
+        assertNotNull(existingFood);
+        assertEquals("meat", existingFood.getFoodCategory());
+        assertEquals("chicken_description", existingFood.getFoodDescription());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingFoodByName() {
+        assertNull(repository.findByFoodName("nonexistent food name"));
+    }
+
+    @Test
+    @Transactional
     void shouldAddFood() {
         Food newFood = TestHelper.makeFood(0);
         Food actual = repository.save(newFood);
         assertEquals(14, actual.getFoodId());
 
         Food expectedNewFood = TestHelper.makeFood(14);
-        actual = repository.findById(14).orElse(null);
+        actual = repository.findById(expectedNewFood.getFoodId()).orElse(null);
+        assertNotNull(actual);
         assertEquals(expectedNewFood, actual);
     }
 

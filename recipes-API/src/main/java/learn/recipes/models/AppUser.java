@@ -1,6 +1,7 @@
 package learn.recipes.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -34,7 +35,9 @@ public class AppUser implements UserDetails {
     private String lastName;
     @NotNull
     @NotBlank
+    @Email
     private String email;
+    @NotNull
     private LocalDate dob;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

@@ -1,4 +1,4 @@
-package learn.recipes.domain;
+package learn.recipes.security;
 
 import learn.recipes.TestHelper;
 import learn.recipes.data.AppUserRepository;
@@ -128,7 +128,6 @@ public class AppUserServiceTest {
         assertEquals("username is required", blankResult.getErrs().get(0).getMessage());
     }
 
-    // TODO: @NonNull NullPointerException issue
     @Test
     void shouldNotSaveUserWithNullUsername() {
         AppUser nullUsernameUser = TestHelper.makeAppUser(0);
@@ -162,7 +161,6 @@ public class AppUserServiceTest {
         assertEquals("password is required", blankResult.getErrs().get(0).getMessage());
     }
 
-    // TODO: @NonNull NullPointerException issue
     @Test
     void shouldNotSaveUserWithNullPassword() {
         AppUser nullPasswordUser = TestHelper.makeAppUser(0);
@@ -186,7 +184,6 @@ public class AppUserServiceTest {
 
     }
 
-    // TODO: @NonNull NullPointerException issue
     @Test
     void shouldNotSaveUserWithNullFirstName() {
 
@@ -210,7 +207,6 @@ public class AppUserServiceTest {
         assertEquals("last name is required", blankResult.getErrs().get(0).getMessage());
     }
 
-    // TODO: @NonNull NullPointerException issue
     @Test
     void shouldNotSaveUserWithNullLastName() {
         AppUser nullLastNameUser = TestHelper.makeAppUser(0);
@@ -233,7 +229,6 @@ public class AppUserServiceTest {
         assertEquals("email is required", blankResult.getErrs().get(0).getMessage());
     }
 
-    // TODO: @NonNull NullPointerException issue
     @Test
     void shouldNotSaveUserWithNullEmail() {
 
