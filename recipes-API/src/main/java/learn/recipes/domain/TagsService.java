@@ -66,14 +66,14 @@ public class TagsService {
         if(Validations.isNullOrBlank(tag.getTagName())) {
             result.addErr("", "tag name is required", ResultType.INVALID);
         }
-
-//        if(tagsRepository.findByTagName(tag.getTagName())) {
-//            result.addErr("", "tag name must be unique", ResultType.INVALID);
-//        }
+        if(tagsRepository.findByTagName(tag.getTagName()) != null) {
+            result.addErr("", "tag name must be unique", ResultType.INVALID);
+        }
 
         if(Validations.isNullOrBlank(tag.getDefaultImage())) {
             result.addErr("", "an image url is required", ResultType.INVALID);
         }
+
         return result;
     }
 
