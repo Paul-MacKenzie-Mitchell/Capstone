@@ -3,12 +3,13 @@ package learn.recipes.data;
 import jakarta.transaction.Transactional;
 import learn.recipes.TestHelper;
 import learn.recipes.models.Meal;
-import learn.recipes.models.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,18 +21,33 @@ class MealRepositoryTest {
     MealRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
-    void setup() {
-        knownGoodState.set();
-    }
+    void setup() {jdbcTemplate.update("call set_known_good_state();");}
+
 
     @Test
     @Transactional
     void shouldFind2To4Meals() {
         List<Meal> meals = repository.findAll();
         assertTrue(meals.size() >= 2 && meals.size() <= 4);
+    }
+
+    @Test
+    @Transactional
+    void shouldFindMealById() {
+        Meal existingMeal = repository.findById(3).orElse(null);
+
+        assertNotNull(existingMeal);
+        assertEquals(LocalDate.of(2023, 01, 16), existingMeal.getDate());
+        assertEquals(LocalTime.of(12, 00, 00), existingMeal.getTime());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingMealById() {
+        assertNull(repository.findById(7).orElse(null));
     }
 
     @Test
@@ -56,14 +72,13 @@ class MealRepositoryTest {
     @Test
     @Transactional
     void shouldUpdateExistingMeal() {
-        List<Meal> meals = repository.findAll();
         Meal meal = repository.findById(1).orElse(null);
-        meal.setTime(LocalTime.of(12, 00, 00));
+        LocalTime time = LocalTime.of(12, 00, 00);
+        meal.setTime(time);
         meal.setMealCategory("Test Meal Category Update");
         repository.save(meal);
 
         Meal updatedMeal = repository.findById(1).orElse(null);
-        LocalTime time = LocalTime.of(12, 00, 00);
         assertEquals(time, updatedMeal.getTime());
         assertEquals("Test Meal Category Update", updatedMeal.getMealCategory());
     }
