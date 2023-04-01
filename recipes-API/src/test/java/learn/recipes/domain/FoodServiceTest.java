@@ -3,6 +3,7 @@ package learn.recipes.domain;
 import learn.recipes.TestHelper;
 import learn.recipes.data.FoodRepository;
 import learn.recipes.models.Food;
+import learn.recipes.models.Tags;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class FoodServiceTest {
     void shouldUpdateFood() {
         Food validUpdateFood = TestHelper.makeFood(1);
 
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(validUpdateFood.getFoodId())).thenReturn(true);
         when(repository.save(validUpdateFood)).thenReturn(validUpdateFood);
         Result<Food> result = service.save(validUpdateFood);
 
@@ -50,21 +51,19 @@ public class FoodServiceTest {
     @Test
     void shouldDeleteFood() {
         Food food = TestHelper.makeFood(2);
-        when(repository.findById(2)).thenReturn(Optional.of(food));
-        assertTrue(service.deleteById(2));
+        when(repository.findById(food.getFoodId())).thenReturn(Optional.of(food));
+        assertTrue(service.deleteById(food.getFoodId()));
     }
 
     @Test
     void shouldNotDeleteFoodWithInvalidId() {
-        Food invalidIdFood = TestHelper.makeFood(0);
-
-        assertFalse(service.deleteById(invalidIdFood.getFoodId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
     void shouldNotDeleteMissingFood() {
-        Food missingFood = TestHelper.makeFood(7);
-        when(repository.findById(7)).thenReturn(Optional.empty());
+        Food missingFood = TestHelper.makeFood(15);
+        when(repository.findById(missingFood.getFoodId())).thenReturn(Optional.empty());
 
         assertFalse(service.deleteById(missingFood.getFoodId()));
     }
@@ -79,8 +78,8 @@ public class FoodServiceTest {
 
     @Test
     void shouldNotUpdateMissingFood() {
-        Food missingFood = TestHelper.makeFood(7);
-        when(repository.existsById(7)).thenReturn(false);
+        Food missingFood = TestHelper.makeFood(15);
+        when(repository.existsById(missingFood.getFoodId())).thenReturn(false);
 
         Result<Food> result = service.save(missingFood);
 
@@ -88,8 +87,6 @@ public class FoodServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
-
-    // TODO: Lombok/JPA won't let me test null because it's marked as non-null in the class! Should I still test?
     @Test
     void shouldNotSaveFoodWithBlankName() {
         Food blankNameFood = TestHelper.makeFood(0);
@@ -102,9 +99,33 @@ public class FoodServiceTest {
     }
 
     @Test
+    void shouldNotSaveFoodWithNullName() {
+        Food nullNameFood = TestHelper.makeFood(0);
+        nullNameFood.setFoodName(null);
+
+        Result<Food> result = service.save(nullNameFood);
+
+        assertFalse(result.isSuccess());
+        assertEquals("food name is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveFoodWithExistingName() {
+        Food existingNameFood = TestHelper.makeFood(0);
+        existingNameFood.setFoodName("existing name");
+        when(repository.findByFoodName(existingNameFood.getFoodName())).thenReturn(existingNameFood);
+
+        Result<Food> result = service.save(existingNameFood);
+
+        assertFalse(result.isSuccess());
+        assertEquals("food name must be unique", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
     void shouldNotSaveFoodWithBlankCategory() {
         Food blankCategoryFood = TestHelper.makeFood(0);
         blankCategoryFood.setFoodCategory("");
+        when(repository.findByFoodName(blankCategoryFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(blankCategoryFood);
 
@@ -113,9 +134,34 @@ public class FoodServiceTest {
     }
 
     @Test
+    void shouldNotSaveFoodWithNullCategory() {
+        Food nullCategoryFood = TestHelper.makeFood(0);
+        nullCategoryFood.setFoodCategory(null);
+        when(repository.findByFoodName(nullCategoryFood.getFoodName())).thenReturn(null);
+
+        Result<Food> result = service.save(nullCategoryFood);
+
+        assertFalse(result.isSuccess());
+        assertEquals("food category is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveFoodWithBlankDescription() {
+        Food blankDescriptionFood = TestHelper.makeFood(0);
+        blankDescriptionFood.setFoodDescription("");
+        when(repository.findByFoodName(blankDescriptionFood.getFoodName())).thenReturn(null);
+
+        Result<Food> result = service.save(blankDescriptionFood);
+
+        assertFalse(result.isSuccess());
+        assertEquals("food description is required", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
     void shouldNotSaveFoodWithNullDescription() {
         Food nullDescriptionFood = TestHelper.makeFood(0);
         nullDescriptionFood.setFoodDescription(null);
+        when(repository.findByFoodName(nullDescriptionFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(nullDescriptionFood);
 
