@@ -37,6 +37,7 @@ public class AppUser implements UserDetails {
     @NotBlank
     @Email
     private String email;
+    @NotNull
     private LocalDate dob;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
