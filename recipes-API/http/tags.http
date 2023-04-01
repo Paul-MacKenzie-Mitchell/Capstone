@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/tags
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzNTI3OX0.kwZO697kOCBFdnrcxIgy_d_wubAoxtX0BB86KqmSW08
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJleHAiOjE2ODAyODgyMzJ9.Dq_OH0s7ryrX-p84k0Xf69NBy_nIrk8hXSvhoZ6mr4U
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1
