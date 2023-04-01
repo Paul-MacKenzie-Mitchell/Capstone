@@ -45,9 +45,13 @@ create table food (
 
 create table meal (
 	meal_id int not null primary key auto_increment,
+    app_user_id int not null,
     `date` date not null,
     `time` time(0) not null,
-    meal_category varchar(50) null
+    meal_category varchar(50) null,
+    constraint fk_meal_app_user_id
+		foreign key (app_user_id)
+        references app_user(app_user_id)
 );
 
 create table app_user_role (
@@ -234,11 +238,11 @@ begin
         (3, 11, 0.5, 'tsp'),
         (3, 12, 1.0, 'pinch');
 	
-    insert into meal (`date`,`time`, meal_category)
+    insert into meal (app_user_id, `date`,`time`, meal_category)
     values
-		('2023-01-16', '18:00:00', 'dinner'),
-        ('2023-01-16', '08:00:00', 'breakfast'),
-        ('2023-01-16', '12:00:00', null);
+		(1, '2023-01-16', '18:00:00', 'dinner'),
+        (1, '2023-01-16', '08:00:00', 'breakfast'),
+        (2, '2023-01-16', '12:00:00', null);
 	
     insert into meal_components
     values
