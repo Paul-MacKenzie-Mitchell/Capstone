@@ -52,8 +52,8 @@ public class TestHelper {
         recipe.setTitle("Test Recipe Title");
         recipe.setRecipeDescription("Test Recipe Description");
         recipe.setInstructions("Test Recipe Instructions");
-        recipe.setCookTime(0);
-        recipe.setPrepTime(1);
+        recipe.setCookTime(1);
+        recipe.setPrepTime(0);
         recipe.setCalories(1);
         recipe.setServings(1);
         recipe.setImageUrl("https://image-url-test.jpg");

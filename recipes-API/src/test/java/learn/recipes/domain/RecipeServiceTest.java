@@ -89,4 +89,15 @@ public class RecipeServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
+    @Test
+    void shouldNotSaveRecipeWithBlankName() {
+        Recipe blankNameRecipe = TestHelper.makeRecipe(0);
+        blankNameRecipe.setTitle("");
+
+        Result<Recipe> result = service.save(blankNameRecipe);
+
+        assertFalse(result.isSuccess());
+        assertEquals("recipe title is required", result.getErrs().get(0).getMessage());
+    }
+
 }
