@@ -162,7 +162,7 @@ begin
 	values
 		('appuser', '$2a$10$/Ltp.l1Z4JDEgI8OpOwWo.8x7MEUYAwqqnbYt8sfxIezigmyh9ADS', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
         ('appadmin', '$2a$10$M7zdZA/n26txoefFMQF8ZeNXuarS2IwqxnbXHdD1n.CgeTpoyunpe', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
-        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin@admin.com', '2000-01-01'); -- find
+        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'adminuser@adminuser.com', '2000-01-01'); -- find
         -- add
         
 	insert into app_role (role_name)
@@ -236,9 +236,9 @@ begin
 	
     insert into meal (`date`,`time`, meal_category)
     values
-		(2023-01-16, '18:00:00', 'dinner'),
-        (2023-01-16, '08:00:00', 'breakfast'),
-        (2023-01-16, '12:00:00', null);
+		('2023-01-16', '18:00:00', 'dinner'),
+        ('2023-01-16', '08:00:00', 'breakfast'),
+        ('2023-01-16', '12:00:00', null);
 	
     insert into meal_components
     values

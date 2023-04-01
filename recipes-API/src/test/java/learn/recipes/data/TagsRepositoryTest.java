@@ -51,6 +51,20 @@ class TagsRepositoryTest {
 
     @Test
     @Transactional
+    void shouldFindTagByName() {
+        Tags existingTag = repository.findByTagName("under 30 mins");
+        assertNotNull(existingTag);
+        assertEquals("https://creazilla-store.fra1.digitaloceanspaces.com/emojis/58241/alarm-clock-emoji-clipart-md.png", existingTag.getDefaultImage());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingTagByName() {
+        assertNull(repository.findByTagName("nonexistent tag name"));
+    }
+
+    @Test
+    @Transactional
     void shouldAddTag() {
         Tags newTag = TestHelper.makeTag(0);
         Tags actual = repository.save(newTag);

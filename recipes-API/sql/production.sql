@@ -22,10 +22,10 @@ create table recipe (
 	recipe_id int not null primary key auto_increment,
     title varchar(100) not null,
     instructions varchar(2048) not null,
-    recipe_description varchar(500) not null,
+    recipe_description varchar(500) null,
     cook_time integer not null,
     prep_time integer not null,
-    calories integer not null,
+    calories integer null,
     servings integer not null,
     image_url varchar(2048) null
 );
@@ -38,13 +38,14 @@ create table tags (
 
 create table food (
 	food_id int not null primary key auto_increment,
-    food_name varchar(50) not null,
+    food_name varchar(50) not null unique,
     food_category varchar(100) not null,
     food_description varchar(500) not null
 );
 
 create table meal (
 	meal_id int not null primary key auto_increment,
+    `date` date not null,
     `time` time(0) not null,
     meal_category varchar(50) null
 );
