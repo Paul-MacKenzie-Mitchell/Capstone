@@ -40,6 +40,7 @@ public class TestHelper {
     static public Meal makeMeal(int id) {
         Meal meal = new Meal();
         meal.setMealId(id);
+        meal.setDate(LocalDate.of(2023, 01, 16));
         meal.setTime(LocalTime.of(00, 00, 00));
         meal.setMealCategory("Test Meal Category");
         return meal;
@@ -51,7 +52,7 @@ public class TestHelper {
         recipe.setTitle("Test Recipe Title");
         recipe.setRecipeDescription("Test Recipe Description");
         recipe.setInstructions("Test Recipe Instructions");
-        recipe.setCookTime(0);
+        recipe.setCookTime(1);
         recipe.setPrepTime(1);
         recipe.setCalories(1);
         recipe.setServings(1);

@@ -24,16 +24,16 @@ public class TagsServiceTest {
     @MockBean
     TagsRepository repository;
 
-
     @Test
     void shouldAddTag() {
         Tags validNewTag = TestHelper.makeTag(0);
 
+        when(repository.findByTagName(validNewTag.getTagName())).thenReturn(null);
         when(repository.save(validNewTag)).thenReturn(validNewTag);
         Result<Tags> result = service.save(validNewTag);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validNewTag, result.getPayload());
     }
 
     @Test
@@ -41,26 +41,25 @@ public class TagsServiceTest {
         Tags validUpdateTag = TestHelper.makeTag(1);
 
         when(repository.existsById(validUpdateTag.getTagId())).thenReturn(true);
+        when(repository.findByTagName(validUpdateTag.getTagName())).thenReturn(null);
         when(repository.save(validUpdateTag)).thenReturn(validUpdateTag);
         Result<Tags> result = service.save(validUpdateTag);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validUpdateTag, result.getPayload());
     }
 
     @Test
     void shouldDeleteTag() {
         Tags tag = TestHelper.makeTag(2);
-        when(repository.findById(tag.getTagId())).thenReturn(Optional.of(tag));
+        when(repository.findById(2)).thenReturn(Optional.of(tag));
 
         assertTrue(service.deleteById(2));
     }
 
     @Test
     void shouldNotDeleteTagWithInvalidId() {
-        Tags invalidIdTag = TestHelper.makeTag(0);
-
-        assertFalse(service.deleteById(invalidIdTag.getTagId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
@@ -91,7 +90,7 @@ public class TagsServiceTest {
     }
 
     @Test
-    void shouldNotSaveTagWithBlankOrNullName() {
+    void shouldNotSaveTagWithBlankName() {
         Tags blankNameTag = TestHelper.makeTag(0);
         blankNameTag.setTagName(" ");
 
@@ -99,7 +98,9 @@ public class TagsServiceTest {
 
         assertFalse(blankResult.isSuccess());
         assertEquals("tag name is required", blankResult.getErrs().get(0).getMessage());
-
+    }
+    @Test
+    void shouldNotSaveTagWithNullName() {
         Tags nullNameTag = TestHelper.makeTag(0);
         nullNameTag.setTagName(null);
 
@@ -110,16 +111,39 @@ public class TagsServiceTest {
     }
 
     @Test
-    void shouldNotSaveTagWithNullDefaultImage() {
-        Tags nullDefaultImageTag = TestHelper.makeTag(0);
-        nullDefaultImageTag.setDefaultImage(null);
+    void shouldNotSaveTagWithExistingName() {
+        Tags existingNameTag = TestHelper.makeTag(0);
+        existingNameTag.setTagName("existing name");
+        when(repository.findByTagName(existingNameTag.getTagName())).thenReturn(existingNameTag);
 
-        Result<Tags> result = service.save(nullDefaultImageTag);
+        Result<Tags> result = service.save(existingNameTag);
+
+        assertFalse(result.isSuccess());
+        assertEquals("tag name must be unique", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveTagWithBlankDefaultImage() {
+        Tags blankDefaultImageTag = TestHelper.makeTag(0);
+        blankDefaultImageTag.setDefaultImage(" ");
+
+        when(repository.findByTagName(blankDefaultImageTag.getTagName())).thenReturn(null);
+        Result<Tags> result = service.save(blankDefaultImageTag);
 
         assertFalse(result.isSuccess());
         assertEquals("an image url is required", result.getErrs().get(0).getMessage());
     }
 
-    // TODO: make tagName unique in SQL, add findByTagName method to repository, test in repository, add validation for unique tag name in service
+    @Test
+    void shouldNotSaveTagWithNullDefaultImage() {
+        Tags nullDefaultImageTag = TestHelper.makeTag(0);
+        nullDefaultImageTag.setDefaultImage(null);
+
+        when(repository.findByTagName(nullDefaultImageTag.getTagName())).thenReturn(null);
+        Result<Tags> result = service.save(nullDefaultImageTag);
+
+        assertFalse(result.isSuccess());
+        assertEquals("an image url is required", result.getErrs().get(0).getMessage());
+    }
 
 }
