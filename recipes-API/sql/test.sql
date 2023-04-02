@@ -256,6 +256,6 @@ end //
 delimiter ;
 
 -- actual data (DELETE THIS when it comes time to test)
--- set sql_safe_updates = 0;
--- call set_known_good_state();
--- set sql_safe_updates = 1;
+set sql_safe_updates = 0;
+call set_known_good_state();
+set sql_safe_updates = 1;

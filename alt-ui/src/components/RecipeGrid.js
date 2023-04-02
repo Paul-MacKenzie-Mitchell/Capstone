@@ -14,10 +14,12 @@ export default function RecipeGrid() {
   }, [navigate]);
 
   return (
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
-      {recipes.map((r) => (
-        <RecipeCard key={r.recipeId} recipe={r} />
-      ))}
+    <div className="w-full mx-8 py-[2em] px-4 ">
+      <div className="max-w-[1240px] mx-auto grid md:grid-cols-3 my-2 gap-8">
+        {recipes.map((r) => (
+          <RecipeCard key={r.recipeId} recipe={r} />
+        ))}
+      </div>
     </div>
   );
 }

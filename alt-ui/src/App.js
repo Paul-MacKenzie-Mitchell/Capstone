@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { refresh } from "./services/authService";
 import AuthContext from "./contexts/AuthContext";
-import { Home, Login, Recipes } from "./pages";
+import { Home, Login, RecipeDetails, Recipes } from "./pages";
 import { Navbar } from "./components";
 
 function App() {
@@ -14,12 +14,12 @@ function App() {
 
   function login(userArg) {
     setUser(userArg);
-    localStorage.setItem("BG_JWT", userArg.jwt);
+    localStorage.setItem("Recipe_JWT", userArg.jwt);
   }
 
   function logout() {
     setUser();
-    localStorage.removeItem("BG_JWT");
+    localStorage.removeItem("Recipe_JWT");
   }
 
   const auth = {
@@ -35,7 +35,12 @@ function App() {
         <div className="container mb-5 mt-2">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes">
+              <Route index element={<Recipes />} />
+              <Route path=":recipeId">
+                <Route index element={<RecipeDetails />} />
+              </Route>
+            </Route>
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>

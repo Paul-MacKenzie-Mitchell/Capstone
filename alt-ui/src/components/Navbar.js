@@ -11,12 +11,12 @@ const Navbar = () => {
   };
 
   const location = useLocation();
-  // const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
-  // function handleLogout(evt) {
-  //   evt.preventDefault();
-  //   logout();
-  // }
+  function handleLogout(evt) {
+    evt.preventDefault();
+    logout();
+  }
 
   return (
     <nav className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 ">
@@ -42,9 +42,17 @@ const Navbar = () => {
         <NavLink className="p-4" to="/">
           About
         </NavLink>
-        <NavLink className="p-4" to="/login">
-          Login
-        </NavLink>
+        {user ? (
+          <>
+            <a href="#logout" className="p-4" onClick={handleLogout}>
+              Logout
+            </a>
+          </>
+        ) : (
+          <NavLink className="p-4" to="/login">
+            Login
+          </NavLink>
+        )}
       </ul>
       <div onClick={handleNav} className="block md:hidden">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
