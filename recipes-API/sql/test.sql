@@ -162,7 +162,7 @@ begin
 	values
 		('appuser', '$2a$10$/Ltp.l1Z4JDEgI8OpOwWo.8x7MEUYAwqqnbYt8sfxIezigmyh9ADS', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
         ('appadmin', '$2a$10$M7zdZA/n26txoefFMQF8ZeNXuarS2IwqxnbXHdD1n.CgeTpoyunpe', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
-        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin@admin.com', '2000-01-01'); -- find
+        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin2@admin.com', '2000-01-01'); -- find
         -- add
         
 	insert into app_role (role_name)
@@ -252,6 +252,6 @@ end //
 delimiter ;
 
 -- actual data (DELETE THIS when it comes time to test)
--- set sql_safe_updates = 0;
--- call set_known_good_state();
--- set sql_safe_updates = 1;
+set sql_safe_updates = 0;
+call set_known_good_state();
+set sql_safe_updates = 1;
