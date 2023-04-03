@@ -1,181 +1,37 @@
-/* This example requires Tailwind CSS v2.0+ */
-// import { useContext, useEffect } from 'react';
-// import { Disclosure, Menu, Transition } from '@headlessui/react';
-// import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-// import { NavLink } from 'react-router-dom';
-// import { LoginContext } from '../App';
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, BellIcon, XIcon } from '@heroicons/react/outline'
+import { UserIcon } from '@heroicons/react/solid'
 import { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LoginContext } from '../App';
+import ff_logo from '../images/ff_logo.png';
+
 
 
 const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/AboutUs' },
     { name: 'Contact', href: '/Contact' },
+    { name: 'Recipe Book', href: '/RecipeBook' },
 ];
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-// export default function NavBar(props) {
-//     const [loggedIn, setLoggedIn] = useContext(LoginContext);
-
-//     return (
-//         <>
-//             <Disclosure as="nav" className="bg-gray-800">
-//                 {({ open }) => (
-//                     <>
-//                         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-//                             <div className="relative flex items-center justify-between h-14">
-//                                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-//                                     {/* Mobile menu button*/}
-//                                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-//                                         <span className="sr-only">
-//                                             Open main menu
-//                                         </span>
-//                                         {open ? (
-//                                             <XIcon
-//                                                 className="block h-6 w-6"
-//                                                 aria-hidden="true"
-//                                             />
-//                                         ) : (
-//                                             <MenuIcon
-//                                                 className="block h-6 w-6"
-//                                                 aria-hidden="true"
-//                                             />
-//                                         )}
-//                                     </Disclosure.Button>
-//                                 </div>
-//                                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-//                                     <div className="hidden sm:block sm:ml-6">
-//                                         <div className="flex space-x-4">
-//                                             {/*className={classNames(
-//                                                     item.current
-//                                                         ? 'no-underline '
-//                                                         : 'no-underline',
-//                                                     ''
-//                                                 )}*/}
-//                                             {navigation.map((item) => (
-//                                                 <NavLink
-//                                                     key={item.name}
-//                                                     to={item.href}
-//                                                     className={({
-//                                                         isActive,
-//                                                     }) => {
-//                                                         return (
-//                                                             'px-3 py-2 rounded-md text-sm font-medium no-underline ' +
-//                                                             (!isActive
-//                                                                 ? ' text-gray-300 hover:bg-gray-700 hover:text-white'
-//                                                                 : 'bg-gray-900 text-white')
-//                                                         );
-//                                                     }}
-//                                                 >
-//                                                     {item.name}
-//                                                 </NavLink>
-//                                             ))}
-//                                             {loggedIn ? (
-//                                                 <NavLink
-//                                                     to={'/userlogin'}
-//                                                     onClick={() => {
-//                                                         setLoggedIn(false);
-//                                                         localStorage.clear();
-//                                                     }}
-//                                                     className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
-//                                                 >
-//                                                     Logout
-//                                                 </NavLink>
-//                                             ) : (
-//                                                 <NavLink
-//                                                     to={'/userlogin'}
-//                                                     className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
-//                                                 >
-//                                                     Login
-//                                                 </NavLink>
-//                                             )}
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-//                                     <button
-//                                         type="button"
-//                                         className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-//                                     >
-//                                         <span className="sr-only">
-//                                             View notifications
-//                                         </span>
-//                                         <BellIcon
-//                                             className="h-6 w-6"
-//                                             aria-hidden="true"
-//                                         />
-//                                     </button>
-//                                 </div>
-//                             </div>
-//                         </div>
-
-//                         <Disclosure.Panel className="sm:hidden">
-//                             <div className="px-2 pt-2 pb-3 space-y-1">
-//                                 {navigation.map((item) => (
-//                                     <NavLink
-//                                         key={item.name}
-//                                         to={item.href}
-//                                         className={({ isActive }) => {
-//                                             return (
-//                                                 'block px-3 py-2 rounded-md text-base font-medium no-underline ' +
-//                                                 (!isActive
-//                                                     ? ' text-gray-300 hover:bg-gray-700 hover:text-white'
-//                                                     : 'bg-gray-900 text-white')
-//                                             );
-//                                         }}
-//                                     >
-//                                         {item.name}
-//                                     </NavLink>
-//                                 ))}
-//                                 {loggedIn ? (
-//                                     <NavLink
-//                                         to={'/userlogin'}
-//                                         onClick={() => {
-//                                             setLoggedIn(false);
-//                                             localStorage.clear();
-//                                         }}
-//                                         className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
-//                                     >
-//                                         Logout
-//                                     </NavLink>
-//                                 ) : (
-//                                     <NavLink
-//                                         to={'/userlogin'}
-//                                         className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
-//                                     >
-//                                         Login
-//                                     </NavLink>
-//                                 )}
-//                             </div>
-//                         </Disclosure.Panel>
-//                     </>
-//                 )}
-//             </Disclosure>
-//             {props.children}
-                
-//         </>
-//     );
-// }
 
 export default function NavBar() {
     return (
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-green-900">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-green-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -186,16 +42,16 @@ export default function NavBar() {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <img
-                      className="block h-8 w-auto lg:hidden"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                     <img
+                      className="block h-10 w-auto lg:hidden"
+                      src={ff_logo}
                       alt="Your Company"
                     />
                     <img
-                      className="hidden h-8 w-auto lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      className="hidden h-10 w-auto lg:block"
+                      src={ff_logo}
                       alt="Your Company"
-                    />
+                    />  
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
@@ -204,7 +60,7 @@ export default function NavBar() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-green-300 hover:text-white',
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -216,26 +72,24 @@ export default function NavBar() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-  
+                  
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full bg-green-900 text-sm focus:solid-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
+                      <div>
+                        <button
+                        type="button"
+                        className="rounded-full bg-green-900 p-1 text-gray-300 hover:text-white focus:solid-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <UserIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                      </div>
                       </Menu.Button>
-                    </div>
+      
+
+                    
                     <Transition
                       as={Fragment}
                       enter="transition ease-out duration-100"

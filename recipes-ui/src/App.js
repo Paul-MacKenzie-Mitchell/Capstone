@@ -14,6 +14,7 @@ import HttpStatus from "./components/HttpStatus";
 import NavBar from "./components/NavBar";
 import MeetUs from "./components/MeetUs";
 import Profile from "./components/Profile";
+import RecipeBook from "./components/RecipeBook";
 import RecipeCard from "./components/RecipeCard";
 import RecipeDelete from "./components/RecipeDelete";
 import RecipeForm from "./components/RecipeForm"; 
@@ -80,6 +81,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/meetus" element={<MeetUs />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/recipebook" element={<RecipeBook />} />
           <Route path="/recipecard" element={<RecipeCard />} />
           <Route path="/recipe/delete/:id" element={<RecipeDelete />} />
           <Route path="/recipe/add" element={<RecipeForm />} />
