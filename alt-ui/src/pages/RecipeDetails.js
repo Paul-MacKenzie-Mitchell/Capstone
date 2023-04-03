@@ -18,33 +18,41 @@ function RecipeDetails() {
   }
 
   return (
-    <div className="w-full mx-8 py-16 px-4">
-      <div className="max-w-[1240px] mx-auto grid md:grid-cols-2">
-        <img
-          className="w-[500px] mx-auto my-4"
-          src={recipe.imageUrl}
-          alt="image of laptop"
-        />
-        <div className="flex mx-8 flex-col justify-center">
-          <p className="text-[#6a8f6b] font-bold">
-            Prep Time: {recipe.prepTime}
-          </p>
-          <p className="text-[#6a8f6b] font-bold">
-            Cook Time: {recipe.cookTime}
-          </p>
-          <h1 className="md:text-4xl sm:text-3xl text-2xl font-bold py-2 text-[#221c42]">
-            {recipe.title}
-          </h1>
-          <p>{recipe.instructions}</p>
-          <ul>
-            <li>Ingrediants List</li>
-            {recipe.foods.map((f) => (
-              <li>{f.foodName}</li>
-            ))}
-          </ul>
+    <>
+      <div className="w-full mx-8 py-16 px-4">
+        <div className="max-w-[1240px] mx-auto grid md:grid-cols-2">
+          <img
+            className="w-[500px] mx-auto my-4"
+            src={recipe.imageUrl}
+            alt="image of laptop"
+          />
+          <div className="flex mx-8 flex-col justify-center">
+            <p className="text-[#6a8f6b] font-bold">
+              Prep Time: {recipe.prepTime}
+            </p>
+            <p className="text-[#6a8f6b] font-bold">
+              Cook Time: {recipe.cookTime}
+            </p>
+            <h1 className="md:text-4xl sm:text-3xl text-2xl font-bold py-2 text-[#221c42]">
+              {recipe.title}
+            </h1>
+            <ul className="mt-6">
+              <li className="p-4 border-b text-center border-gray-600">
+                Ingrediants List
+              </li>
+              {recipe.foods.map((f) => (
+                <li className="p-4 border-b border-gray-600">{f.foodName}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="w-full flex mx-8 py-6 ps-8 bg-white">
+        <p className="leading-10">
+          <pre className="font-sans ...">{recipe.instructions}</pre>
+        </p>
+      </div>
+    </>
   );
 }
 

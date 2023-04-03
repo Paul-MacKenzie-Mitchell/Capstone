@@ -2,25 +2,19 @@ import { NavLink } from "react-router-dom";
 
 export default function RecipeCard({ recipe }) {
   return (
-    <div className="col">
-      <div className="w-full  shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-110 duration-300">
-        <div className=" my-2 h-full bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-[#6a8f6b] dark:border-[#6a8f6b]">
+    <NavLink to={`/recipes/${recipe.recipeId}`}>
+      <a href="#" className="group">
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
           {recipe.imageUrl && (
             <img
               src={recipe.imageUrl}
-              className="card-img-top"
+              className="h-full w-full object-cover object-center group-hover:opacity-75"
               alt={recipe.name}
             />
           )}
-          <div className="p-5">
-            <NavLink to={`/recipes/${recipe.recipeId}`}>
-              <h5 className=" font-bold text-2xl tracking-tight mb-2 text-white">
-                {recipe.title}
-              </h5>
-            </NavLink>
-          </div>
         </div>
-      </div>
-    </div>
+        <h3 className="mt-4 text-md text-gray-700">{recipe.title}</h3>
+      </a>
+    </NavLink>
   );
 }

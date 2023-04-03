@@ -9,3 +9,7 @@ body {
 .active {
   @apply text-[#4d634d];
 }
+
+pre {
+  white-space: pre-line;
+}
