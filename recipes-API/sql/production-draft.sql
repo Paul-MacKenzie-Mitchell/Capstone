@@ -462,4 +462,6 @@ values
     (3, 9),
 	(3, 10);
 
-
+use recipes;
+select * from recipe;
+commit;

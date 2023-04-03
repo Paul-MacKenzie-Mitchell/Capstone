@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/food
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDI3OTYyNX0.nXHPALS9ev8oN7fp9e2WPq0aic-mnvhYPSuNq7wM8qc
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJleHAiOjE2ODAyODgyMzJ9.Dq_OH0s7ryrX-p84k0Xf69NBy_nIrk8hXSvhoZ6mr4U
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1
@@ -54,7 +54,7 @@ Authorization: Bearer {{jwt}}
 
 {
   "foodId": 14,
-  "foodName": "Red Snapper",
+  "foodName": "Test Red Snapper",
   "foodCategory": "fish",
   "foodDescription": "red_snapper_description"
 }

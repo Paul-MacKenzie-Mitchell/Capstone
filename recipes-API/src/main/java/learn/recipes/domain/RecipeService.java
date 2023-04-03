@@ -63,18 +63,16 @@ public class RecipeService {
         if(Validations.isNullOrBlank(recipe.getInstructions())) {
             result.addErr("", "recipe instructions are required", ResultType.INVALID);
         }
-        if(Validations.isNullOrBlank(recipe.getRecipeDescription())) {
-            result.addErr("", "recipe description is required", ResultType.INVALID);
-        }
         if(recipe.getCookTime() <= 0) {
             result.addErr("", "cook time must be greater than 0", ResultType.INVALID);
         }
         if(recipe.getPrepTime() <= 0) {
             result.addErr("", "prep time must be greater than 0", ResultType.INVALID);
         }
-        if(recipe.getCalories() <= 0) {
-            result.addErr("", "calories must be greater than 0", ResultType.INVALID);
-        }
+        //TODO Delete?
+//        if(recipe.getCalories() <= 0) {
+//            result.addErr("", "calories must be greater than 0", ResultType.INVALID);
+//        }
         if(recipe.getServings() <= 0) {
             result.addErr("", "servings must be greater than 0", ResultType.INVALID);
         }
