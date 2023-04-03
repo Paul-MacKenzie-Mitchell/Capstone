@@ -21,11 +21,5 @@ public class Food {
     @NotNull
     @NotBlank
     private String foodName;
-    @NotNull
-    @NotBlank
-    private String foodCategory;
-    @NotNull
-    @NotBlank
-    private String foodDescription;
 
 }

@@ -124,7 +124,7 @@ public class FoodServiceTest {
     @Test
     void shouldNotSaveFoodWithBlankCategory() {
         Food blankCategoryFood = TestHelper.makeFood(0);
-        blankCategoryFood.setFoodCategory("");
+//        blankCategoryFood.setFoodCategory("");
         when(repository.findByFoodName(blankCategoryFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(blankCategoryFood);
@@ -136,7 +136,7 @@ public class FoodServiceTest {
     @Test
     void shouldNotSaveFoodWithNullCategory() {
         Food nullCategoryFood = TestHelper.makeFood(0);
-        nullCategoryFood.setFoodCategory(null);
+//        nullCategoryFood.setFoodCategory(null);
         when(repository.findByFoodName(nullCategoryFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(nullCategoryFood);
@@ -148,7 +148,7 @@ public class FoodServiceTest {
     @Test
     void shouldNotSaveFoodWithBlankDescription() {
         Food blankDescriptionFood = TestHelper.makeFood(0);
-        blankDescriptionFood.setFoodDescription("");
+//        blankDescriptionFood.setFoodDescription("");
         when(repository.findByFoodName(blankDescriptionFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(blankDescriptionFood);
@@ -160,7 +160,7 @@ public class FoodServiceTest {
     @Test
     void shouldNotSaveFoodWithNullDescription() {
         Food nullDescriptionFood = TestHelper.makeFood(0);
-        nullDescriptionFood.setFoodDescription(null);
+//        nullDescriptionFood.setFoodDescription(null);
         when(repository.findByFoodName(nullDescriptionFood.getFoodName())).thenReturn(null);
 
         Result<Food> result = service.save(nullDescriptionFood);

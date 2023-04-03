@@ -487,7 +487,7 @@ values
     15, 30, 115, 12,
     "https://i0.wp.com/chefsavvy.com/wp-content/uploads/peanut-butter-chocolate-chip-energy-balls.jpg?w=665&ssl=1",
     1);
-    
+
 insert into food (food_name)
 values
 	('plain Greek yogurt'), -- 36
@@ -496,7 +496,7 @@ values
     ('maple syrup'),
     ('peanut butter'), -- 40
     ('dark chocolate chips');
-    
+
 insert into ingredients (recipe_id, food_id, amount, measurement_unit)
 values
 	(11, 36, 0.33, 'cup'),
