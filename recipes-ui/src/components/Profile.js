@@ -1,17 +1,4 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 import { MenuIcon, UserCircleIcon } from '@heroicons/react/solid'
 
 export default function Profile() {
@@ -58,7 +45,7 @@ export default function Profile() {
                 />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
-            </div>
+            </div> 
 
             <div className="col-span-full">
               <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
@@ -73,7 +60,7 @@ export default function Profile() {
                   Change
                 </button>
               </div>
-            </div>
+            </div> 
 
             <div className="col-span-full">
               <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">

@@ -1,11 +1,8 @@
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, BellIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { UserIcon } from '@heroicons/react/solid'
-import { useContext, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { LoginContext } from '../App';
 import ff_logo from '../images/ff_logo.png';
 
 
@@ -14,7 +11,7 @@ const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/AboutUs' },
     { name: 'Contact', href: '/Contact' },
-    { name: 'Recipe Book', href: '/RecipeBook' },
+    { name: 'Recipe Book'},
 ];
 
 function classNames(...classes) {
@@ -42,6 +39,7 @@ export default function NavBar() {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
+                    <a href="/" className="block">
                      <img
                       className="block h-10 w-auto lg:hidden"
                       src={ff_logo}
@@ -52,6 +50,7 @@ export default function NavBar() {
                       src={ff_logo}
                       alt="Your Company"
                     />  
+                    </a>
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
@@ -106,20 +105,11 @@ export default function NavBar() {
                               href="/profile"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Your Profile
+                              Profile
                             </a>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="/settings"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
+                    
                         <Menu.Item>
                           {({ active }) => (
                             <a

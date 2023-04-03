@@ -12,14 +12,7 @@ import Contact from "./components/Contact";
 import Home from "./components/Home";
 import HttpStatus from "./components/HttpStatus";
 import NavBar from "./components/NavBar";
-import MeetUs from "./components/MeetUs";
 import Profile from "./components/Profile";
-import RecipeBook from "./components/RecipeBook";
-import RecipeCard from "./components/RecipeCard";
-import RecipeDelete from "./components/RecipeDelete";
-import RecipeForm from "./components/RecipeForm"; 
-import RecipeList from "./components/RecipeList";
-import Search from "./components/Search";
 import UserLogin from "./components/UserLogin";
 import UserRegistrationForm from "./components/UserRegistrationForm";
 import { baseUrl } from './shared';
@@ -79,15 +72,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/meetus" element={<MeetUs />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/recipebook" element={<RecipeBook />} />
-          <Route path="/recipecard" element={<RecipeCard />} />
-          <Route path="/recipe/delete/:id" element={<RecipeDelete />} />
-          <Route path="/recipe/add" element={<RecipeForm />} />
-          <Route path="/recipe/edit/:id" element={<RecipeForm />} />
-          <Route path="/recipelist" element={<RecipeList />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/profile" element={<Profile />} /> 
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/userregistration/add" element={<UserRegistrationForm />} />
           <Route path="/userregistration/edit/:id" element={<UserRegistrationForm />} />
