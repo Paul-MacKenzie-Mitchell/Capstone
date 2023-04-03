@@ -20,6 +20,7 @@ create table app_role (
 
 create table recipe (
 	recipe_id int not null primary key auto_increment,
+    app_user_id int null,
     title varchar(100) not null,
     instructions varchar(2048) not null,
     recipe_description varchar(500) null,
@@ -27,7 +28,10 @@ create table recipe (
     prep_time integer not null,
     calories integer null,
     servings integer not null,
-    image_url varchar(2048) null
+    image_url varchar(2048) null,
+    constraint fk_recipe_app_user_id
+		foreign key (app_user_id)
+        references app_user(app_user_id)
 );
 
 create table tags (
