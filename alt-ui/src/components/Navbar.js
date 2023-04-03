@@ -36,17 +36,17 @@ const Navbar = () => {
         <NavLink className="p-4" to="/recipes">
           Recipes
         </NavLink>
-        <NavLink className="p-4" to="/">
+        <NavLink className="p-4" to="/recipebook">
           RecipeBook
         </NavLink>
-        <NavLink className="p-4" to="/">
+        <NavLink className="p-4" to="/about">
           About
         </NavLink>
         {user ? (
           <>
-            <a href="#logout" className="p-4" onClick={handleLogout}>
+            <NavLink to={"/logout"} className="p-4" onClick={handleLogout}>
               Logout
-            </a>
+            </NavLink>
           </>
         ) : (
           <NavLink className="p-4" to="/login">
