@@ -21,6 +21,7 @@ create table app_role (
 
 create table recipe (
 	recipe_id int not null primary key auto_increment,
+    app_user_id int null,
     title varchar(100) not null,
     instructions varchar(2048) not null,
     recipe_description varchar(500) null,
@@ -28,7 +29,10 @@ create table recipe (
     prep_time integer not null,
     calories integer null,
     servings integer not null,
-    image_url varchar(2048) null
+    image_url varchar(2048) null,
+    constraint fk_recipe_app_user_id
+		foreign key (app_user_id)
+        references app_user(app_user_id)
 );
 
 create table tags (
@@ -462,6 +466,52 @@ values
     (3, 9),
 	(3, 10);
 
-use recipes;
-select * from recipe;
-commit;
+insert into recipe (title, recipe_description, instructions, prep_time, cook_time, calories, servings, image_url, app_user_id)
+values
+	("Classic Vanilla Overnight Oats",
+	"These vanilla overnight oats are ready to eat as-is, but they also make a great base to which you can add in any mix-ins for a variety of flavors.",
+    "1. Whisk together all ingredients in a medium-sized mixing bowl. Spoon into a jar with a tight-fitting lid.
+	2. Close and refrigerate for at least 4 hours, but preferably overnight before eating.",
+    5, 240, 177, 2,
+    "https://wholefully.com/wp-content/uploads/2019/04/classic-vanilla-overnight-oats-in-jar-814x814.jpg",
+    1),
+    ("Peanut Butter Chocolate-Chip Oatmeal Balls",
+    "Easy energy balls for snacking! They're also extremely versatile. The chocolate chips can be replaced or complemented with other add-ins create many different (but equally delicious) variations.",
+    "1. Before you start, if your peanut butter is not creamy (maybe you opened the jar a while back), then pour it into a microwave-safe bowl with sweetener. Microwave for 30 seconds to soften. Stir and then use in the recipe.
+	2. In a large mixing bowl, add all the ingredients: old-fashioned oats, fresh runny peanut butter, maple syrup, and chocolate chips.
+	3. Use a spatula to combine all the ingredients until it is sticky and forms a dough. If too dry, add 1 or 2 more tablespoons of maple syrup.
+	4. Refrigerate the oatmeal balls mixture for 20 minutes to set the dough. This makes it easier to roll into energy bites.
+	5. Remove the mixture from the fridge. slightly oil your hands with an oil before shaping each energy ball to prevent the batter from sticking to your hands. Scoop out about 1 1/2 tablespoons of dough and roll within your hands to shape energy balls. You should be able to create anywhere from 10-12.
+	6. Place each oatmeal ball onto a plate covered with parchment paper.
+	7. Enjoy immediately or store in the fridge in an airtight container for up to 3 weeks. The oatmeal balls may also be frozen in an airtight container instead if you'd like for them to last longer. In this case, remove them from the freezer 3 hours before you're ready to eat them, and thaw at room temperature until soft.",
+    15, 30, 115, 12,
+    "https://i0.wp.com/chefsavvy.com/wp-content/uploads/peanut-butter-chocolate-chip-energy-balls.jpg?w=665&ssl=1",
+    1);
+
+insert into food (food_name)
+values
+	('plain Greek yogurt'), -- 36
+    ('rolled oats'),
+    ('chia seeds'),
+    ('maple syrup'),
+    ('peanut butter'), -- 40
+    ('dark chocolate chips');
+
+insert into ingredients (recipe_id, food_id, amount, measurement_unit)
+values
+	(11, 36, 0.33, 'cup'),
+    (11, 37, 0.50, 'cup'),
+    (11, 5, 0.66, 'cup'),
+    (11, 37, 1, 'tbsp'),
+    (11, 6, 0.50, 'tsp'),
+    (11, 2, 0.25, 'tsp'),
+    (11, 39, 2, 'tbsp'),
+    (12, 37, 1.25, 'cup'),
+    (12, 40, 0.50, 'cup'),
+    (12, 39, 0.25, 'cup'),
+    (12, 40, 0.25, 'cup'),
+    (12, 6, 0.50, 'tsp'),
+    (12, 2, 0.25, 'tsp');
+
+select * from food order by food_id;
+select * from recipe order by recipe_id;
