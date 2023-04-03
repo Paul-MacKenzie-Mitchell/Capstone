@@ -40,14 +40,17 @@ function RecipeDetails() {
               <li className="p-4 border-b text-center border-gray-600">
                 Ingrediants List
               </li>
-              {recipe.foods.map((f) => (
-                <li className="p-4 border-b border-gray-600">{f.foodName}</li>
+              {recipe.ingredients.map((i) => (
+                <li className="p-4 border-b border-gray-600">
+                  {i.amount} {i.measurementUnit}
+                  {i.food.foodName}
+                </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-      <div className="w-full flex mx-8 py-6 ps-8 bg-white">
+      <div className="w-full flex mx-8 py-6 ps-8 bg-white ">
         <p className="leading-10">
           <pre className="font-sans ...">{recipe.instructions}</pre>
         </p>
