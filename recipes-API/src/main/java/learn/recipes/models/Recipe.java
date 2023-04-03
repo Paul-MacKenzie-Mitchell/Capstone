@@ -41,19 +41,23 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tags> tags = new HashSet<>();
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "ingredients",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id")
-    )
-    private List<Food> foods = new ArrayList<>();
 
-    public void addFoods(Collection<String> foodNames) {
-        foods.clear();
-        for (String name : foodNames) {
-            Food food = new Food();
-            food.setFoodName(name);
-            foods.add(food);
-        }
-    }
+    @OneToMany(mappedBy = "recipeId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ingredients> ingredients = new ArrayList<>();
+
+//    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinTable(name = "ingredients",
+//            joinColumns = @JoinColumn(name = "recipe_id"),
+//            inverseJoinColumns = @JoinColumn(name = "food_id")
+//    )
+//    private List<Food> foods = new ArrayList<>();
+
+//    public void addFoods(Collection<String> foodNames) {
+//        ingredients.clear();
+//        for (String name : foodNames) {
+//            Food food = new Food();
+//            food.setFoodName(name);
+//            ingredients.add(food);
+//        }
+//    }
 }
