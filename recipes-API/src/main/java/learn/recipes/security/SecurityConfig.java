@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("USER", "ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("ADMIN")
         );
 
         http.addFilter(new JwtRequestFilter(manager(config), converter));

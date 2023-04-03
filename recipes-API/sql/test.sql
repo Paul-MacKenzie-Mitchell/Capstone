@@ -2,7 +2,6 @@ drop database if exists recipes_test;
 create database recipes_test;
 use recipes_test;
 
--- establishing tables and relationships
 create table app_user (
 	app_user_id int not null primary key auto_increment,
     username varchar(50) not null unique,
@@ -10,7 +9,7 @@ create table app_user (
     enabled bit not null default 1,
     first_name varchar(75) not null,
     last_name varchar(75) not null,
-    email varchar(320) not null,
+    email varchar(320) not null unique,
     dob date not null
 );
 
@@ -21,14 +20,18 @@ create table app_role (
 
 create table recipe (
 	recipe_id int not null primary key auto_increment,
+    app_user_id int null,
     title varchar(100) not null,
     instructions varchar(2048) not null,
-    recipe_description varchar(500) not null,
+    recipe_description varchar(500) null,
     cook_time integer not null,
     prep_time integer not null,
-    calories integer not null,
+    calories integer null,
     servings integer not null,
-    image_url varchar(2048) null
+    image_url varchar(2048) null,
+    constraint fk_recipe_app_user_id
+		foreign key (app_user_id)
+        references app_user(app_user_id)
 );
 
 create table tags (
@@ -39,15 +42,18 @@ create table tags (
 
 create table food (
 	food_id int not null primary key auto_increment,
-    food_name varchar(50) not null,
-    food_category varchar(100) not null,
-    food_description varchar(500) not null
+    food_name varchar(50) not null unique
 );
 
 create table meal (
 	meal_id int not null primary key auto_increment,
+    app_user_id int not null,
+    `date` date not null,
     `time` time(0) not null,
-    meal_category varchar(50) null
+    meal_category varchar(50) null,
+    constraint fk_meal_app_user_id
+		foreign key (app_user_id)
+        references app_user(app_user_id)
 );
 
 create table app_user_role (
@@ -77,7 +83,7 @@ create table recipebook (
 create table ingredients (
 	recipe_id int not null,
     food_id int not null,
-	amount decimal(7,2) not null,
+	amount decimal(7,3) not null,
     measurement_unit varchar(100) null,
     constraint fk_ingredients_recipe_id
 		foreign key (recipe_id)
@@ -91,7 +97,7 @@ create table meal_components (
 	meal_id int not null,
     recipe_id int null,
     food_id int null,
-	amount decimal(7,2) not null,
+	amount decimal(7,3) not null,
     measurement_unit varchar(100) null,
     constraint fk_meal_components_meal_id
 		foreign key (meal_id)
@@ -154,26 +160,26 @@ begin
 	-- NOTES: in individual entity tables (NOT bridge tables), test methods on each entry as follows:
 		-- the first item (ID 1) should always be used to test the Update method
         -- the second item (ID 2) should always be used to test the Delete method
-        -- the third itme (ID 3) should always be used to test the Find method
+        -- the third item (ID 3) should always be used to test the Find method
         -- to test your Add method, you can add a fourth item (it should end up with ID 4 if the auto_increment ID field is working correctly)
 	-- see the first individual entity table below (app_user) for an example labeling each entry with the appropriate method it should be used to test\
     
     insert into app_user (username, password_hash, first_name, last_name, email, dob)
 	values
-		('appuser', 'p@ssw0rd', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
-        ('appadmin', 'p@ssw0rd', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
-        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'admin@admin.com', '2000-01-01'); -- find
+		('appuser', '$2a$10$/Ltp.l1Z4JDEgI8OpOwWo.8x7MEUYAwqqnbYt8sfxIezigmyh9ADS', 'userfirst', 'userlast', 'user@user.com', '1998-01-01'), -- update
+        ('appadmin', '$2a$10$M7zdZA/n26txoefFMQF8ZeNXuarS2IwqxnbXHdD1n.CgeTpoyunpe', 'adminfirst', 'adminlast', 'admin@admin.com', '2000-01-01'), -- delete
+        ('adminuser', 'p@ssw0rd', 'adminuserfirst', 'adminuserlast', 'adminuser@adminuser.com', '2000-01-01'); -- find
         -- add
         
 	insert into app_role (role_name)
     values
-		('ADMIN'),
-        ('USER');
+        ('USER'),
+        ('ADMIN');
         
 	insert into app_user_role
     values
-		(1, 2),
-        (2, 1),
+		(1, 1),
+        (2, 2),
         (3, 1),
         (3, 2);
         
@@ -234,11 +240,11 @@ begin
         (3, 11, 0.5, 'tsp'),
         (3, 12, 1.0, 'pinch');
 	
-    insert into meal (`time`, meal_category)
+    insert into meal (app_user_id, `date`,`time`, meal_category)
     values
-		('18:00:00', 'dinner'),
-        ('08:00:00', 'breakfast'),
-        ('12:00:00', 'lunch');
+		(1, '2023-01-16', '18:00:00', 'dinner'),
+        (1, '2023-01-16', '08:00:00', 'breakfast'),
+        (2, '2023-01-16', '12:00:00', null);
 	
     insert into meal_components
     values
@@ -252,6 +258,8 @@ end //
 delimiter ;
 
 -- actual data (DELETE THIS when it comes time to test)
--- set sql_safe_updates = 0;
--- call set_known_good_state();
--- set sql_safe_updates = 1;
+set sql_safe_updates = 0;
+call set_known_good_state();
+set sql_safe_updates = 1;
+
+select * from recipe;

@@ -28,44 +28,44 @@ public class TagsServiceTest {
     void shouldAddTag() {
         Tags validNewTag = TestHelper.makeTag(0);
 
+        when(repository.findByTagName(validNewTag.getTagName())).thenReturn(null);
         when(repository.save(validNewTag)).thenReturn(validNewTag);
         Result<Tags> result = service.save(validNewTag);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validNewTag, result.getPayload());
     }
 
-    // TODO: update to use the getter
     @Test
     void shouldUpdateTag() {
         Tags validUpdateTag = TestHelper.makeTag(1);
 
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(validUpdateTag.getTagId())).thenReturn(true);
+        when(repository.findByTagName(validUpdateTag.getTagName())).thenReturn(null);
         when(repository.save(validUpdateTag)).thenReturn(validUpdateTag);
         Result<Tags> result = service.save(validUpdateTag);
 
         assertTrue(result.isSuccess());
-        assertEquals(ResultType.SUCCESS, result.getType());
+        assertEquals(validUpdateTag, result.getPayload());
     }
 
     @Test
     void shouldDeleteTag() {
         Tags tag = TestHelper.makeTag(2);
         when(repository.findById(2)).thenReturn(Optional.of(tag));
+
         assertTrue(service.deleteById(2));
     }
 
     @Test
     void shouldNotDeleteTagWithInvalidId() {
-        Tags invalidIdTag = TestHelper.makeTag(0);
-
-        assertFalse(service.deleteById(invalidIdTag.getTagId()));
+        assertFalse(service.deleteById(0));
     }
 
     @Test
     void shouldNotDeleteMissingTag() {
         Tags missingTag = TestHelper.makeTag(7);
-        when(repository.findById(7)).thenReturn(Optional.empty());
+        when(repository.findById(missingTag.getTagId())).thenReturn(Optional.empty());
 
         assertFalse(service.deleteById(missingTag.getTagId()));
     }
@@ -81,7 +81,7 @@ public class TagsServiceTest {
     @Test
     void shouldNotUpdateMissingTag() {
         Tags missingTag = TestHelper.makeTag(7);
-        when(repository.existsById(7)).thenReturn(false);
+        when(repository.existsById(missingTag.getTagId())).thenReturn(false);
 
         Result<Tags> result = service.save(missingTag);
 
@@ -89,16 +89,49 @@ public class TagsServiceTest {
         assertEquals("not found", result.getErrs().get(0).getMessage());
     }
 
-    // TODO: add both null and blank instances
     @Test
     void shouldNotSaveTagWithBlankName() {
         Tags blankNameTag = TestHelper.makeTag(0);
         blankNameTag.setTagName(" ");
 
-        Result<Tags> result = service.save(blankNameTag);
+        Result<Tags> blankResult = service.save(blankNameTag);
+
+        assertFalse(blankResult.isSuccess());
+        assertEquals("tag name is required", blankResult.getErrs().get(0).getMessage());
+    }
+    @Test
+    void shouldNotSaveTagWithNullName() {
+        Tags nullNameTag = TestHelper.makeTag(0);
+        nullNameTag.setTagName(null);
+
+        Result<Tags> nullResult = service.save(nullNameTag);
+
+        assertFalse(nullResult.isSuccess());
+        assertEquals("tag name is required", nullResult.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveTagWithExistingName() {
+        Tags existingNameTag = TestHelper.makeTag(0);
+        existingNameTag.setTagName("existing name");
+        when(repository.findByTagName(existingNameTag.getTagName())).thenReturn(existingNameTag);
+
+        Result<Tags> result = service.save(existingNameTag);
 
         assertFalse(result.isSuccess());
-        assertEquals("tag name is required", result.getErrs().get(0).getMessage());
+        assertEquals("tag name must be unique", result.getErrs().get(0).getMessage());
+    }
+
+    @Test
+    void shouldNotSaveTagWithBlankDefaultImage() {
+        Tags blankDefaultImageTag = TestHelper.makeTag(0);
+        blankDefaultImageTag.setDefaultImage(" ");
+
+        when(repository.findByTagName(blankDefaultImageTag.getTagName())).thenReturn(null);
+        Result<Tags> result = service.save(blankDefaultImageTag);
+
+        assertFalse(result.isSuccess());
+        assertEquals("an image url is required", result.getErrs().get(0).getMessage());
     }
 
     @Test
@@ -106,11 +139,11 @@ public class TagsServiceTest {
         Tags nullDefaultImageTag = TestHelper.makeTag(0);
         nullDefaultImageTag.setDefaultImage(null);
 
+        when(repository.findByTagName(nullDefaultImageTag.getTagName())).thenReturn(null);
         Result<Tags> result = service.save(nullDefaultImageTag);
 
         assertFalse(result.isSuccess());
         assertEquals("an image url is required", result.getErrs().get(0).getMessage());
     }
-
 
 }

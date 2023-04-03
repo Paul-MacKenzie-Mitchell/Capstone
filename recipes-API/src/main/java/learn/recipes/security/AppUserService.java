@@ -65,7 +65,7 @@ public class AppUserService implements UserDetailsService {
         Result<AppUser> result = new Result<>();
 
         if (user == null) {
-            result.addErr("", "user cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "user cannot be null", ResultType.INVALID);
             return result;
         }
 
@@ -77,26 +77,31 @@ public class AppUserService implements UserDetailsService {
         }
 
         if(Validations.isNullOrBlank(user.getUsername())) {
-            result.addErr("", "username is required", ResultType.NOT_FOUND);
+            result.addErr("", "username is required", ResultType.INVALID);
         }
-
         if(appUserRepository.findByUsername(user.getUsername()) != null) {
-            result.addErr("", "username already exists", ResultType.NOT_FOUND);
+            result.addErr("", "username already exists", ResultType.ALREADY_EXISTS);
         }
 
         if(Validations.isNullOrBlank(user.getPassword())) {
-            result.addErr("", "password is required", ResultType.NOT_FOUND);
+            result.addErr("", "password is required", ResultType.INVALID);
         }
 
         if(Validations.isNullOrBlank(user.getFirstName())) {
-            result.addErr("", "first name is required", ResultType.NOT_FOUND);
+            result.addErr("", "first name is required", ResultType.INVALID);
         }
+
         if(Validations.isNullOrBlank(user.getLastName())) {
-            result.addErr("", "last name is required", ResultType.NOT_FOUND);
+            result.addErr("", "last name is required", ResultType.INVALID);
         }
+
         if(Validations.isNullOrBlank(user.getEmail())) {
-            result.addErr("", "email is required", ResultType.NOT_FOUND);
+            result.addErr("", "email is required", ResultType.INVALID);
         }
+        if(appUserRepository.findByEmail(user.getEmail()) != null) {
+            result.addErr("", "an account with this email already exists", ResultType.ALREADY_EXISTS);
+        }
+
         if(user.getDob().isAfter(LocalDate.now())) {
             result.addErr("", "date of birth cannot be in the future", ResultType.INVALID);
         }

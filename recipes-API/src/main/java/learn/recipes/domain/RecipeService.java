@@ -48,7 +48,7 @@ public class RecipeService {
         Result<Recipe> result = new Result<>();
 
         if (recipe == null) {
-            result.addErr("", "recipe cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "recipe cannot be null", ResultType.INVALID);
             return result;
         }
         if (recipe.getRecipeId() > 0) {
@@ -58,23 +58,21 @@ public class RecipeService {
             }
         }
         if(Validations.isNullOrBlank(recipe.getTitle())) {
-            result.addErr("", "recipe title is required", ResultType.NOT_FOUND);
+            result.addErr("", "recipe title is required", ResultType.INVALID);
         }
         if(Validations.isNullOrBlank(recipe.getInstructions())) {
-            result.addErr("", "recipe instructions are required", ResultType.NOT_FOUND);
+            result.addErr("", "recipe instructions are required", ResultType.INVALID);
         }
-        if(Validations.isNullOrBlank(recipe.getRecipeDescription())) {
-            result.addErr("", "recipe description is required", ResultType.NOT_FOUND);
-        }
-        if(recipe.getCookTime() < 0) {
-            result.addErr("", "cook time cannot be less than 0", ResultType.INVALID);
+        if(recipe.getCookTime() <= 0) {
+            result.addErr("", "cook time must be greater than 0", ResultType.INVALID);
         }
         if(recipe.getPrepTime() <= 0) {
-            result.addErr("", "prep time is required", ResultType.INVALID);
+            result.addErr("", "prep time must be greater than 0", ResultType.INVALID);
         }
-        if(recipe.getCalories() <= 0) {
-            result.addErr("", "calories per serving must be greater than 0", ResultType.INVALID);
-        }
+        //TODO Delete?
+//        if(recipe.getCalories() <= 0) {
+//            result.addErr("", "calories must be greater than 0", ResultType.INVALID);
+//        }
         if(recipe.getServings() <= 0) {
             result.addErr("", "servings must be greater than 0", ResultType.INVALID);
         }

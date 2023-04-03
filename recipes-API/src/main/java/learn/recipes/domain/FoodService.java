@@ -51,7 +51,7 @@ public class FoodService {
         Result<Food> result = new Result<>();
 
         if (food == null) {
-            result.addErr("", "food cannot be null", ResultType.NOT_FOUND);
+            result.addErr("", "food cannot be null", ResultType.INVALID);
             return result;
         }
 
@@ -63,17 +63,11 @@ public class FoodService {
         }
 
         if(Validations.isNullOrBlank(food.getFoodName())) {
-            result.addErr("", "food name is required", ResultType.NOT_FOUND);
+            result.addErr("", "food name is required", ResultType.INVALID);
         }
-
-        if(Validations.isNullOrBlank(food.getFoodCategory())) {
-            result.addErr("", "food category is required", ResultType.NOT_FOUND);
+        if(foodRepository.findByFoodName(food.getFoodName()) != null) {
+            result.addErr("", "food name must be unique", ResultType.ALREADY_EXISTS);
         }
-
-        if(Validations.isNullOrBlank(food.getFoodDescription())) {
-            result.addErr("", "food description is required", ResultType.NOT_FOUND);
-        }
-
         return result;
     }
 }

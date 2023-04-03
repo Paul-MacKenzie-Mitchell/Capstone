@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -19,12 +20,11 @@ class TagsRepositoryTest {
     TagsRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
-    void setup() {
-        knownGoodState.set();
-    }
+    void setup() {jdbcTemplate.update("call set_known_good_state();");}
+
 
     @Test
     @Transactional
@@ -32,6 +32,35 @@ class TagsRepositoryTest {
         List<Tags> allTags = repository.findAll();
         assertNotNull(allTags);
         assertTrue(allTags.size() >= 2 && allTags.size() <= 4);
+    }
+
+    @Test
+    @Transactional
+    void shouldFindTagById() {
+        Tags existingTag = repository.findById(3).orElse(null);
+        assertNotNull(existingTag);
+        assertEquals("under 30 mins", existingTag.getTagName());
+        assertEquals("https://creazilla-store.fra1.digitaloceanspaces.com/emojis/58241/alarm-clock-emoji-clipart-md.png", existingTag.getDefaultImage());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingTagById() {
+        assertNull(repository.findById(7).orElse(null));
+    }
+
+    @Test
+    @Transactional
+    void shouldFindTagByName() {
+        Tags existingTag = repository.findByTagName("under 30 mins");
+        assertNotNull(existingTag);
+        assertEquals("https://creazilla-store.fra1.digitaloceanspaces.com/emojis/58241/alarm-clock-emoji-clipart-md.png", existingTag.getDefaultImage());
+    }
+
+    @Test
+    @Transactional
+    void shouldNotFindMissingTagByName() {
+        assertNull(repository.findByTagName("nonexistent tag name"));
     }
 
     @Test
