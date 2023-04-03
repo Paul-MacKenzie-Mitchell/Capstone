@@ -24,8 +24,6 @@ public class TestHelper {
         Food food = new Food();
         food.setFoodId(id);
         food.setFoodName("Test Food Name");
-        food.setFoodCategory("Test Food Category");
-        food.setFoodDescription("Test Food Description");
         return food;
     }
 

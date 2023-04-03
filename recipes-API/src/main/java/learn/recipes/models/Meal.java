@@ -23,6 +23,9 @@ public class Meal {
     @NotNull
     private LocalTime time;
     private String mealCategory;
+    @ManyToOne
+    @JoinColumn(name="app_user_id")
+    private AppUser appUser;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "meal_components",
@@ -35,5 +38,8 @@ public class Meal {
             joinColumns = @JoinColumn(name = "meal_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
+
+
+
     private Set<Food> food = new HashSet<>();
 }

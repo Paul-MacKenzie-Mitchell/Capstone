@@ -12,6 +12,8 @@ export function getEmptyRecipe() {
     calories: "",
     servings: "",
     imageUrl: "",
+    tags: [],
+    foods: [],
   };
 }
 

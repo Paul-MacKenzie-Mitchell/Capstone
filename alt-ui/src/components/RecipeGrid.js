@@ -10,7 +10,7 @@ export default function RecipeGrid() {
   useEffect(() => {
     findAll()
       .then(setRecipes)
-      .catch(() => navigate("/500"));
+      .catch(() => navigate("/"));
   }, [navigate]);
 
   return (

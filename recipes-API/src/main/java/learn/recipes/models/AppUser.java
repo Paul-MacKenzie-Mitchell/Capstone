@@ -40,6 +40,7 @@ public class AppUser implements UserDetails {
     @NotNull
     private LocalDate dob;
 
+
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "app_user_role",
             joinColumns = @JoinColumn(name = "app_user_id"),
@@ -52,7 +53,8 @@ public class AppUser implements UserDetails {
                 inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
-
+    @OneToMany(mappedBy = "mealId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Meal> meals = new HashSet<>();
     @Override
     public String getPassword() {
         return password;

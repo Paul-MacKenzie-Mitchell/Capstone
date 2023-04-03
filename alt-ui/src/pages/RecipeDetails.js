@@ -36,6 +36,12 @@ function RecipeDetails() {
             {recipe.title}
           </h1>
           <p>{recipe.instructions}</p>
+          <ul>
+            <li>Ingrediants List</li>
+            {recipe.foods.map((f) => (
+              <li>{f.foodName}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

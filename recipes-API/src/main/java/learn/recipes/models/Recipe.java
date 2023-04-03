@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -23,13 +22,14 @@ public class Recipe {
     @NotNull
     @NotBlank
     private String instructions;
+
     private String recipeDescription;
     @Min(value = 1)
     private int cookTime;
     @Min(value = 1)
     private int prepTime;
-    @Min(value = 1)
-    private int calories;
+
+    private Integer calories;
     @Min(value = 1)
     private int servings;
     @URL
@@ -46,6 +46,14 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
-    private Set<Food> foods = new HashSet<>();
+    private List<Food> foods = new ArrayList<>();
 
+    public void addFoods(Collection<String> foodNames) {
+        foods.clear();
+        for (String name : foodNames) {
+            Food food = new Food();
+            food.setFoodName(name);
+            foods.add(food);
+        }
+    }
 }

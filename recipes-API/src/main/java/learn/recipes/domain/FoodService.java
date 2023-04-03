@@ -68,15 +68,6 @@ public class FoodService {
         if(foodRepository.findByFoodName(food.getFoodName()) != null) {
             result.addErr("", "food name must be unique", ResultType.ALREADY_EXISTS);
         }
-
-        if(Validations.isNullOrBlank(food.getFoodCategory())) {
-            result.addErr("", "food category is required", ResultType.INVALID);
-        }
-
-        if(Validations.isNullOrBlank(food.getFoodDescription())) {
-            result.addErr("", "food description is required", ResultType.INVALID);
-        }
-
         return result;
     }
 }
