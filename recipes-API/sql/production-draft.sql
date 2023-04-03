@@ -309,8 +309,7 @@ values
     
 insert into ingredients (recipe_id, food_id, amount, measurement_unit)
 values
-	(7, 20, 0.25, 'cup'),
-    (7, 20, 1.50, 'tsp'),
+	(7, 20, 2.25, 'oz'),
     (7, 26, 2, 'tbsp'),
     (7, 27, 0.25, 'tsp'),
     (7, 2, 0.125, 'tsp'),
@@ -513,5 +512,6 @@ values
     (12, 6, 0.50, 'tsp'),
     (12, 2, 0.25, 'tsp');
 
+select * from ingredients;
 select * from food order by food_id;
 select * from recipe order by recipe_id;
