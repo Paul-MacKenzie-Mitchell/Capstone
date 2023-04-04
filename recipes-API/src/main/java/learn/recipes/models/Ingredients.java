@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Ingredients {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ingredientId;
     private int recipeId;
     private double amount;

@@ -243,7 +243,7 @@ values
 	3. Set out a baking sheet, lined with wax paper or foil, to hold the patties. One at a time, gather the patty mix and press firmly into patties. Shape them just slightly larger than the buns you plan to use, to account for shrinkage during cooking. Set the patties on the baking sheet. Use a spoon to press a dent in the center of each patty so they don't puff up as they cook. If you need to stack the patties separate them with a sheet of wax paper.
     4. Preheat the grill or a skillet to medium heat. (Approximately 350-400 degrees F.)
     5. If you chose to make thicker patties, grill or fry each patty for 3-4 minutes per side. If you opted for thin patties, cook them on the griddle for 2 minutes per side.
-	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and tomatoes. Serve warm.",
+	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and slices of tomatoes. Serve warm.",
     15, 8, 430, 6,
     "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2004/2/25/0/bw2b07_hambugers1.jpg.rend.hgtvcom.826.620.suffix/1558017418187.jpeg");
     
@@ -531,10 +531,13 @@ values
     10, 20, 394, 6,
     "https://www.foodnetwork.com/content/dam/images/food/fullset/2012/2/1/0/WU0202_chili_s3x4.jpg",
     3),
-    ("",
-    "",
-    0, 0, 0, 0,
-    "",
+    ("Asian Lettuce Wraps",
+    "1. Rinse whole lettuce leaves and pat dry, being careful not to tear them; set aside. Chop onion (both varieties) and mince garlic cloves. Drain water chestnuts before finely chopping them.
+	2. Heat oil in a large skillet over medium-high heat. Add beef; cook and stir until browned and crumbly, 5 to 7 minutes. Drain and discard grease; transfer beef to a bowl. Add yellow onion to the same skillet; cook and stir until just tender, 5 to 7 minutes.
+	3. Stir in hoisin sauce, garlic, soy sauce, vinegar, ginger, and chile pepper sauce until well combined. Add water chestnuts, green onions, sesame oil, and cooked beef; cook and stir until the onions just begin to wilt, about 2 minutes.
+	4. Arrange lettuce leaves around the outer edge of a large serving platter; spoon beef mixture in the center.",
+    15, 15, 388, 4,
+    "https://www.allrecipes.com/thmb/eE1YsnC8Bmdn-Yv7myza5kCh830=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/2630776-asian-lettuce-wraps-Chefd-1x1-1-b10d1fecc65748a4b4c60113da62a863.jpg",
     3);
     
 insert into food (food_name)
@@ -546,7 +549,17 @@ values
     ('tomato sauce'),
     ('kidney beans'),
     ('stewed tomatoes'),
-    ('chili powder');
+    ('chili powder'),
+    ('lettuce'), -- 50 
+    ('tomato'),
+    ('American cheese'),
+    ('hoisin sauce'),
+    ('soy sauce'),
+    ('rice wine vinegar'), -- 55
+    ('minced pickled ginger'),
+    ('water chestnuts'),
+    ('green onions'),
+    ('dark sesame oil');
 
 insert into ingredients (recipe_id, food_id, amount, measurement_unit)
 values
@@ -568,7 +581,22 @@ values
     (14, 49, 0.50, 'tsp'),
     (14, 25, 0.50, 'tsp'),
     (14, 2, 0.50, 'tsp'),
-    (14, 4, 0.50, 'tsp');
+    (14, 4, 0.50, 'tsp'),
+    (6, 50, 12, 'leaves'),
+    (6, 51, 4, null),
+    (6, 52, 6, 'slices'),
+    (15, 50, 16, 'leaves'),
+    (15, 22, 1, 'lb'),
+    (15, 31, 1, 'tbsp'),
+    (15, 45, 1, null),
+    (15, 53, 0.25, 'cup'),
+    (15, 20, 2, 'cloves'),
+    (15, 54, 1, 'tbsp'),
+    (15, 55, 1, 'tbsp'),
+    (15, 56, 1, 'tsp'),
+    (15, 57, 1, '8-oz can'),
+    (15, 58, 1, 'bunch'),
+    (15, 59, 2, 'tsp');
     
     
     

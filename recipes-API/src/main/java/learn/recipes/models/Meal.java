@@ -38,8 +38,5 @@ public class Meal {
             joinColumns = @JoinColumn(name = "meal_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
-
-
-
     private Set<Food> food = new HashSet<>();
 }

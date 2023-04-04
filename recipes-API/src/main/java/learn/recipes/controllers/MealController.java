@@ -3,7 +3,6 @@ package learn.recipes.controllers;
 import jakarta.validation.Valid;
 import learn.recipes.domain.MealService;
 import learn.recipes.models.Meal;
-import learn.recipes.models.Recipe;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.springframework.http.HttpStatus;
