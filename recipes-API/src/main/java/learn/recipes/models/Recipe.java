@@ -45,12 +45,9 @@ public class Recipe {
     @OneToMany(mappedBy = "recipeId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredients> ingredients = new ArrayList<>();
 
-//    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//    @JoinTable(name = "ingredients",
-//            joinColumns = @JoinColumn(name = "recipe_id"),
-//            inverseJoinColumns = @JoinColumn(name = "food_id")
-//    )
-//    private List<Food> foods = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private AppUser user;
 
 //    public void addFoods(Collection<String> foodNames) {
 //        ingredients.clear();

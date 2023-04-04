@@ -12,13 +12,8 @@ public class Ingredients {
     @Id
     private int ingredientId;
     private int recipeId;
-//    private int foodId;
     private double amount;
     private String measurementUnit;
-
-//    @ManyToOne
-//    @JoinColumn(name = "recipeId")
-//    private Recipe recipe;
 
     @ManyToOne
     @JoinColumn (name = "foodId")

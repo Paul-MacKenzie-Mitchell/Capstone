@@ -512,6 +512,68 @@ values
     (12, 40, 0.25, 'cup'),
     (12, 6, 0.50, 'tsp'),
     (12, 2, 0.25, 'tsp');
+    
+insert into recipe (title, instructions, prep_time, cook_time, calories, servings, image_url, app_user_id)
+values
+	("Granola",
+    "1. Preheat oven to 350 degrees Fahrenheit and line a large, rimmed baking sheet with parchment paper.
+    2. In a large mixing bowl, combine the oats, pecans, pepitas, salt and cinnamon. Stir to blend.
+	3. Pour in the oil, maple syrup, and vanilla. Mix well, until every oat and nut is lightly coated. Pour the granola onto your prepared pan and use a large spoon to spread it in an even layer.
+	4. Bake until lightly golden, about 21 to 24 minutes, stirring halfway (for extra-clumpy granola, press the stirred granola down with your spatula to create a more even layer). The granola will further crisp up as it cools.
+	5. Let the granola cool completely, undisturbed (at least 45 minutes). Top with the dried fruit and chocolate chips. Break the granola into pieces with your hands if you want to retain big chunks, or stir it around with a spoon if you don’t want extra-clumpy granola.
+	6. Store the granola in an airtight container at room temperature for 1 to 2 weeks, or in a sealed freezer bag in the freezer for up to 3 months. The dried fruit can freeze solid, so let it warm to room temperature for 5 to 10 minutes before serving.",
+    5, 24, 251, 16,
+    "https://cookieandkate.com/images/2015/10/clumpy-granola.jpg",
+    3),
+    ("Easy-Peasy Chili",
+    "1. Place ground beef and onion in a large saucepan over medium heat; cook and stir until meat is browned and onion is tender, about 5 to 7 minutes.
+	2. Stir in tomato sauce, kidney beans, stewed tomatoes with juice, and water. Season with chili powder, garlic powder, salt, and black pepper. Bring to a boil, reduce heat to low, cover and let simmer for 15 minutes.",
+    10, 20, 394, 6,
+    "https://www.foodnetwork.com/content/dam/images/food/fullset/2012/2/1/0/WU0202_chili_s3x4.jpg",
+    3),
+    ("",
+    "",
+    0, 0, 0, 0,
+    "",
+    3);
+    
+insert into food (food_name)
+values
+	('pecans'), -- 42
+    ('pepitas'),
+    ('dried fruit'),
+    ('yellow onion'), -- 45
+    ('tomato sauce'),
+    ('kidney beans'),
+    ('stewed tomatoes'),
+    ('chili powder');
+
+insert into ingredients (recipe_id, food_id, amount, measurement_unit)
+values
+	(13, 37, 4, 'cups'),
+    (13, 42, 0.75, 'cup'),
+    (13, 43, 0.75, 'cup'),
+    (13, 2, 0.75, 'tsp'),
+    (13, 7, 0.50, 'tsp'),
+    (13, 31, 0.50, 'cup'),
+    (13, 39, 0.50, 'cup'),
+    (13, 6, 0.50, 'tsp'),
+    (13, 43, 0.66, 'cup'),
+    (13, 41, 0.50, 'cup'),
+    (14, 22, 1, 'lb'),
+    (14, 45, 1, null),
+    (14, 46, 1, '15-oz can'),
+    (14, 47, 1, '15-oz can'),
+    (14, 48, 1, '14.5-oz can'),
+    (14, 49, 0.50, 'tsp'),
+    (14, 25, 0.50, 'tsp'),
+    (14, 2, 0.50, 'tsp'),
+    (14, 4, 0.50, 'tsp');
+    
+    
+    
+    
+    
 
 select * from ingredients;
 select * from food order by food_id;

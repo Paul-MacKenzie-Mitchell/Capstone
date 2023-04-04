@@ -81,6 +81,7 @@ create table recipebook (
 );
 
 create table ingredients (
+	ingredient_id int not null primary key auto_increment,
 	recipe_id int not null,
     food_id int not null,
 	amount decimal(7,3) not null,
@@ -183,11 +184,11 @@ begin
         (3, 1),
         (3, 2);
         
-	insert into recipe (title, instructions, recipe_description, cook_time, prep_time, calories, servings, image_url)
+	insert into recipe (title, instructions, recipe_description, cook_time, prep_time, calories, servings, image_url, app_user_id)
     values
-		('Chicken Alfredo Penne Pasta', 'chicken alfredo instructions', 'chicken alfredo penne pasta', 20, 15, 460, 6, 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/9768.jpg'),
-        ('Scrambled Eggs', 'scrambled eggs instructions', 'scrambled eggs', 5, 2, 100, 2, 'https://bellyfull.net/wp-content/uploads/2019/03/The-Best-Scrambled-Eggs-blog.jpg'),
-        ('Marinated Italian Tomato Salad', 'tomato salad instructions', 'marinated italian tomato salad', 0, 10, 115, 4, 'https://loveandgoodstuff.com/wp-content/uploads/2019/07/italian-tomato-salad-6.jpg');
+		('Chicken Alfredo Penne Pasta', 'chicken alfredo instructions', 'chicken alfredo penne pasta', 20, 15, 460, 6, 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/9768.jpg', null),
+        ('Scrambled Eggs', 'scrambled eggs instructions', 'scrambled eggs', 5, 2, 100, 2, 'https://bellyfull.net/wp-content/uploads/2019/03/The-Best-Scrambled-Eggs-blog.jpg', null),
+        ('Marinated Italian Tomato Salad', 'tomato salad instructions', 'marinated italian tomato salad', 0, 10, 115, 4, 'https://loveandgoodstuff.com/wp-content/uploads/2019/07/italian-tomato-salad-6.jpg', 3);
         
 	insert into recipebook
     values
@@ -209,23 +210,23 @@ begin
         (3, 1),
         (3, 2);
         
-	insert into food (food_name, food_category, food_description)
+	insert into food (food_name)
     values
-		('chicken', 'meat', 'chicken_description'),
-        ('alfredo sauce', 'sauce', 'alfredo_description'),
-        ('penne', 'pasta', 'penne_description'),
-        ('egg', 'egg', 'egg_description'),
-        ('tomato', 'vegetable', 'tomato_description'),
-        ('red onion', 'vegetable', 'red_onion_description'),
-        ('dressing', 'sauce', 'dressing_description'),
-        ('fresh basil', 'herb', 'basil_description'),
-        ('fresh parsley', 'herb', 'parsley_description'),
-        ('garlic', 'vegetable', 'garlic_description'),
-        ('salt', 'seasoning', 'salt_description'),
-        ('pepper', 'seasoning', 'pepper_description'),
-        ('apple', 'fruit', 'apple_description');
+		('chicken'),
+        ('alfredo sauce'),
+        ('penne'),
+        ('egg'),
+        ('tomato'),
+        ('red onion'),
+        ('dressing'),
+        ('fresh basil'),
+        ('fresh parsley'),
+        ('garlic'),
+        ('salt'),
+        ('pepper'),
+        ('apple');
         
-	insert into ingredients
+	insert into ingredients (recipe_id, food_id, amount, measurement_unit)
     values
 		(1, 1, 1.5, 'lbs'),
         (1, 2, 1.0, 'cup'),

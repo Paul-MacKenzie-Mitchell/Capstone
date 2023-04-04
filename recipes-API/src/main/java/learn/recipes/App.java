@@ -11,9 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
-//        var encoder = new BCryptPasswordEncoder();
-//        System.out.println(encoder.encode("p@ssw0rd"));
-//        System.out.println(encoder.encode("admin"));
         SpringApplication.run(App.class, args);
     }
     @Bean
