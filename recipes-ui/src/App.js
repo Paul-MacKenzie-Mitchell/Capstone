@@ -12,6 +12,7 @@ import Contact from "./components/Contact";
 import Home from "./components/Home";
 import HttpStatus from "./components/HttpStatus";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import Profile from "./components/Profile";
 import UserLogin from "./components/UserLogin";
 import UserRegistrationForm from "./components/UserRegistrationForm";
@@ -67,6 +68,7 @@ function App() {
     <LoginContext.Provider value={[loggedIn, changeLoggedIn]}>
     <Router>
       <NavBar />
+      {/* <Footer /> */}
       <div className="container mb-5 mt-2">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -77,7 +79,6 @@ function App() {
           <Route path="/userregistration/add" element={<UserRegistrationForm />} />
           <Route path="/userregistration/edit/:id" element={<UserRegistrationForm />} />
           <Route path="/userregistration/delete/:id" element={<UserRegistrationForm />} />
-          <Route path="/500" element={<HttpStatus message="Server Error" status={500} />} />
           <Route path="*" element={<HttpStatus message="Not Found" status={404} />} />
         </Routes>
       </div>

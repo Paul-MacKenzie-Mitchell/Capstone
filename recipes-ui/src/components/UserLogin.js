@@ -2,12 +2,20 @@
 import { LockClosedIcon } from '@heroicons/react/outline';
 import login_page from '../images/login_page.jpg';
 import ff_logo2 from '../images/ff_logo2.png';
+import { useEffect } from 'react';
 
 
 export default function UserLogin() {
+    useEffect (() => {
+      document.body.classList.add ("bg")
+  
+    },[])  
+
   return (
     <>
-  
+
+<div className="bg-cover bg-center w-full h-screen"> 
+
       <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -15,7 +23,7 @@ export default function UserLogin() {
               className="mx-auto h-12 w-auto"
               src={ff_logo2}
               alt="Your Company"
-            />
+            />  
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign In
             </h2>
@@ -93,6 +101,7 @@ export default function UserLogin() {
           </form>
         </div>
       </div>
+    </div> 
     </>
   )
 }
