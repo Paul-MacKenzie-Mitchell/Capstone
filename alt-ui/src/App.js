@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { refresh } from "./services/authService";
 import AuthContext from "./contexts/AuthContext";
-import { Home, Login, RecipeDetails, Recipes } from "./pages";
+import {
+  Contact,
+  Home,
+  UserLogin,
+  Recipes,
+  RecipeDetails,
+  RecipeForm,
+  UserRegistrationForm,
+} from "./pages";
 import { Navbar } from "./components";
 
 function App() {
@@ -40,8 +48,11 @@ function App() {
               <Route path=":recipeId">
                 <Route index element={<RecipeDetails />} />
               </Route>
+              <Route path="add" element={<RecipeForm />} />
             </Route>
-            <Route path="/login" element={<Login />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/register" element={<UserRegistrationForm />} />
           </Routes>
         </div>
       </Router>

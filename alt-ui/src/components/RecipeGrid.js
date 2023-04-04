@@ -6,12 +6,24 @@ import RecipeCard from "./RecipeCard";
 export default function RecipeGrid() {
   const [recipes, setRecipes] = useState([]);
   const navigate = useNavigate();
+  const [wait, setWait] = useState(true);
 
   useEffect(() => {
     findAll()
-      .then(setRecipes)
+      .then((result) => {
+        setRecipes(result);
+        setWait(false);
+      })
       .catch(() => navigate("/"));
   }, [navigate]);
+
+  if (wait) {
+    return (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full mx-8 py-[2em] px-4 ">
