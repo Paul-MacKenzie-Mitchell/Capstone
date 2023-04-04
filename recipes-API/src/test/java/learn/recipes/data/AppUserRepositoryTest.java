@@ -98,6 +98,7 @@ class AppUserRepositoryTest {
         assertTrue(expectedNewUser.isEnabled());
     }
 
+    // TODO: why won't this one pass? I get an AssertionError because the deleteById function isn't working for some reason
     @Test
     @Transactional
     void shouldDeleteAppUser() {

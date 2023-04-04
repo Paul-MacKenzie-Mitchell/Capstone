@@ -3,7 +3,6 @@ package learn.recipes.security;
 import learn.recipes.TestHelper;
 import learn.recipes.data.AppUserRepository;
 import learn.recipes.models.AppUser;
-import learn.recipes.security.AppUserService;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.junit.jupiter.api.Test;

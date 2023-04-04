@@ -49,11 +49,11 @@ public class AppUser implements UserDetails {
     private Set<AppRole> roles = new HashSet<>();
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "recipebook",
-                joinColumns = @JoinColumn(name = "app_user_id"),
-                inverseJoinColumns = @JoinColumn(name = "recipe_id")
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
-    @OneToMany(mappedBy = "appUserId", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "mealId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Meal> meals = new HashSet<>();
     @Override
     public String getPassword() {
@@ -90,3 +90,4 @@ public class AppUser implements UserDetails {
     }
 
 }
+

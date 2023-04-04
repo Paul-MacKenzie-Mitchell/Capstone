@@ -25,3 +25,4 @@ public class Tags {
     @URL
     private String defaultImage;
 }
+

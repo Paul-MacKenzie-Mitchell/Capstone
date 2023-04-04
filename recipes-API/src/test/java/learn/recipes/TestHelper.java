@@ -36,9 +36,11 @@ public class TestHelper {
     }
 
     static public Meal makeMeal(int id) {
+        AppUser mealUser = makeAppUser(3);
+
         Meal meal = new Meal();
         meal.setMealId(id);
-        meal.setAppUserId(3);
+        meal.setAppUser(mealUser);
         meal.setDate(LocalDate.of(2023, 01, 16));
         meal.setTime(LocalTime.of(00, 00, 00));
         meal.setMealCategory("Test Meal Category");

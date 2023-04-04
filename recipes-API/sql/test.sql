@@ -184,11 +184,11 @@ begin
         (3, 1),
         (3, 2);
         
-	insert into recipe (title, instructions, recipe_description, cook_time, prep_time, calories, servings, image_url, app_user_id)
+	insert into recipe (title, instructions, recipe_description, cook_time, prep_time, calories, servings, image_url)
     values
-		('Chicken Alfredo Penne Pasta', 'chicken alfredo instructions', 'chicken alfredo penne pasta', 20, 15, 460, 6, 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/9768.jpg', null),
-        ('Scrambled Eggs', 'scrambled eggs instructions', 'scrambled eggs', 5, 2, 100, 2, 'https://bellyfull.net/wp-content/uploads/2019/03/The-Best-Scrambled-Eggs-blog.jpg', null),
-        ('Marinated Italian Tomato Salad', 'tomato salad instructions', 'marinated italian tomato salad', 0, 10, 115, 4, 'https://loveandgoodstuff.com/wp-content/uploads/2019/07/italian-tomato-salad-6.jpg', 3);
+		('Chicken Alfredo Penne Pasta', 'chicken alfredo instructions', 'chicken alfredo penne pasta', 20, 15, 460, 6, 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/9768.jpg'),
+        ('Scrambled Eggs', 'scrambled eggs instructions', 'scrambled eggs', 5, 2, 100, 2, 'https://bellyfull.net/wp-content/uploads/2019/03/The-Best-Scrambled-Eggs-blog.jpg'),
+        ('Marinated Italian Tomato Salad', 'tomato salad instructions', 'marinated italian tomato salad', 0, 10, 115, 4, 'https://loveandgoodstuff.com/wp-content/uploads/2019/07/italian-tomato-salad-6.jpg');
         
 	insert into recipebook
     values
@@ -263,4 +263,5 @@ set sql_safe_updates = 0;
 call set_known_good_state();
 set sql_safe_updates = 1;
 
-select * from recipe;
+select * from app_user where app_user_id = 2;
+delete from app_user where app_user_id = 2;
