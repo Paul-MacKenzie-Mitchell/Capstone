@@ -9,7 +9,7 @@ export function getEmptyRecipe() {
     recipeDescription: "",
     cookTime: "",
     prepTime: "",
-    calories: 0,
+    calories: "",
     servings: "",
     imageUrl: "",
     tags: [],
