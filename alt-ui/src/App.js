@@ -4,6 +4,7 @@ import { refresh } from "./services/authService";
 import AuthContext from "./contexts/AuthContext";
 import {
   Contact,
+  AboutUs,
   Home,
   UserLogin,
   Recipes,
@@ -42,6 +43,7 @@ function App() {
         <Navbar />
         <div className="container mb-5 mt-2">
           <Routes>
+            <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/" element={<Home />} />
             <Route path="/recipes">
               <Route path="add" element={<RecipeForm />} />

@@ -41,7 +41,8 @@ video {
 }
 
 body.bg {
-    background-image: url(./images/login_page.jpg); 
+    background-image: url(./images/login_page.jpg);
+    background-image: url(./images/ff_about_page.jpg);  
     background-size: cover;
     background-repeat: no-repeat;
   }
