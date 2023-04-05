@@ -1,6 +1,6 @@
 import mmProfile from '../images/mm_profile.jpg';
 import img_logo from '../images/img_logo.png';
-
+import { useEffect } from 'react';
 
 const people = [
   {
@@ -8,24 +8,33 @@ const people = [
     role: 'Full-Stack Developer',
     imageUrl: mmProfile,
     socialMediaUrl: 'https://www.linkedin.com/in/mwenge-maliro',
+    socialMediaLogoUrl: img_logo,
   },
   {
     name: 'Paul Mitchell',
     role: 'Full-Stack Developer',
     imageUrl: '',
     socialMediaUrl: 'https://www.linkedin.com/in/paul-mitchell',
+    socialMediaLogoUrl: img_logo,
   },
   {
     name: 'Hanako Boucher',
     role: 'Full-Stack Developer',
     imageUrl: '',
     socialMediaUrl: 'https://www.linkedin.com/in/hanako-boucher',
+    socialMediaLogoUrl: img_logo,
   },
 ];
 
 export default function AboutUs() {
+  useEffect (() => {
+    document.body.classList.add ("bg")
+
+  },[]) 
+
   return (
-    <div className="bg-white py-24 sm:py-32 flex flex-col justify-center items-center">
+ <div className="bg-cover bg-center w-full h-screen"> 
+    //<div className="bg-white py-24 sm:py-32 flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Meet Our Team</h2>
       <div className="max-w-2xl mt-6">
         <p className="text-lg leading-8 text-gray-600">
@@ -49,7 +58,9 @@ export default function AboutUs() {
                 <div>
                   <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">{person.name}</h3>
                   <p className="text-sm font-semibold leading-6 text-indigo-600">{person.role}</p>
-                  <a href={person.socialMediaUrl} className="text-sm font-semibold leading-6 text-indigo-600 hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                  <a href={person.socialMediaUrl} className="text-sm font-semibold leading-6 text-indigo-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                    <img src={person.socialMediaLogoUrl} alt="" className="h-4 w-4 inline-block" />
+                  </a>
                 </div>
               </div>
             </li>
@@ -57,5 +68,6 @@ export default function AboutUs() {
         </ul>
       </div>
     </div>
+  </div>
   );
 }
