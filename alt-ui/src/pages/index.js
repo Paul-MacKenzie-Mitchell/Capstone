@@ -1,4 +1,5 @@
 export { default as Contact } from "./Contact";
+export { default as AboutUs } from "./AboutUs";
 export { default as Home } from "./Home";
 export { default as Recipes } from "./Recipes";
 export { default as RecipeDetails } from "./RecipeDetails";
