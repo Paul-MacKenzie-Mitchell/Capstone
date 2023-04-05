@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -53,6 +54,8 @@ public class AppUser implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Meal> meals = new HashSet<>();
     @Override

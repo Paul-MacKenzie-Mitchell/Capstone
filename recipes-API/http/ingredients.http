@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/ingredients
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjQ3MDk1fQ.3A2fD3m39OFOMXcQFpL4-qMaKwt2wUP48IRDdj68x6Y
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjY0MjUxfQ.g4ru499orM4NXE6g4lXr3ptaY4d37NcE638n_vZnlkk
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1
@@ -22,6 +22,6 @@ Authorization: Bearer {{jwt}}
       "foodId": 55,
       "foodName": "rice wine vinegar"
       },
-  "amount": 5,
+  "amount": 2,
   "measurementUnit": "tbsp"
 }

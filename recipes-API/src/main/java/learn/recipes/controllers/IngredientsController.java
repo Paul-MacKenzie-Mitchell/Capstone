@@ -13,7 +13,7 @@ import static learn.recipes.controllers.ErrMapper.mapErrs;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/ingredients")
+@RequestMapping("/api")
 public class IngredientsController {
 
     private final IngredientsService ingredientsService;
@@ -22,7 +22,7 @@ public class IngredientsController {
         this.ingredientsService = ingredientsService;
     }
 
-    @PostMapping
+    @PostMapping("/ingredients")
     public ResponseEntity<?> add(@RequestBody @Valid Ingredients ingredient, BindingResult bindingResult) {
         Result<Ingredients> result = ingredientsService.save(ingredient);
         if (bindingResult.hasErrors()) {

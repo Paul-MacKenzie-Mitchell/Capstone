@@ -598,6 +598,39 @@ values
     (15, 58, 1, 'bunch'),
     (15, 59, 2, 'tsp');
     
+insert into tags (tag_name)
+values
+	('breakfast'),
+    ('lunch'),
+    ('dinner'),
+    ('sweet'),
+    ('snack'), -- 5
+    ('vegetarian'),
+    ('vegan'),
+    ('one pot meal'),
+    ('slow cooker meal'),
+    ('sheet pan meal'), -- 10
+    ('under 30 mins'),
+    ('under 15 mins'),
+    ('under 10 mins'),
+    ('appetizer'),
+    ('main dish'), -- 15
+    ('side dish'),
+    ('Italian'),
+    ('Japanese'),
+    ('Chinese'),
+    ('Asian'), -- 20
+    ('African'),
+    ('Ethiopian'),
+    ('Nigerian'),
+    ('Kenyan'),
+    ('Greek'), -- 25
+    ('Indian'),
+    ('American'),
+    ('Mexican'),
+    ('Thai'),
+	('French'), -- 30
+	('low-calorie (under 300 calories per serving)');
     
     
     

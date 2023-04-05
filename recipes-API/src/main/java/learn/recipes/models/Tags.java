@@ -20,8 +20,6 @@ public class Tags {
     @NotNull
     @NotBlank
     private String tagName;
-    @NotNull
-    @NotBlank
     @URL
     private String defaultImage;
 }

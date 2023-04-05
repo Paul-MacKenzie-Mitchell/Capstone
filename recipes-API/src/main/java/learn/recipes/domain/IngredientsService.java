@@ -2,7 +2,9 @@ package learn.recipes.domain;
 
 import jakarta.transaction.Transactional;
 import learn.recipes.data.IngredientsRepository;
+import learn.recipes.data.RecipeRepository;
 import learn.recipes.models.Ingredients;
+import learn.recipes.models.Recipe;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,11 @@ public class IngredientsService {
 
     private final IngredientsRepository ingredientsRepository;
 
-    public IngredientsService(IngredientsRepository ingredientsRepository) {
+    private final RecipeRepository recipeRepository;
+
+    public IngredientsService(IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository) {
         this.ingredientsRepository = ingredientsRepository;
+        this.recipeRepository = recipeRepository;
     }
 
     public List<Ingredients> findAll() {
@@ -64,10 +69,6 @@ public class IngredientsService {
             }
         }
 
-        if(ingredient.getRecipeId() <= 0) {
-            result.addErr("", "ingredient needs a recipe ID", ResultType.INVALID);
-            return result;
-        }
         if(ingredient.getAmount() <= 0) {
             result.addErr("", "ingredient must have an amount greater than zero (0)", ResultType.INVALID);
             return result;

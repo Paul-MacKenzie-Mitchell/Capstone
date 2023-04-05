@@ -38,7 +38,7 @@ create table recipe (
 create table tags (
 	tag_id int not null primary key auto_increment,
     tag_name varchar(25) not null unique,
-    default_image varchar(2048) not null
+    default_image varchar(2048) null
 );
 
 create table food (
@@ -394,6 +394,8 @@ values
 	(6, 35, 12, 'leaves'),
     (6, 36, 4, null),
     (6, 37, 6, 'slices');
+    
+insert into tags (
     
 insert into recipebook
 values
