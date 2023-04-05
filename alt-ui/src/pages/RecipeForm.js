@@ -14,22 +14,22 @@ function RecipeForm() {
   const { recipeId } = useParams();
 
   const measurements = [
-    "cup",
-    "tsp",
-    "tbsp",
-    "pinch",
-    "oz",
-    "fl. oz",
-    "qt",
-    "pt",
-    "gal",
-    "lb",
-    "ml",
-    "g",
-    "kg",
-    "liter",
-    "stick",
-    "slice",
+    { name: "cup" },
+    { name: "tsp" },
+    { name: "tbsp" },
+    { name: "pinch" },
+    { name: "oz" },
+    { name: "fl. oz" },
+    { name: "qt" },
+    { name: "pt" },
+    { name: "gal" },
+    { name: "lb" },
+    { name: "ml" },
+    { name: "g" },
+    { name: "kg" },
+    { name: "liter" },
+    { name: "stick" },
+    { name: "slice" },
   ];
 
   useEffect(() => {
@@ -221,17 +221,7 @@ function RecipeForm() {
                       <label className="form-label" htmlFor="measurementUnit">
                         Measurement
                       </label>
-                      <CBox
-                        array={measurements}
-                        type="text"
-                        name="measurementUnit"
-                        id="measurementUnit"
-                        className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        onChange={handleChange}
-                        value={currentRecipe.ingrediants}
-                        required
-                        placeholder=""
-                      />
+                      <CBox array={measurements} />
                     </div>
                   </div>
                 </div>
@@ -244,7 +234,7 @@ function RecipeForm() {
               </button>
               <NavLink
                 to="/recipes"
-                className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
+                className="rounded-md bg-[#6a8f6b] mx-2 mt-4 py-2 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
               >
                 Cancel
               </NavLink>

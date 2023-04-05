@@ -13,16 +13,18 @@ export default function MyCombobox({ array, id, name }) {
         });
 
   return (
-    <Combobox value={selectedElement} onChange={setSelectedElement}>
-      <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-      <Combobox.Options>
-        {filteredElements.map((element) => (
-          <Combobox.Option key={element} value={element}>
-            {element}
-          </Combobox.Option>
-        ))}
-      </Combobox.Options>
-    </Combobox>
+    <div className="md:col-span-2">
+      <Combobox>
+        <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
+        <Combobox.Options>
+          {filteredElements.map((element) => (
+            <Combobox.Option key={element} value={element}>
+              {element}
+            </Combobox.Option>
+          ))}
+        </Combobox.Options>
+      </Combobox>
+    </div>
   );
 }
 
