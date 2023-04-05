@@ -243,7 +243,7 @@ values
 	3. Set out a baking sheet, lined with wax paper or foil, to hold the patties. One at a time, gather the patty mix and press firmly into patties. Shape them just slightly larger than the buns you plan to use, to account for shrinkage during cooking. Set the patties on the baking sheet. Use a spoon to press a dent in the center of each patty so they don't puff up as they cook. If you need to stack the patties separate them with a sheet of wax paper.
     4. Preheat the grill or a skillet to medium heat. (Approximately 350-400 degrees F.)
     5. If you chose to make thicker patties, grill or fry each patty for 3-4 minutes per side. If you opted for thin patties, cook them on the griddle for 2 minutes per side.
-	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and tomatoes. Serve warm.",
+	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and slices of tomatoes. Serve warm.",
     15, 8, 430, 6,
     "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2004/2/25/0/bw2b07_hambugers1.jpg.rend.hgtvcom.826.620.suffix/1558017418187.jpeg");
     
@@ -512,6 +512,129 @@ values
     (12, 40, 0.25, 'cup'),
     (12, 6, 0.50, 'tsp'),
     (12, 2, 0.25, 'tsp');
+    
+insert into recipe (title, instructions, prep_time, cook_time, calories, servings, image_url, app_user_id)
+values
+	("Granola",
+    "1. Preheat oven to 350 degrees Fahrenheit and line a large, rimmed baking sheet with parchment paper.
+    2. In a large mixing bowl, combine the oats, pecans, pepitas, salt and cinnamon. Stir to blend.
+	3. Pour in the oil, maple syrup, and vanilla. Mix well, until every oat and nut is lightly coated. Pour the granola onto your prepared pan and use a large spoon to spread it in an even layer.
+	4. Bake until lightly golden, about 21 to 24 minutes, stirring halfway (for extra-clumpy granola, press the stirred granola down with your spatula to create a more even layer). The granola will further crisp up as it cools.
+	5. Let the granola cool completely, undisturbed (at least 45 minutes). Top with the dried fruit and chocolate chips. Break the granola into pieces with your hands if you want to retain big chunks, or stir it around with a spoon if you don’t want extra-clumpy granola.
+	6. Store the granola in an airtight container at room temperature for 1 to 2 weeks, or in a sealed freezer bag in the freezer for up to 3 months. The dried fruit can freeze solid, so let it warm to room temperature for 5 to 10 minutes before serving.",
+    5, 24, 251, 16,
+    "https://cookieandkate.com/images/2015/10/clumpy-granola.jpg",
+    3),
+    ("Easy-Peasy Chili",
+    "1. Place ground beef and onion in a large saucepan over medium heat; cook and stir until meat is browned and onion is tender, about 5 to 7 minutes.
+	2. Stir in tomato sauce, kidney beans, stewed tomatoes with juice, and water. Season with chili powder, garlic powder, salt, and black pepper. Bring to a boil, reduce heat to low, cover and let simmer for 15 minutes.",
+    10, 20, 394, 6,
+    "https://www.foodnetwork.com/content/dam/images/food/fullset/2012/2/1/0/WU0202_chili_s3x4.jpg",
+    3),
+    ("Asian Lettuce Wraps",
+    "1. Rinse whole lettuce leaves and pat dry, being careful not to tear them; set aside. Chop onion (both varieties) and mince garlic cloves. Drain water chestnuts before finely chopping them.
+	2. Heat oil in a large skillet over medium-high heat. Add beef; cook and stir until browned and crumbly, 5 to 7 minutes. Drain and discard grease; transfer beef to a bowl. Add yellow onion to the same skillet; cook and stir until just tender, 5 to 7 minutes.
+	3. Stir in hoisin sauce, garlic, soy sauce, vinegar, ginger, and chile pepper sauce until well combined. Add water chestnuts, green onions, sesame oil, and cooked beef; cook and stir until the onions just begin to wilt, about 2 minutes.
+	4. Arrange lettuce leaves around the outer edge of a large serving platter; spoon beef mixture in the center.",
+    15, 15, 388, 4,
+    "https://www.allrecipes.com/thmb/eE1YsnC8Bmdn-Yv7myza5kCh830=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/2630776-asian-lettuce-wraps-Chefd-1x1-1-b10d1fecc65748a4b4c60113da62a863.jpg",
+    3);
+    
+insert into food (food_name)
+values
+	('pecans'), -- 42
+    ('pepitas'),
+    ('dried fruit'),
+    ('yellow onion'), -- 45
+    ('tomato sauce'),
+    ('kidney beans'),
+    ('stewed tomatoes'),
+    ('chili powder'),
+    ('lettuce'), -- 50 
+    ('tomato'),
+    ('American cheese'),
+    ('hoisin sauce'),
+    ('soy sauce'),
+    ('rice wine vinegar'), -- 55
+    ('minced pickled ginger'),
+    ('water chestnuts'),
+    ('green onions'),
+    ('dark sesame oil');
+
+insert into ingredients (recipe_id, food_id, amount, measurement_unit)
+values
+	(13, 37, 4, 'cups'),
+    (13, 42, 0.75, 'cup'),
+    (13, 43, 0.75, 'cup'),
+    (13, 2, 0.75, 'tsp'),
+    (13, 7, 0.50, 'tsp'),
+    (13, 31, 0.50, 'cup'),
+    (13, 39, 0.50, 'cup'),
+    (13, 6, 0.50, 'tsp'),
+    (13, 43, 0.66, 'cup'),
+    (13, 41, 0.50, 'cup'),
+    (14, 22, 1, 'lb'),
+    (14, 45, 1, null),
+    (14, 46, 1, '15-oz can'),
+    (14, 47, 1, '15-oz can'),
+    (14, 48, 1, '14.5-oz can'),
+    (14, 49, 0.50, 'tsp'),
+    (14, 25, 0.50, 'tsp'),
+    (14, 2, 0.50, 'tsp'),
+    (14, 4, 0.50, 'tsp'),
+    (6, 50, 12, 'leaves'),
+    (6, 51, 4, null),
+    (6, 52, 6, 'slices'),
+    (15, 50, 16, 'leaves'),
+    (15, 22, 1, 'lb'),
+    (15, 31, 1, 'tbsp'),
+    (15, 45, 1, null),
+    (15, 53, 0.25, 'cup'),
+    (15, 20, 2, 'cloves'),
+    (15, 54, 1, 'tbsp'),
+    (15, 55, 1, 'tbsp'),
+    (15, 56, 1, 'tsp'),
+    (15, 57, 1, '8-oz can'),
+    (15, 58, 1, 'bunch'),
+    (15, 59, 2, 'tsp');
+    
+insert into tags (tag_name)
+values
+	('breakfast'),
+    ('lunch'),
+    ('dinner'),
+    ('sweet'),
+    ('snack'), -- 5
+    ('vegetarian'),
+    ('vegan'),
+    ('one pot meal'),
+    ('slow cooker meal'),
+    ('sheet pan meal'), -- 10
+    ('under 30 mins'),
+    ('under 15 mins'),
+    ('under 10 mins'),
+    ('appetizer'),
+    ('main dish'), -- 15
+    ('side dish'),
+    ('Italian'),
+    ('Japanese'),
+    ('Chinese'),
+    ('Asian'), -- 20
+    ('African'),
+    ('Ethiopian'),
+    ('Nigerian'),
+    ('Kenyan'),
+    ('Greek'), -- 25
+    ('Indian'),
+    ('American'),
+    ('Mexican'),
+    ('Thai'),
+	('French'), -- 30
+	('low-calorie (under 300 calories per serving)');
+    
+    
+    
+    
 
 select * from ingredients;
 select * from food order by food_id;

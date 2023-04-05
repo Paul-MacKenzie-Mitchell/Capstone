@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/meal
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzNjI3OH0.xqluZJb5GC-JF9YzAMEZjPTi1bV0Wz44msniSKpbHmA
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjQ3MDk1fQ.3A2fD3m39OFOMXcQFpL4-qMaKwt2wUP48IRDdj68x6Y
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1
@@ -42,10 +42,11 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
+  "app_user_id": 1,
+  "date": "2023-04-01",
   "time": "18:00:00",
   "mealCategory": "dinner",
   "recipes": []
-
 }
 ###
 //Update Good

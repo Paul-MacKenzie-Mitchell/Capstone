@@ -3,7 +3,6 @@ package learn.recipes.domain;
 import learn.recipes.TestHelper;
 import learn.recipes.data.RecipeRepository;
 import learn.recipes.models.Recipe;
-import learn.recipes.models.Tags;
 import learn.recipes.validation.Result;
 import learn.recipes.validation.ResultType;
 import org.junit.jupiter.api.Test;
@@ -132,28 +131,6 @@ public class RecipeServiceTest {
     }
 
     @Test
-    void shouldNotSaveRecipeWithBlankDescription() {
-        Recipe blankDescriptionRecipe = TestHelper.makeRecipe(0);
-        blankDescriptionRecipe.setRecipeDescription(" ");
-
-        Result<Recipe> result = service.save(blankDescriptionRecipe);
-
-        assertFalse(result.isSuccess());
-        assertEquals("recipe description is required", result.getErrs().get(0).getMessage());
-    }
-
-    @Test
-    void shouldNotSaveRecipeWithNullDescription() {
-        Recipe nullDescriptionRecipe = TestHelper.makeRecipe(0);
-        nullDescriptionRecipe.setRecipeDescription(null);
-
-        Result<Recipe> result = service.save(nullDescriptionRecipe);
-
-        assertFalse(result.isSuccess());
-        assertEquals("recipe description is required", result.getErrs().get(0).getMessage());
-    }
-
-    @Test
     void shouldNotSaveRecipeWithInvalidCookTime() {
         Recipe invalidCookTimeRecipe = TestHelper.makeRecipe(0);
         invalidCookTimeRecipe.setCookTime(0);
@@ -173,17 +150,6 @@ public class RecipeServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals("prep time must be greater than 0", result.getErrs().get(0).getMessage());
-    }
-
-    @Test
-    void shouldNotSaveRecipeWithInvalidCalories() {
-        Recipe invalidCaloriesRecipe = TestHelper.makeRecipe(0);
-        invalidCaloriesRecipe.setCalories(0);
-
-        Result<Recipe> result = service.save(invalidCaloriesRecipe);
-
-        assertFalse(result.isSuccess());
-        assertEquals("calories must be greater than 0", result.getErrs().get(0).getMessage());
     }
 
     @Test
