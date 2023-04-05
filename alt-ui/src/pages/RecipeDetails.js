@@ -43,8 +43,7 @@ function RecipeDetails() {
               </li>
               {recipe.ingredients.map((i) => (
                 <li className="p-4 border-b border-gray-600">
-                  {i.amount} {i.measurementUnit}
-                  {i.food.foodName}
+                  {i.amount} {i.measurementUnit} {i.food.foodName}
                 </li>
               ))}
             </ul>

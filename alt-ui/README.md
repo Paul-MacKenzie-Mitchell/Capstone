@@ -24,11 +24,7 @@ content: [
 
 npm install react-icons
 
-npm install --save prop-types
-
-npm i typed.js
-
-npm i react-typed --force
+npm install @headlessui/react
 
 <!-- npm install @headlessui/react
 npm install @heroicons/react -->

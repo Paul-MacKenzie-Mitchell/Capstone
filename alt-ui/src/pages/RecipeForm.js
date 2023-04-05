@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { findById, getEmptyRecipe, save } from "../services/recipeService";
 import { findAll } from "../services/foodService";
+import { CBox } from "../components";
 
 function RecipeForm() {
   const [currentRecipe, setCurrentRecipe] = useState(getEmptyRecipe());
@@ -216,6 +217,22 @@ function RecipeForm() {
                         placeholder=""
                       />
                     </div>
+                    <div className="md:col-span-5">
+                      <label className="form-label" htmlFor="measurementUnit">
+                        Measurement
+                      </label>
+                      <CBox
+                        array={measurements}
+                        type="text"
+                        name="measurementUnit"
+                        id="measurementUnit"
+                        className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        onChange={handleChange}
+                        value={currentRecipe.ingrediants}
+                        required
+                        placeholder=""
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -250,11 +267,9 @@ function RecipeForm() {
 
 export default RecipeForm;
 
-{
-  /* <ul>
+/* <ul>
   <li>Hi</li>
   {allFoods.map((f) => (
     <li>{f.foodName}</li>
   ))}
 </ul>; */
-}

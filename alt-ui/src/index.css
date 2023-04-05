@@ -23,11 +23,6 @@ video {
   object-fit: cover;
 }
 
-/* .navbar-nav {
-    display: flex;
-    align-items: center;
-  } */
-
 .navbar-nav {
   display: flex;
   justify-content: center;
@@ -49,4 +44,10 @@ video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+body.bg {
+  background-image: url(./images/login_page.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
