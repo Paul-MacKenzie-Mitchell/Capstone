@@ -37,7 +37,7 @@ create table recipe (
 
 create table tags (
 	tag_id int not null primary key auto_increment,
-    tag_name varchar(25) not null unique,
+    tag_name varchar(50) not null unique,
     default_image varchar(2048) null
 );
 
@@ -395,7 +395,89 @@ values
     (6, 36, 4, null),
     (6, 37, 6, 'slices');
     
-insert into tags (
+insert into tags (tag_name)
+values
+	('breakfast'),
+    ('lunch'),
+    ('dinner'),
+    ('sweet'),
+    ('snack'), -- 5
+    ('vegetarian'),
+    ('vegan'),
+    ('one pot meal'),
+    ('slow cooker meal'),
+    ('sheet pan meal'), -- 10
+    ('under 30 mins'),
+    ('under 15 mins'),
+    ('under 10 mins'),
+    ('appetizer'),
+    ('main dish'), -- 15
+    ('side dish'),
+    ('Italian'),
+    ('Japanese'),
+    ('Chinese'),
+    ('Asian'), -- 20
+    ('African'),
+    ('Ethiopian'),
+    ('Nigerian'),
+    ('Kenyan'),
+    ('Greek'), -- 25
+    ('Indian'),
+    ('American'),
+    ('Mexican'),
+    ('Thai'),
+	('French'), -- 30
+	('low-calorie (under 300 calories per serving)');
+
+insert into recipe_tags
+values
+	(1, 1),
+    (1, 6),
+    (1, 13),
+    (1, 15),
+    (1, 16),
+    (1, 31),
+    (2, 1),
+    (2, 6),
+    (2, 12),
+    (2, 15),
+    (2, 31),
+    (3, 2),
+    (3, 13),
+    (3, 15),
+    (3, 31),
+    (4, 2),
+    (4, 13),
+    (4, 14),
+    (4, 15),
+    (4, 16),
+    (4, 17),
+    (5, 3),
+    (5, 17),
+    (5, 15),
+    (6, 11),
+    (6, 3),
+    (6, 15),
+    (6, 27),
+    (7, 13),
+    (7, 6),
+    (7, 4),
+    (8, 4),
+    (8, 6),
+    (8, 11),
+    (9, 31),
+    (9, 16),
+    (9, 10),
+    (9, 6),
+    (9, 7),
+    (9, 5),
+    (10, 31),
+    (10, 16),
+    (10, 14),
+    (10, 13),
+    (10, 7),
+    (10, 6),
+    (10, 5);
     
 insert into recipebook
 values
