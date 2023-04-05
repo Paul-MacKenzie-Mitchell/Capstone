@@ -14,6 +14,7 @@ export function getEmptyRecipe() {
     imageUrl: "",
     tags: [],
     foods: [],
+    ingrediants: [],
   };
 }
 

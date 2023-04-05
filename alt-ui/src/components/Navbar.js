@@ -1,9 +1,22 @@
-import React, { useState, useContext } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Fragment, useState, useContext } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/solid";
+import ff_logo from "../images/ff_logo.png";
 
-const Navbar = () => {
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "Recipes", href: "/recipes" },
+  { name: "Contact", href: "/Contact" },
+  { name: "Recipe Book" },
+];
+
+export default function NavBar() {
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
   const [nav, setNav] = useState(false);
 
   const handleNav = () => {
@@ -17,67 +30,139 @@ const Navbar = () => {
     evt.preventDefault();
     logout();
   }
-
   return (
-    <nav className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 ">
-      <NavLink
-        to="/"
-        className={({ isActive }) => (isActive ? "font-bold" : "")}
-      >
-        <h1 className="w-full text-3xl font-bold text-[#6a8f6b]">
-          Fresh Feast
-        </h1>
-      </NavLink>
+    <Disclosure as="nav" className="sticky top-0 bg-[#6a8f6b]">
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-green-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-shrink-0 items-center">
+                  <a href="/" className="block">
+                    <img
+                      className="block h-10 w-auto lg:hidden"
+                      src={ff_logo}
+                      alt="Fresh Feast"
+                    />
+                    <img
+                      className="hidden h-10 w-auto lg:block"
+                      src={ff_logo}
+                      alt="Fresh Feast"
+                    />
+                  </a>
+                </div>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-green-300 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative ml-3">
+                  <Menu.Button className="flex rounded-full bg-green-900 text-sm focus:solid-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                    <span className="sr-only">Open user menu</span>
+                    <div>
+                      <button
+                        type="button"
+                        className="rounded-full bg-green-900 p-1 text-gray-300 hover:text-white focus:solid-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <UserIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    </div>
+                  </Menu.Button>
 
-      <ul className="hidden md:flex text-[#6a8f6b]">
-        <NavLink className="p-4" to="/">
-          Home
-        </NavLink>
-        <NavLink className="p-4" to="/recipes">
-          Recipes
-        </NavLink>
-        <NavLink className="p-4" to="/recipebook">
-          RecipeBook
-        </NavLink>
-        <NavLink className="p-4" to="/about">
-          About
-        </NavLink>
-        {user ? (
-          <>
-            <NavLink to={"/logout"} className="p-4" onClick={handleLogout}>
-              Logout
-            </NavLink>
-          </>
-        ) : (
-          <NavLink className="p-4" to="/login">
-            Login
-          </NavLink>
-        )}
-      </ul>
-      <div onClick={handleNav} className="block md:hidden">
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-      </div>
-      <ul
-        className={
-          nav
-            ? "fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#6a8f6b] ease-in-out duration-500"
-            : "ease-in-out duration-500 fixed left-[-100%]"
-        }
-      >
-        <h1 className="w-full text-3xl font-bold text-[#ffe0c9] m-4">
-          Fresh Feast
-        </h1>
-        <li className="p-4 border-b text-[#ffe0c9] border-gray-600">Home</li>
-        <li className="p-4 border-b text-[#ffe0c9] border-gray-600">Recipes</li>
-        <li className="p-4 border-b text-[#ffe0c9] border-gray-600">
-          RecipeBook
-        </li>
-        <li className="p-4 border-b text-[#ffe0c9] border-gray-600">Login</li>
-        <li className="p-4 border-b text-[#ffe0c9] border-gray-600">About</li>
-        <li className="p-4 text-[#ffe0c9]">Contact</li>
-      </ul>
-    </nav>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {user ? (
+                        <>
+                          <Menu.Item>
+                            <NavLink
+                              to={"/logout"}
+                              className="p-4"
+                              onClick={handleLogout}
+                            >
+                              Logout
+                            </NavLink>
+                          </Menu.Item>
+                        </>
+                      ) : (
+                        <>
+                          <Menu.Item>
+                            <NavLink className="p-4" to="/login">
+                              Login
+                            </NavLink>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <NavLink className="p-4" to="/register">
+                              Register
+                            </NavLink>
+                          </Menu.Item>
+                        </>
+                      )}
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
-};
-
-export default Navbar;
+}
