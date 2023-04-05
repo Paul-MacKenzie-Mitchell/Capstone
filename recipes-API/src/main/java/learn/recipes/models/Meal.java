@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,6 +24,8 @@ public class Meal {
     @NotNull
     private LocalTime time;
     private String mealCategory;
+
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="app_user_id")
     private AppUser appUser;
@@ -38,8 +41,5 @@ public class Meal {
             joinColumns = @JoinColumn(name = "meal_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
-
-
-
     private Set<Food> food = new HashSet<>();
 }

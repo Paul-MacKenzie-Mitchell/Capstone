@@ -38,7 +38,7 @@ create table recipe (
 create table tags (
 	tag_id int not null primary key auto_increment,
     tag_name varchar(25) not null unique,
-    default_image varchar(2048) not null
+    default_image varchar(2048) null
 );
 
 create table food (
@@ -82,6 +82,7 @@ create table recipebook (
 );
 
 create table ingredients (
+	ingredient_id int not null primary key auto_increment,
 	recipe_id int not null,
     food_id int not null,
 	amount decimal(7,3) not null,
@@ -260,7 +261,7 @@ values
 	3. Set out a baking sheet, lined with wax paper or foil, to hold the patties. One at a time, gather the patty mix and press firmly into patties. Shape them just slightly larger than the buns you plan to use, to account for shrinkage during cooking. Set the patties on the baking sheet. Use a spoon to press a dent in the center of each patty so they don't puff up as they cook. If you need to stack the patties separate them with a sheet of wax paper.
     4. Preheat the grill or a skillet to medium heat. (Approximately 350-400 degrees F.)
     5. If you chose to make thicker patties, grill or fry each patty for 3-4 minutes per side. If you opted for thin patties, cook them on the griddle for 2 minutes per side.
-	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and tomatoes. Serve warm.",
+	6. Stack the hot patties on burger buns, and top with cheese. Let cheese melt onto the patty until it doesn't slide off easily, and then top with lettuce and slices of tomatoes. Serve warm.",
     15, 8, 430, 6,
     "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2004/2/25/0/bw2b07_hambugers1.jpg.rend.hgtvcom.826.620.suffix/1558017418187.jpeg");
     
@@ -369,7 +370,10 @@ values
     ('rosemary'),
     ('thyme'),
     ('lemon juice'),
-    ('cumin'); -- 34
+    ('cumin'),
+    ('lettuce'), -- 35
+    ('tomato'),
+    ('American cheese');
     
 insert into ingredients (recipe_id, food_id, amount, measurement_unit)
 values
@@ -386,7 +390,12 @@ values
     (10, 33, 1, 'tbsp'),
     (10, 19, 1, 'clove'),
     (10, 34, 0.75, 'tsp'),
-    (10, 2, 0.25, 'tsp');
+    (10, 2, 0.25, 'tsp'),
+	(6, 35, 12, 'leaves'),
+    (6, 36, 4, null),
+    (6, 37, 6, 'slices');
+    
+insert into tags (
     
 insert into recipebook
 values

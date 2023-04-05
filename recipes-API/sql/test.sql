@@ -81,6 +81,7 @@ create table recipebook (
 );
 
 create table ingredients (
+	ingredient_id int not null primary key auto_increment,
 	recipe_id int not null,
     food_id int not null,
 	amount decimal(7,3) not null,
@@ -209,23 +210,23 @@ begin
         (3, 1),
         (3, 2);
         
-	insert into food (food_name, food_category, food_description)
+	insert into food (food_name)
     values
-		('chicken', 'meat', 'chicken_description'),
-        ('alfredo sauce', 'sauce', 'alfredo_description'),
-        ('penne', 'pasta', 'penne_description'),
-        ('egg', 'egg', 'egg_description'),
-        ('tomato', 'vegetable', 'tomato_description'),
-        ('red onion', 'vegetable', 'red_onion_description'),
-        ('dressing', 'sauce', 'dressing_description'),
-        ('fresh basil', 'herb', 'basil_description'),
-        ('fresh parsley', 'herb', 'parsley_description'),
-        ('garlic', 'vegetable', 'garlic_description'),
-        ('salt', 'seasoning', 'salt_description'),
-        ('pepper', 'seasoning', 'pepper_description'),
-        ('apple', 'fruit', 'apple_description');
+		('chicken'),
+        ('alfredo sauce'),
+        ('penne'),
+        ('egg'),
+        ('tomato'),
+        ('red onion'),
+        ('dressing'),
+        ('fresh basil'),
+        ('fresh parsley'),
+        ('garlic'),
+        ('salt'),
+        ('pepper'),
+        ('apple');
         
-	insert into ingredients
+	insert into ingredients (recipe_id, food_id, amount, measurement_unit)
     values
 		(1, 1, 1.5, 'lbs'),
         (1, 2, 1.0, 'cup'),
@@ -262,4 +263,5 @@ set sql_safe_updates = 0;
 call set_known_good_state();
 set sql_safe_updates = 1;
 
-select * from recipe;
+select * from app_user where app_user_id = 2;
+delete from app_user where app_user_id = 2;

@@ -40,7 +40,7 @@ class AppUserRepositoryTest {
     @Test
     @Transactional
     void shouldFindUserById() {
-        AppUser existingUser = repository.findById(3).orElse(null);
+        AppUser existingUser = repository.findById(2).orElse(null);
         assertNotNull(existingUser);
         assertEquals("adminuser@adminuser.com", existingUser.getEmail());
         assertEquals(LocalDate.of(2000, 01, 01), existingUser.getDob());
@@ -98,6 +98,7 @@ class AppUserRepositoryTest {
         assertTrue(expectedNewUser.isEnabled());
     }
 
+    // TODO: why won't this one pass? I get an AssertionError because the deleteById function isn't working for some reason
     @Test
     @Transactional
     void shouldDeleteAppUser() {

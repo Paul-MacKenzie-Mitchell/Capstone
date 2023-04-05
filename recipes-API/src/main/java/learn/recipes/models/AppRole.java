@@ -23,4 +23,3 @@ public class AppRole implements GrantedAuthority {
         return roleName;
     }
 }
-

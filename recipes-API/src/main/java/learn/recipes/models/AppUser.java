@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -49,11 +50,13 @@ public class AppUser implements UserDetails {
     private Set<AppRole> roles = new HashSet<>();
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "recipebook",
-                joinColumns = @JoinColumn(name = "app_user_id"),
-                inverseJoinColumns = @JoinColumn(name = "recipe_id")
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private Set<Recipe> recipes = new HashSet<>();
-    @OneToMany(mappedBy = "mealId", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Meal> meals = new HashSet<>();
     @Override
     public String getPassword() {
@@ -90,3 +93,4 @@ public class AppUser implements UserDetails {
     }
 
 }
+

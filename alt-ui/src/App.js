@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { refresh } from "./services/authService";
 import AuthContext from "./contexts/AuthContext";
-import { Home, Login, RecipeDetails, Recipes } from "./pages";
+import {
+  Contact,
+  Home,
+  UserLogin,
+  Recipes,
+  RecipeDetails,
+  RecipeForm,
+  UserRegistrationForm,
+} from "./pages";
 import { Navbar } from "./components";
 
 function App() {
@@ -36,12 +44,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes">
+              <Route path="add" element={<RecipeForm />} />
               <Route index element={<Recipes />} />
               <Route path=":recipeId">
                 <Route index element={<RecipeDetails />} />
+                <Route path="edit" element={<RecipeForm />} />
               </Route>
             </Route>
-            <Route path="/login" element={<Login />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/register" element={<UserRegistrationForm />} />
           </Routes>
         </div>
       </Router>

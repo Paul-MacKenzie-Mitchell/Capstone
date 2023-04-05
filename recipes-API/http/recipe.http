@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/recipe
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDIzNTI3OX0.kwZO697kOCBFdnrcxIgy_d_wubAoxtX0BB86KqmSW08
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6InBtIiwiYXBwVXNlcklkIjozLCJhdXRob3JpdGllcyI6WyJVU0VSIiwiQURNSU4iXSwiZXhwIjoxNjgwNjY0MjUxfQ.g4ru499orM4NXE6g4lXr3ptaY4d37NcE638n_vZnlkk
 ###
 
 POST http://localhost:8080/authenticate HTTP/1.1

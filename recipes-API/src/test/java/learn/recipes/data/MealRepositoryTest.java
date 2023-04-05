@@ -56,6 +56,7 @@ class MealRepositoryTest {
         Meal newMeal = TestHelper.makeMeal(0);
         Meal actual = repository.save(newMeal);
         assertEquals(4, actual.getMealId());
+        assertEquals(3, actual.getAppUser().getAppUserId());
 
         Meal expectedNewMeal = TestHelper.makeMeal(4);
         actual = repository.findById(4).orElse(null);

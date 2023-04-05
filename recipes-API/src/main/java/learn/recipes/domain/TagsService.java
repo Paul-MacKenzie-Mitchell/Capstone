@@ -70,10 +70,6 @@ public class TagsService {
             result.addErr("", "tag name must be unique", ResultType.ALREADY_EXISTS);
         }
 
-        if(Validations.isNullOrBlank(tag.getDefaultImage())) {
-            result.addErr("", "an image url is required", ResultType.INVALID);
-        }
-
         return result;
     }
 

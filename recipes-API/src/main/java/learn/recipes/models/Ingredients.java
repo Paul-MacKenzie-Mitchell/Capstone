@@ -10,17 +10,14 @@ import lombok.NoArgsConstructor;
 public class Ingredients {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ingredientId;
     private int recipeId;
-//    private int foodId;
     private double amount;
     private String measurementUnit;
-
-//    @ManyToOne
-//    @JoinColumn(name = "recipeId")
-//    private Recipe recipe;
 
     @ManyToOne
     @JoinColumn (name = "foodId")
     private Food food;
 }
+
