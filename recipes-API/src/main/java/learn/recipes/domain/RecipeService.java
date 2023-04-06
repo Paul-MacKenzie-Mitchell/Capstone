@@ -64,10 +64,10 @@ public class RecipeService {
             result.addErr("", "recipe instructions are required", ResultType.INVALID);
         }
         if(recipe.getCookTime() < 0) {
-            result.addErr("", "cook time must be greater than 0", ResultType.INVALID);
+            result.addErr("", "cook time must be at least 0", ResultType.INVALID);
         }
         if(recipe.getPrepTime() < 0) {
-            result.addErr("", "prep time must be greater than 0", ResultType.INVALID);
+            result.addErr("", "prep time must be at least 0", ResultType.INVALID);
         }
         //TODO Delete?
 //        if(recipe.getCalories() <= 0) {

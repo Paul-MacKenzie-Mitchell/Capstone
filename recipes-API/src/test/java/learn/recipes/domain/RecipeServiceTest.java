@@ -133,23 +133,23 @@ public class RecipeServiceTest {
     @Test
     void shouldNotSaveRecipeWithInvalidCookTime() {
         Recipe invalidCookTimeRecipe = TestHelper.makeRecipe(0);
-        invalidCookTimeRecipe.setCookTime(0);
+        invalidCookTimeRecipe.setCookTime(-1);
 
         Result<Recipe> result = service.save(invalidCookTimeRecipe);
 
         assertFalse(result.isSuccess());
-        assertEquals("cook time must be greater than 0", result.getErrs().get(0).getMessage());
+        assertEquals("cook time must be at least 0", result.getErrs().get(0).getMessage());
     }
 
     @Test
     void shouldNotSaveRecipeWithInvalidPrepTime() {
         Recipe invalidPrepTimeRecipe = TestHelper.makeRecipe(0);
-        invalidPrepTimeRecipe.setPrepTime(0);
+        invalidPrepTimeRecipe.setPrepTime(-1);
 
         Result<Recipe> result = service.save(invalidPrepTimeRecipe);
 
         assertFalse(result.isSuccess());
-        assertEquals("prep time must be greater than 0", result.getErrs().get(0).getMessage());
+        assertEquals("prep time must be at least 0", result.getErrs().get(0).getMessage());
     }
 
     @Test
