@@ -39,7 +39,7 @@ function RecipeDetails() {
 
             <ul className="mt-6">
               <li className="p-4 border-b text-center border-gray-600">
-                Ingrediants List
+                Ingredients List
               </li>
               {recipe.ingredients.map((i) => (
                 <li className="p-4 border-b border-gray-600">
