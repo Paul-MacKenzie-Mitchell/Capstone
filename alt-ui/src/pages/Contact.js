@@ -1,20 +1,8 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Switch } from "@headlessui/react";
+import { useEffect } from 'react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,16 +11,21 @@ function classNames(...classes) {
 export default function Contact() {
   const [agreed, setAgreed] = useState(false);
 
+  useEffect(() => {
+    document.body.classList.add("bg-contact")
+  }, [])
+
+
   return (
-    <div className=" bg-white px-6 py-24 sm:py-32 lg:px-8">
+    <div className="bg-none px-6 py-24 sm:py-32 lg:px-8 content-center">
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10  overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
       ></div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-green-700 sm:text-4xl">
           Contact Our Team
-        </h2>
+        </h1>
         <p className="mt-2 text-lg leading-8 text-gray-600"></p>
       </div>
       <form
@@ -193,12 +186,13 @@ export default function Contact() {
         <div className="mt-10">
           <button
             type="submit"
-            className="block w-full rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="block w-full rounded-md bg-green-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Submit
           </button>
         </div>
       </form>
     </div>
+  
   );
 }
