@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authenticate } from "../services/authService";
 import AuthContext from "../contexts/AuthContext";
+import login_page from "../images/login_page.jpg"
 
 export default function UserLogin() {
   useEffect(() => {
@@ -129,7 +130,7 @@ export default function UserLogin() {
               <div>
                 <button
                   type="submit"
-                  className="group relative flex w-full justify-center rounded-md bg-[#6a8f6b] px-3 py-2 text-sm font-semibold text-white hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-igreen-900"
+                  className="group relative flex w-full justify-center rounded-md bg-green-900 px-3 py-2 text-sm font-semibold text-white hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-igreen-900"
                 >
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                     <LockClosedIcon

@@ -8,9 +8,11 @@ import ff_logo from "../images/ff_logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
+  { name: "About Us", href: "/aboutus" },
   { name: "Recipes", href: "/recipes" },
+  { name: "Recipe Book" },
   { name: "Contact", href: "/Contact" },
-  { name: "Recipe Book", href: "/recipebook" },
+  { name: "Recipe Book", href: "/recipebook" }
 ];
 
 export default function NavBar() {
@@ -31,7 +33,7 @@ export default function NavBar() {
     logout();
   }
   return (
-    <Disclosure as="nav" className="sticky top-0 bg-[#6a8f6b]">
+    <Disclosure as="nav" className="sticky top-0 bg-green-900 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -65,9 +67,9 @@ export default function NavBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -77,7 +79,7 @@ export default function NavBar() {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
