@@ -64,12 +64,31 @@ body.bg-contact {
   background-repeat: no-repeat;
 }
 
+
+.main-content {
+  padding-bottom: 80px; /* adjust the value to match the height of your footer */
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+
 footer {
-  height: 100px;
-  position: fixed;
+  height: 80px;
+  position: absolute;
   bottom: 0;
   width: 100%;
 }
+
+
+
+
+
+
+
 
 
 

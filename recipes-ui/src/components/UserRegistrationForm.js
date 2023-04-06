@@ -41,7 +41,7 @@ export default function UserRegistrationForm() {
                 navigate(
                     location?.state?.previousUrl
                         ? location.state.previousUrl
-                        : '/customers'
+                        : '/'
                 );
             });
     }
