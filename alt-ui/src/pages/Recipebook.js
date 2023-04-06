@@ -12,12 +12,13 @@ export default function Recipebook() {
     console.log(user.appUserId);
   
     useEffect(() => {
+    if(user) {
       findById(user.appUserId)
         .then((result) => {
             setUserRecipes(result.recipes);
             setWait(false);
         })
-    }, []);
+    }}, []);
 
     console.log(userRecipes);
 }
