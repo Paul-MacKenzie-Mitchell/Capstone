@@ -7,3 +7,4 @@ export { default as RecipeDetails } from "./RecipeDetails";
 export { default as RecipeForm } from "./RecipeForm";
 export { default as UserLogin } from "./UserLogin";
 export { default as UserRegistrationForm } from "./UserRegistrationForm";
+export { default as Recipebook } from "./Recipebook";

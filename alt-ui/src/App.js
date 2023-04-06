@@ -12,6 +12,7 @@ import {
   RecipeDetails,
   RecipeForm,
   UserRegistrationForm,
+  Recipebook
 } from "./pages";
 import { Navbar } from "./components";
 
@@ -55,6 +56,7 @@ function App() {
                 <Route path="food" element={<FoodsForm />} />
               </Route>
             </Route>
+            <Route path="/recipebook" element={<Recipebook />}/>
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<UserLogin />} />
             <Route path="/register" element={<UserRegistrationForm />} />

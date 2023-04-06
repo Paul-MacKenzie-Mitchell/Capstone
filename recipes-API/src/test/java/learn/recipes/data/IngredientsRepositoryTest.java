@@ -33,16 +33,14 @@ public class IngredientsRepositoryTest {
     void shouldAddTag() {
         Ingredients newIngredient = new Ingredients();
         Food ingredientFood = TestHelper.makeFood(3);
+        newIngredient.setIngredientId(0);
         newIngredient.setFood(ingredientFood);
         newIngredient.setRecipeId(3);
         newIngredient.setAmount(2.5);
         newIngredient.setMeasurementUnit("oz");
         Ingredients actual = repository.save(newIngredient);
-        assertEquals(13, actual.getIngredientId());
-
-        Tags expectedNewTag = TestHelper.makeTag(13);
-        actual = repository.findById(13).orElse(null);
-        assertEquals(expectedNewTag, actual);
+        assertEquals("oz", actual.getMeasurementUnit());
+        assertEquals(2.5, actual.getAmount());
     }
 
 

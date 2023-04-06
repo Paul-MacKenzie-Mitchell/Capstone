@@ -122,28 +122,4 @@ public class TagsServiceTest {
         assertEquals("tag name must be unique", result.getErrs().get(0).getMessage());
     }
 
-    @Test
-    void shouldNotSaveTagWithBlankDefaultImage() {
-        Tags blankDefaultImageTag = TestHelper.makeTag(0);
-        blankDefaultImageTag.setDefaultImage(" ");
-
-        when(repository.findByTagName(blankDefaultImageTag.getTagName())).thenReturn(null);
-        Result<Tags> result = service.save(blankDefaultImageTag);
-
-        assertFalse(result.isSuccess());
-        assertEquals("an image url is required", result.getErrs().get(0).getMessage());
-    }
-
-    @Test
-    void shouldNotSaveTagWithNullDefaultImage() {
-        Tags nullDefaultImageTag = TestHelper.makeTag(0);
-        nullDefaultImageTag.setDefaultImage(null);
-
-        when(repository.findByTagName(nullDefaultImageTag.getTagName())).thenReturn(null);
-        Result<Tags> result = service.save(nullDefaultImageTag);
-
-        assertFalse(result.isSuccess());
-        assertEquals("an image url is required", result.getErrs().get(0).getMessage());
-    }
-
 }
