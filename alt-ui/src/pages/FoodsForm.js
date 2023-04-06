@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { findById, getEmptyRecipe, save } from "../services/recipeService";
-import { findAll } from "../services/foodService";
+import {
+  getEmptyIngredient,
+  saveIngredient,
+} from "../services/ingredientsService";
+import { findById, getEmptyRecipe } from "../services/recipeService";
+import { findAll, save } from "../services/foodService";
 import { DropDown } from "../components";
 
 function FoodsForm() {
   const [currentRecipe, setCurrentRecipe] = useState(getEmptyRecipe());
+  const [currentIngredient, setCurrentIngredient] = useState(
+    getEmptyIngredient()
+  );
   const [errors, setErrors] = useState([]);
   const [allFoods, setAllFoods] = useState([]);
   const [wait, setWait] = useState(true);
@@ -43,8 +50,9 @@ function FoodsForm() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    save(currentRecipe)
-      .then(() => navigate("/recipes"))
+    save(currentIngredient)
+      .then(currentRecipe.push.c)
+      .then()
       .catch((errs) => {
         if (errs) {
           setErrors(errs);
@@ -102,7 +110,7 @@ function FoodsForm() {
                         id="amount"
                         className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         onChange={handleChange}
-                        // value={currentRecipe.cookTime}
+                        value={currentIngredient.amount}
                         required
                         placeholder=""
                       />
@@ -117,7 +125,7 @@ function FoodsForm() {
                       to="/recipes"
                       className="rounded-md bg-[#6a8f6b] mx-2 mt-4 py-2 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
                     >
-                      Done
+                      Finish
                     </NavLink>
                     <button
                       type="submit"

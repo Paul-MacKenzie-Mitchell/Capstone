@@ -1,5 +1,5 @@
 import { Fragment, useState, useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -10,9 +10,8 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/aboutus" },
   { name: "Recipes", href: "/recipes" },
-  { name: "Recipe Book" },
   { name: "Contact", href: "/Contact" },
-  { name: "Recipe Book", href: "/recipebook" }
+  { name: "Recipe Book", href: "/recipebook" },
 ];
 
 export default function NavBar() {
