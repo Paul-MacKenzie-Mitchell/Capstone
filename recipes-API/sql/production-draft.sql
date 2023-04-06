@@ -141,7 +141,7 @@ values
     6. Remove from the heat when the eggs still shimmer with some moisture.
     7. Transfer to serving plates. Finish with some pepper and salt.",
     3, 3, 251, 2,
-    "https://bellyfull.net/wp-content/uploads/2019/03/The-Best-Scrambled-Eggs-blog.jpg"),
+    "https://thecozycook.com/wp-content/uploads/2021/02/Fluffy-Scrambled-Eggs-4.jpg"),
     ("French Toast",
     "A Sunday favorite that's great for any day of the week - flawless and fluffy French toast.",
     "1. Whisk milk, eggs, vanilla, cinnamon, and salt together in a shallow bowl.
@@ -681,6 +681,14 @@ values
     (10, 7),
     (10, 6),
     (10, 5);
+    
+insert into recipebook
+values 
+	(1, 11),
+    (1, 12),
+    (3, 13),
+    (3, 14),
+    (3, 15);
     
     
     
