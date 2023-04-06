@@ -13,6 +13,7 @@ import {
   UserRegistrationForm,
 } from "./pages";
 import { Navbar } from "./components";
+import Footer from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState();
@@ -41,7 +42,8 @@ function App() {
     <AuthContext.Provider value={auth}>
       <Router>
         <Navbar />
-        <div className="container mb-5 mt-2">
+        <Footer />
+        <div className="mb-5 mt-2">
           <Routes>
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/" element={<Home />} />

@@ -15,10 +15,8 @@ export default function Home() {
   return (
     <div className="w-full h-screen relative">
       <header className="absolute inset-x-0 top-0 z-[-1]">
-        <nav
-          className="flex items-center justify-between p-6 lg:px-8"
-          aria-label="Global"
-        >
+      <nav className="flex justify-between items-center p-6 lg:px-8" aria-label="Global">
+
           <div className="flex lg:flex-1">
             <video
               className="w-full h-screen object-cover z-[-1]"
@@ -95,7 +93,7 @@ export default function Home() {
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <NavLink
                   to="/login"
-                  className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
+                  className="rounded-md bg-green-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
                 >
                   Login
                 </NavLink>
