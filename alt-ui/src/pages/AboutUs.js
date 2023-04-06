@@ -1,4 +1,6 @@
 import mmProfile from '../images/mm_profile.jpg';
+import pmProfile from '../images/pm_profile.jpg';
+import hbProfile from '../images/hb_profile.jpg';
 import img_logo from '../images/img_logo.png';
 import { useEffect } from 'react';
 import ff_about_page from '../images/ff_about_page.jpg';
@@ -14,14 +16,14 @@ const people = [
   {
     name: 'Paul Mitchell',
     role: 'Full-Stack Developer',
-    imageUrl: '',
+    imageUrl: pmProfile,
     socialMediaUrl: 'https://www.linkedin.com/in/paul-mitchell',
     socialMediaLogoUrl: img_logo,
   },
   {
     name: 'Hanako Boucher',
     role: 'Full-Stack Developer',
-    imageUrl: '',
+    imageUrl: hbProfile,
     socialMediaUrl: 'https://www.linkedin.com/in/hanako-boucher',
     socialMediaLogoUrl: img_logo,
   },
