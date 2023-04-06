@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { RecipeCard, RecipeGrid } from "../components";
+import { useParams } from "react-router-dom";
+import { RecipeGrid } from "../components";
 import { findById } from "../services/appUserService";
 
 import AuthContext from "../contexts/AuthContext";

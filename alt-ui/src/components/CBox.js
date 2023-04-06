@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Combobox, Transition } from "@headlessui/react";
+import { Combobox } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/solid";
 
 export default function CBox({ array, name, id }) {

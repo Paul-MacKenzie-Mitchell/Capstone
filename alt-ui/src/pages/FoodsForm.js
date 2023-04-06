@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { findById, getEmptyRecipe, save } from "../services/recipeService";
 import { findAll } from "../services/foodService";
-import { CBox, DropDown } from "../components";
+import { DropDown } from "../components";
 
 function FoodsForm() {
   const [currentRecipe, setCurrentRecipe] = useState(getEmptyRecipe());
@@ -90,7 +90,7 @@ function FoodsForm() {
                       <label className="form-label" htmlFor="title">
                         Food
                       </label>
-                      <CBox array={allFoods} name="foodName" id="foodId" />
+                      <DropDown array={allFoods} name="foodName" id="foodId" />
                     </div>
                     <div className="md:col-span-2">
                       <label className="form-label" htmlFor="cookTime">

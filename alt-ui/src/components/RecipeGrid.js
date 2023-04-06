@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { findAll } from "../services/recipeService";
 import RecipeCard from "./RecipeCard";
 
 export default function RecipeGrid({ array }) {

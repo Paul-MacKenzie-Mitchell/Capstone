@@ -2,9 +2,8 @@ import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import ff_landingpage from "../videos/ff_landingpage.mp4";
 import React, { useState, useContext } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
-import Logo from "../images/ff_logo2.png";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
