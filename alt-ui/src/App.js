@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { refresh } from "./services/authService";
 import AuthContext from "./contexts/AuthContext";
 import {
-  Contact,
   AboutUs,
+  Contact,
+  FoodsForm,
   Home,
   UserLogin,
   Recipes,
@@ -51,6 +52,7 @@ function App() {
               <Route path=":recipeId">
                 <Route index element={<RecipeDetails />} />
                 <Route path="edit" element={<RecipeForm />} />
+                <Route path="food" element={<FoodsForm />} />
               </Route>
             </Route>
             <Route path="/contact" element={<Contact />} />

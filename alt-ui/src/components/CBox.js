@@ -1,25 +1,43 @@
 import { useState } from "react";
 import { Combobox } from "@headlessui/react";
 
-export default function MyCombobox({ array, id, name }) {
+export default function CBox({ array, name, id }) {
   const [selectedElement, setSelectedElement] = useState(array[0]);
   const [query, setQuery] = useState("");
 
   const filteredElements =
     query === ""
       ? array
-      : array.filter((array) => {
-          return array.toLowerCase().includes(query.toLowerCase());
+      : array.filter((item) => {
+          console.log(item);
+          return item[name].toLowerCase().includes(query.toLowerCase());
         });
 
   return (
-    <div className="md:col-span-2">
-      <Combobox>
-        <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
+    <div className="md:col-span-5">
+      {/* {console.log(filteredElements)}
+      {console.log(array)} */}
+
+      <Combobox value={selectedElement} onChange={setSelectedElement}>
+        <Combobox.Input
+          type="text"
+          name="meaurementUnit"
+          id="meaurementUnit"
+          className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+          value={query}
+          required
+          placeholder=""
+          onChange={(event) => setQuery(event.target.value)}
+        />
         <Combobox.Options>
           {filteredElements.map((element) => (
-            <Combobox.Option key={element} value={element}>
-              {element}
+            <Combobox.Option
+              key={element[id]}
+              value={element}
+              className="ui-active:bg-blue-500 ui-active:text-white ui-not-active:bg-white ui-not-active:text-black"
+            >
+              {/* <CheckIcon className="hidden ui-selected:block" /> */}
+              {element[name]}
             </Combobox.Option>
           ))}
         </Combobox.Options>
@@ -27,37 +45,3 @@ export default function MyCombobox({ array, id, name }) {
     </div>
   );
 }
-
-// const people = [
-//   "Wade Cooper",
-//   "Arlene McCoy",
-//   "Devon Webb",
-//   "Tom Cook",
-//   "Tanya Fox",
-//   "Hellen Schmidt",
-// ];
-
-// export default function MyCombobox() {
-//   const [selectedPerson, setSelectedPerson] = useState(people[0]);
-//   const [query, setQuery] = useState("");
-
-//   const filteredPeople =
-//     query === ""
-//       ? people
-//       : people.filter((person) => {
-//           return person.toLowerCase().includes(query.toLowerCase());
-//         });
-
-//   return (
-//     <Combobox value={selectedPerson} onChange={setSelectedPerson}>
-//       <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-//       <Combobox.Options>
-//         {filteredPeople.map((person) => (
-//           <Combobox.Option key={person} value={person}>
-//             {person}
-//           </Combobox.Option>
-//         ))}
-//       </Combobox.Options>
-//     </Combobox>
-//   );
-// }
