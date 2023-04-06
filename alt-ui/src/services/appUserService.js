@@ -1,5 +1,5 @@
 import * as base from "./baseService";
-const model = "user";
+const model = "appUser";
 
 export function getEmptyUser() {
   return {
