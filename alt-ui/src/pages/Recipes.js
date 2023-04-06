@@ -1,11 +1,32 @@
-import { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RecipeGrid } from "../components";
+import { findAll } from "../services/recipeService";
 
 import AuthContext from "../contexts/AuthContext";
 
 function Recipes() {
   const { user } = useContext(AuthContext);
+  const [recipes, setRecipes] = useState([]);
+  const navigate = useNavigate();
+  const [wait, setWait] = useState(true);
+
+  useEffect(() => {
+    findAll()
+      .then((result) => {
+        setRecipes(result);
+        setWait(false);
+      })
+      .catch(() => navigate("/"));
+  }, [navigate]);
+
+  if (wait) {
+    return (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -27,7 +48,7 @@ function Recipes() {
               )}
             </div>
           </div>
-          <RecipeGrid />
+          <RecipeGrid array={recipes} />
         </div>
       </div>
     </>

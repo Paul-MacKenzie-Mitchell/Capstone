@@ -3,28 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { findAll } from "../services/recipeService";
 import RecipeCard from "./RecipeCard";
 
-export default function RecipeGrid() {
-  const [recipes, setRecipes] = useState([]);
-  const navigate = useNavigate();
-  const [wait, setWait] = useState(true);
-
-  useEffect(() => {
-    findAll()
-      .then((result) => {
-        setRecipes(result);
-        setWait(false);
-      })
-      .catch(() => navigate("/"));
-  }, [navigate]);
-
-  if (wait) {
-    return (
-      <div className="spinner-border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    );
-  }
-
+export default function RecipeGrid({ array }) {
   return (
     <div className="w-full mx-8 py-[2em] px-4 ">
       <div className="bg-white rounded-lg">
@@ -34,7 +13,7 @@ export default function RecipeGrid() {
           </h2>
 
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {recipes.map((r) => (
+            {array.map((r) => (
               <RecipeCard key={r.recipeId} recipe={r} />
             ))}
           </div>

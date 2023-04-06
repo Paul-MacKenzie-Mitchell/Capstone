@@ -1,40 +1,37 @@
 import { useEffect, useState, useContext } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { RecipeGrid } from "../components";
+import { RecipeCard, RecipeGrid } from "../components";
 import { findById } from "../services/appUserService";
 
 import AuthContext from "../contexts/AuthContext";
 
 export default function Recipebook() {
-    const [userRecipes, setUserRecipes] = useState([]);
-    const [wait, setWait] = useState(true);
-    const { user } = useContext(AuthContext);
-    console.log(user.appUserId);
-  
-    useEffect(() => {
-      findById(user.appUserId)
-        .then((result) => {
-            setUserRecipes(result.recipes);
-            setWait(false);
-        })
-    }, []);
+  const [userRecipes, setUserRecipes] = useState([]);
+  const [wait, setWait] = useState(true);
+  const { user } = useContext(AuthContext);
+  console.log(user.userId);
 
-    console.log(userRecipes);
+  //   useEffect(() => {
+  //     findById(user.appUserId).then((result) => {
+  //       setUserRecipes(result.recipes);
+  //       setWait(false);
+  //     });
+  //   }, []);
+
+  //   const { user } = useContext(AuthContext);
+  //   const { appUserId } = useParams();
+  //   const [currentUser, setCurrentUser] = useState(null);
+
+  //   const [userRecipes, setUserRecipes] = useState([]);
+  //   const [wait, setWait] = useState(true);
+
+  //   useEffect(() => {
+  //     findById(appUserId).then(setCurrentUser);
+  //   }, [appUserId]);
+
+  //   return (
+  //     <div>
+  //       <RecipeGrid array={userRecipes} />
+  //     </div>
+  //   );
 }
-
-// const { user } = useContext(AuthContext);
-// const { appUserId } = useParams();
-// const [ currentUser, setCurrentUser] = useState(null);
-
-// console.log(user);
-
-// const [userRecipes, setUserRecipes] = useState([]);
-// const [wait, setWait] = useState(true);
-
-
-// useEffect(() => {
-//   findById(appUserId)
-//     .then(setCurrentUser);
-// }, [appUserId]);
-
-// console.log(currentUser);
