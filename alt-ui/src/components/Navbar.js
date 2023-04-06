@@ -10,7 +10,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Recipes", href: "/recipes" },
   { name: "Contact", href: "/Contact" },
-  { name: "Recipe Book" },
+  { name: "Recipe Book", href: "/recipebook" },
 ];
 
 export default function NavBar() {

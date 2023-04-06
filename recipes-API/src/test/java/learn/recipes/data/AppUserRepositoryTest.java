@@ -40,7 +40,7 @@ class AppUserRepositoryTest {
     @Test
     @Transactional
     void shouldFindUserById() {
-        AppUser existingUser = repository.findById(2).orElse(null);
+        AppUser existingUser = repository.findById(3).orElse(null);
         assertNotNull(existingUser);
         assertEquals("adminuser@adminuser.com", existingUser.getEmail());
         assertEquals(LocalDate.of(2000, 01, 01), existingUser.getDob());
