@@ -1,25 +1,56 @@
 import { useState } from "react";
-import { Combobox } from "@headlessui/react";
+import { Combobox, Transition } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/solid";
 
-export default function MyCombobox({ array, id, name }) {
-  const [selectedElement, setSelectedElement] = useState(array[0]);
+export default function CBox({ array, name, id }) {
+  const [selectedElement, setSelectedElement] = useState();
   const [query, setQuery] = useState("");
 
   const filteredElements =
     query === ""
       ? array
-      : array.filter((array) => {
-          return array.toLowerCase().includes(query.toLowerCase());
+      : array.filter((item) => {
+          console.log(item);
+          return item[name].toLowerCase().includes(query.toLowerCase());
         });
 
+  function onChange(value) {
+    console.log(value);
+  }
+
   return (
-    <div className="md:col-span-2">
-      <Combobox>
-        <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-        <Combobox.Options>
+    <div className="md:col-span-5">
+      <select
+        id="countries"
+        value={selectedElement}
+        by="id"
+        onChange={setSelectedElement}
+        className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+      >
+        <option selected></option>
+        {filteredElements.map((element) => (
+          <option key={element[id]} value={element}>
+            {element[name]}
+          </option>
+        ))}
+      </select>
+
+      <Combobox value={selectedElement} onChange={onChange}>
+        <Combobox.Input
+          type="text"
+          name="meaurementUnit"
+          id="meaurementUnit"
+          className="form-control h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+          value={query}
+          required
+          placeholder=""
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <Combobox.Options className="py-2 text-sm">
           {filteredElements.map((element) => (
-            <Combobox.Option key={element} value={element}>
-              {element}
+            <Combobox.Option key={element[id]} value={element}>
+              <CheckIcon className="hidden ui-selected:block" />
+              {element[name]}
             </Combobox.Option>
           ))}
         </Combobox.Options>
@@ -27,37 +58,3 @@ export default function MyCombobox({ array, id, name }) {
     </div>
   );
 }
-
-// const people = [
-//   "Wade Cooper",
-//   "Arlene McCoy",
-//   "Devon Webb",
-//   "Tom Cook",
-//   "Tanya Fox",
-//   "Hellen Schmidt",
-// ];
-
-// export default function MyCombobox() {
-//   const [selectedPerson, setSelectedPerson] = useState(people[0]);
-//   const [query, setQuery] = useState("");
-
-//   const filteredPeople =
-//     query === ""
-//       ? people
-//       : people.filter((person) => {
-//           return person.toLowerCase().includes(query.toLowerCase());
-//         });
-
-//   return (
-//     <Combobox value={selectedPerson} onChange={setSelectedPerson}>
-//       <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-//       <Combobox.Options>
-//         {filteredPeople.map((person) => (
-//           <Combobox.Option key={person} value={person}>
-//             {person}
-//           </Combobox.Option>
-//         ))}
-//       </Combobox.Options>
-//     </Combobox>
-//   );
-// }

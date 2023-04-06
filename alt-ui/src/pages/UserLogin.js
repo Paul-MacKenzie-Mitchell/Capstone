@@ -8,7 +8,7 @@ import login_page from "../images/login_page.jpg"
 
 export default function UserLogin() {
   useEffect(() => {
-    document.body.classList.add("bg");
+    document.body.classList.add("recipe");
   }, []);
 
   const [credentials, setCredentials] = useState({
