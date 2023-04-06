@@ -6,10 +6,10 @@ import { findById } from "../services/appUserService";
 import AuthContext from "../contexts/AuthContext";
 
 export default function Recipebook() {
-  const [userRecipes, setUserRecipes] = useState([]);
-  const [wait, setWait] = useState(true);
-  const { user } = useContext(AuthContext);
-  console.log(user.userId);
+  //   const [userRecipes, setUserRecipes] = useState([]);
+  //   const [wait, setWait] = useState(true);
+  //   const { user } = useContext(AuthContext);
+  //   console.log(user.appUserId);
 
   //   useEffect(() => {
   //     findById(user.appUserId).then((result) => {
@@ -18,20 +18,31 @@ export default function Recipebook() {
   //     });
   //   }, []);
 
-  //   const { user } = useContext(AuthContext);
-  //   const { appUserId } = useParams();
-  //   const [currentUser, setCurrentUser] = useState(null);
-
-  //   const [userRecipes, setUserRecipes] = useState([]);
-  //   const [wait, setWait] = useState(true);
-
+  //   console.log(userRecipes);
+  // }
   //   useEffect(() => {
-  //     findById(appUserId).then(setCurrentUser);
-  //   }, [appUserId]);
+  //     findById(user.appUserId).then((result) => {
+  //       setUserRecipes(result.recipes);it
+  //       setWait(false);
+  //     });
+  //   }, []);
 
-  //   return (
-  //     <div>
-  //       <RecipeGrid array={userRecipes} />
-  //     </div>
-  //   );
+  const { user } = useContext(AuthContext);
+  const { appUserId } = useParams();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const [userRecipes, setUserRecipes] = useState([]);
+  const [wait, setWait] = useState(true);
+
+  useEffect(() => {
+    findById(appUserId)
+      .then(setCurrentUser)
+      .then(setUserRecipes(currentUser.recipes));
+  }, [appUserId]);
+
+  return (
+    <div>
+      <RecipeGrid array={userRecipes} />
+    </div>
+  );
 }

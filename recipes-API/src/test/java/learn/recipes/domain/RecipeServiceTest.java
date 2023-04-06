@@ -133,12 +133,12 @@ public class RecipeServiceTest {
     @Test
     void shouldNotSaveRecipeWithInvalidCookTime() {
         Recipe invalidCookTimeRecipe = TestHelper.makeRecipe(0);
-        invalidCookTimeRecipe.setCookTime(0);
+        invalidCookTimeRecipe.setCookTime(-1);
 
         Result<Recipe> result = service.save(invalidCookTimeRecipe);
 
         assertFalse(result.isSuccess());
-        assertEquals("cook time must be greater than 0", result.getErrs().get(0).getMessage());
+        assertEquals("cook time must not be negative", result.getErrs().get(0).getMessage());
     }
 
     @Test

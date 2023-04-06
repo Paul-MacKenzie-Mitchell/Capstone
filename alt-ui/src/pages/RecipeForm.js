@@ -52,7 +52,8 @@ function RecipeForm() {
   function handleSubmit(evt) {
     evt.preventDefault();
     save(currentRecipe)
-      .then(() => navigate(`/recipes/${currentRecipe.recipeId}/food`))
+      .then(() => navigate("/recipes"))
+      // .then(() => navigate(`/recipes/${currentRecipe.recipeId}/food`))
       .catch((errs) => {
         if (errs) {
           setErrors(errs);
@@ -197,11 +198,6 @@ function RecipeForm() {
                         placeholder=""
                       />
                     </div>
-                    <div className="md:col-span-5">
-                      <label className="form-label" htmlFor="measurementUnit">
-                        Measurement
-                      </label>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -235,10 +231,3 @@ function RecipeForm() {
 }
 
 export default RecipeForm;
-
-/* <ul>
-  <li>Hi</li>
-  {allFoods.map((f) => (
-    <li>{f.foodName}</li>
-  ))}
-</ul>; */
