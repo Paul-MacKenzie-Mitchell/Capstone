@@ -24,7 +24,7 @@ public class Recipe {
     private String instructions;
 
     private String recipeDescription;
-    @Min(value = 0)
+    @Min(value = 1)
     private int cookTime;
     @Min(value = 1)
     private int prepTime;
