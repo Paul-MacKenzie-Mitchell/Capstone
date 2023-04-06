@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { findById, getEmptyRecipe, save } from "../services/recipeService";
 import { findAll } from "../services/foodService";
-import { CBox, DropDownWithSearch } from "../components";
+import { CBox, DropDown } from "../components";
 
 function FoodsForm() {
   const [currentRecipe, setCurrentRecipe] = useState(getEmptyRecipe());
@@ -111,7 +111,7 @@ function FoodsForm() {
                       <label className="form-label" htmlFor="title">
                         Measurement Unit{" "}
                       </label>
-                      <CBox array={measurements} name="name" id="name" />
+                      <DropDown array={measurements} name="name" id="name" />
                     </div>
                     <NavLink
                       to="/recipes"
