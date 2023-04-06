@@ -8,9 +8,11 @@ import ff_logo from "../images/ff_logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
+  { name: "About Us", href: "/aboutus" },
   { name: "Recipes", href: "/recipes" },
+  { name: "Recipe Book" },
   { name: "Contact", href: "/Contact" },
-  { name: "Recipe Book", href: "/recipebook" },
+  
 ];
 
 export default function NavBar() {
@@ -31,7 +33,7 @@ export default function NavBar() {
     logout();
   }
   return (
-    <Disclosure as="nav" className="sticky top-0 bg-[#6a8f6b]">
+    <Disclosure as="nav" className="sticky top-0 bg-green-900 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

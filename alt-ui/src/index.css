@@ -51,3 +51,33 @@ body.bg {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+body.bg-about {
+  background-image: url(./images/ff_about_page.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body.bg-contact {
+  background-image: url(./images/ff_contact_page.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+footer {
+  height: 100px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
