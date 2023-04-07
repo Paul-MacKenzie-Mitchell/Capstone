@@ -690,7 +690,7 @@ values
     (3, 14),
     (3, 15);
     
-    
+select * from recipebook;
     
 select * from ingredients;
 select * from food order by food_id;
