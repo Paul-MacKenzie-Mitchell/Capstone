@@ -36,11 +36,12 @@ function RecipeDetails() {
             <p className="text-[#6a8f6b] font-bold">
               Cook Time: {recipe.cookTime}
             </p>
-
-            <ul className="mt-6">
-              <li className="p-4 border-b text-center border-gray-600">
+              <ul className="mt-6">
+              { recipe.ingredients.length > 0 ?
+              (<li className="p-4 border-b text-center border-gray-600">
                 Ingredients List
-              </li>
+              </li>) : <div></div>
+              }
               {recipe.ingredients.map((i) => (
                 <li className="p-4 border-b border-gray-600">
                   {i.amount} {i.measurementUnit} {i.food.foodName}
