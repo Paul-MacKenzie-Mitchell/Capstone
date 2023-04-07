@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import AuthContext from "../contexts/AuthContext";
 
-import { findById } from "../services/recipeService";
-import { deleteById } from "../services/recipeService";
+import { findById, deleteById } from "../services/recipeService";
+import { deleteRecipebookEntry } from "../services/recipebookService";
 
 function RecipeDetails() {
   const [recipe, setRecipe] = useState(null);
@@ -13,7 +13,8 @@ function RecipeDetails() {
 
   const auth = useContext(AuthContext);
 
-  const canDelete = auth.user && auth.user.authorities.includes("ADMIN");
+  const hasAdminPrivileges = auth.user && auth.user.authorities.includes("ADMIN");
+  const hasUserPrivileges = auth.user && auth.user.authorities.includes("USER");
 
   useEffect(() => {
     findById(recipeId).then(setRecipe);
@@ -23,8 +24,12 @@ function RecipeDetails() {
     return null;
   }
 
-  const handleDelete = (id) => {
-    deleteById(recipeId);
+  const handleDatabaseDelete = (id) => {
+    deleteById(id);
+  }
+
+  const handleRecipebookDelete = (userId, recipeId) => {
+    deleteRecipebookEntry(userId, recipeId);
   }
 
   return (
@@ -66,10 +71,17 @@ function RecipeDetails() {
           <pre className="font-sans ...">{recipe.instructions}</pre>
         </p>
       </div>
-      { canDelete && (
+      { hasAdminPrivileges && (
         <div className="flex items-center justify-center mt-6 gap-x-6">
-          <button onClick={() => handleDelete(recipeId)} className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
+          <button onClick={() => handleDatabaseDelete(recipeId)} className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
             Delete This Recipe<br/><em><sub>Careful&mdash;once you hit this button, this recipe will be gone forever!</sub></em>
+          </button>
+        </div>
+      ) }
+      { (hasAdminPrivileges || hasUserPrivileges) && (
+        <div className="flex items-center justify-center mt-6 gap-x-6">
+          <button onClick={() => handleRecipebookDelete(auth.user.appUserId,recipeId)} className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
+            Delete This Recipe From My Recipebook
           </button>
         </div>
       ) }
