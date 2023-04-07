@@ -48,7 +48,8 @@ function RecipeDetails() {
 
 
   const handleDatabaseDelete = (id) => {
-    deleteById(id);
+    deleteById(id)
+    .then(() => navigate("/recipes"));
   }
   
   const handleAdd = (userId, recipeId) => {
