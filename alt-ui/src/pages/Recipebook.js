@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { RecipeCard, RecipeGrid } from "../components";
+import { RecipeGrid } from "../components";
 import { findById } from "../services/appUserService";
 
 import AuthContext from "../contexts/AuthContext";
@@ -10,7 +9,6 @@ export default function Recipebook() {
     const [userRecipes, setUserRecipes] = useState([]);
     const [wait, setWait] = useState(true);
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {

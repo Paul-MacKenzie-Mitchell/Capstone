@@ -1,5 +1,5 @@
 @base-url = http://localhost:8080/api/appUser
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImFwcGFkbWluIiwiYXBwVXNlcklkIjoyLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImV4cCI6MTY4MDI3OTYyNX0.nXHPALS9ev8oN7fp9e2WPq0aic-mnvhYPSuNq7wM8qc
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNpcGVzLUFQSSIsInN1YiI6ImhsYjIwMDAiLCJhcHBVc2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwiZXhwIjoxNjgwODU0NzI2fQ.D8PQpumi_2uOJ4yFdhGp1Lkwh8bQYuFi4bGJeAp4xro
 
 // findAll
 GET {{base-url}} HTTP/1.1
@@ -15,9 +15,14 @@ POST http://localhost:8080/authenticate HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "appuser",
-    "password": "user"
+    "username": "hlb2000",
+    "password": "hanako"
 }
+
+###
+
+DELETE http://localhost:8080/api/recipebook/3/13 HTTP/1.1
+Authorization: Bearer {{jwt}}
 
 ###
 
