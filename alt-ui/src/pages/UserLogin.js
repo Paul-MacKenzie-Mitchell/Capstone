@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authenticate } from "../services/authService";
 import AuthContext from "../contexts/AuthContext";
-import login_page from "../images/login_page.jpg"
+import login_page from "../images/login_page.jpg";
 
 export default function UserLogin() {
   useEffect(() => {

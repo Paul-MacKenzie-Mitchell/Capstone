@@ -692,8 +692,6 @@ values
     
     
     
-    
-
 select * from ingredients;
 select * from food order by food_id;
 select * from recipe order by recipe_id;

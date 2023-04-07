@@ -5,7 +5,7 @@ import AuthContext from "../contexts/AuthContext";
 
 import { findById as findByRecipeId, deleteById } from "../services/recipeService";
 import { findById as findByUserId } from "../services/appUserService";
-import { deleteRecipebookEntry } from "../services/recipebookService";
+import { deleteRecipebookEntry, addRecipebookEntry } from "../services/recipebookService";
 
 function RecipeDetails() {
   const [recipe, setRecipe] = useState(null);
@@ -47,6 +47,11 @@ function RecipeDetails() {
 
   const handleDatabaseDelete = (id) => {
     deleteById(id);
+  }
+  
+  const handleAdd = (userId, recipeId) => {
+    const newRecipeEntry = { appUserId: userId, recipeId: recipeId  };
+    addRecipebookEntry(newRecipeEntry);
   }
 
   const handleRecipebookDelete = (userId, recipeId) => {
@@ -108,7 +113,7 @@ function RecipeDetails() {
       ) }
       { ((hasAdminPrivileges || hasUserPrivileges) && !recipeEntry) && (
         <div className="flex items-center justify-center mt-6 gap-x-6">
-          <button onClick={() => handleRecipebookDelete(auth.user.appUserId,recipeId)} className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
+          <button onClick={() => handleAdd(auth.user.appUserId,recipeId)} className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
             Add This Recipe to My Recipebook
           </button>
         </div>
