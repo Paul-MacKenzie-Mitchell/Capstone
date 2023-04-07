@@ -29,14 +29,22 @@ function RecipeDetails() {
             src={recipe.imageUrl}
             alt="image of laptop"
           />
-          <div className="flex mx-8 flex-col justify-center">
-            <p className="text-[#6a8f6b] font-bold">
+          <div className="flex mx-8 flex-col justify-center ">
+            <p className="text-[#6a8f6b] font-bold mb-2">
               Prep Time: {recipe.prepTime}
             </p>
-            <p className="text-[#6a8f6b] font-bold">
+            <p className="text-[#6a8f6b] font-bold mb-2">
               Cook Time: {recipe.cookTime}
             </p>
-
+            <p className="text-[#6a8f6b] font-bold mb-2">
+              Calories: {recipe.calories}
+            </p>
+            <p className="text-[#6a8f6b] font-bold mb-2">
+              Servings: {recipe.servings}
+            </p>
+            {/* <p className="text-[#6a8f6b] font-bold mb-2">
+              Calories: {recipe.tags.map((i) => ())}
+            </p> */}
             <ul className="mt-6">
               <li className="p-4 border-b text-center border-gray-600">
                 Ingredients List
