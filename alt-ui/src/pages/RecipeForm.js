@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { findById, getEmptyRecipe, save } from "../services/recipeService";
 import { findAll } from "../services/foodService";
-import { CBox } from "../components";
 
 function RecipeForm() {
   const [currentRecipe, setCurrentRecipe] = useState(getEmptyRecipe());
@@ -12,25 +11,6 @@ function RecipeForm() {
 
   const navigate = useNavigate();
   const { recipeId } = useParams();
-
-  const measurements = [
-    { name: "cup" },
-    { name: "tsp" },
-    { name: "tbsp" },
-    { name: "pinch" },
-    { name: "oz" },
-    { name: "fl. oz" },
-    { name: "qt" },
-    { name: "pt" },
-    { name: "gal" },
-    { name: "lb" },
-    { name: "ml" },
-    { name: "g" },
-    { name: "kg" },
-    { name: "liter" },
-    { name: "stick" },
-    { name: "slice" },
-  ];
 
   useEffect(() => {
     findAll()
@@ -73,6 +53,7 @@ function RecipeForm() {
     evt.preventDefault();
     save(currentRecipe)
       .then(() => navigate("/recipes"))
+      // .then(() => navigate(`/recipes/${currentRecipe.recipeId}/food`))
       .catch((errs) => {
         if (errs) {
           setErrors(errs);
@@ -217,12 +198,6 @@ function RecipeForm() {
                         placeholder=""
                       />
                     </div>
-                    <div className="md:col-span-5">
-                      <label className="form-label" htmlFor="measurementUnit">
-                        Measurement
-                      </label>
-                      <CBox array={measurements} />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -256,10 +231,3 @@ function RecipeForm() {
 }
 
 export default RecipeForm;
-
-/* <ul>
-  <li>Hi</li>
-  {allFoods.map((f) => (
-    <li>{f.foodName}</li>
-  ))}
-</ul>; */

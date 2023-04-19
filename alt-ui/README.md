@@ -27,7 +27,7 @@ npm install react-icons
 npm install @headlessui/react
 
 <!-- npm install @headlessui/react
-npm install @heroicons/react -->
+npm install @heroicons/react 
 
 Pale green: #dde7dd
 Earth green: #6a8f6b

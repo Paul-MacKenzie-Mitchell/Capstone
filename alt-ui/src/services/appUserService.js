@@ -12,6 +12,7 @@ export function getEmptyUser() {
     email: "",
     dob: "",
     roles: [],
+    recipes: [],
   };
 }
 
