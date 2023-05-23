@@ -21,6 +21,7 @@ export async function authenticate(credentials) {
 
   if (response.ok) {
     const json = await response.json();
+    console.log(json);
     return convertJwtToUser(json.jwt);
   }
 
@@ -31,7 +32,7 @@ export async function refresh() {
   const config = {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("BG_JWT")}`,
+      Authorization: `Bearer ${localStorage.getItem("Recipe_JWT")}`,
     },
   };
 

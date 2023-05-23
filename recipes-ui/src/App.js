@@ -1,91 +1,72 @@
-import './index.css';
-
-import { createContext, useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { refresh } from "./services/authService";
+import AuthContext from "./contexts/AuthContext";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-
-import AboutUs from "./components/AboutUs";
-import Contact from "./components/Contact";
-import Home from "./components/Home";
-import HttpStatus from "./components/HttpStatus";
-import NavBar from "./components/NavBar";
+  AboutUs,
+  Contact,
+  FoodsForm,
+  Home,
+  UserLogin,
+  Recipes,
+  RecipeDetails,
+  RecipeForm,
+  UserRegistrationForm,
+  Recipebook
+} from "./pages";
+import { Navbar } from "./components";
 import Footer from "./components/Footer";
-import Profile from "./components/Profile";
-import UserLogin from "./components/UserLogin";
-import UserRegistrationForm from "./components/UserRegistrationForm";
-import { baseUrl } from './shared';
-
-export const LoginContext = createContext();
 
 function App() {
-  useEffect(() => {
-      function refreshTokens() {
-          if (localStorage.refresh) {
-              const url = baseUrl + 'api/token/refresh/';
-              fetch(url, {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                      refresh: localStorage.refresh,
-                  }),
-              })
-                  .then((response) => {
-                      return response.json();
-                  })
-                  .then((data) => {
-                      localStorage.access = data.access;
-                      localStorage.refresh = data.refresh;
-                      setLoggedIn(true);
-                  });
-          }
-      }
+  const [user, setUser] = useState();
 
-      const minute = 1000 * 60;
-      refreshTokens();
-      setInterval(refreshTokens, minute * 3);
+  useEffect(() => {
+    refresh().then(login).catch();
   }, []);
 
-  const [loggedIn, setLoggedIn] = useState(
-      localStorage.access ? true : false
-  );
-
-  function changeLoggedIn(value) {
-      setLoggedIn(value);
-      if (value === false) {
-          localStorage.clear();
-      }
+  function login(userArg) {
+    setUser(userArg);
+    localStorage.setItem("Recipe_JWT", userArg.jwt);
   }
 
+  function logout() {
+    setUser();
+    localStorage.removeItem("Recipe_JWT");
+  }
 
-
+  const auth = {
+    user,
+    login,
+    logout,
+  };
 
   return (
-    <LoginContext.Provider value={[loggedIn, changeLoggedIn]}>
-    <Router>
-      <NavBar />
-      {/* <Footer /> */}
-      <div className="container mb-5 mt-2">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/profile" element={<Profile />} /> 
-          <Route path="/userlogin" element={<UserLogin />} />
-          <Route path="/userregistration/add" element={<UserRegistrationForm />} />
-          <Route path="/userregistration/edit/:id" element={<UserRegistrationForm />} />
-          <Route path="/userregistration/delete/:id" element={<UserRegistrationForm />} />
-          <Route path="*" element={<HttpStatus message="Not Found" status={404} />} />
-        </Routes>
-      </div>
-    </Router>
-  </LoginContext.Provider>
+    <AuthContext.Provider value={auth}>
+      <Router>
+        <Navbar />
+        <Footer />
+        <div className="mb-5 mt-2">
+          <Routes>
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes">
+              <Route path="add" element={<RecipeForm />} />
+              <Route index element={<Recipes />} />
+              <Route path=":recipeId">
+                <Route index element={<RecipeDetails />} />
+                <Route path="edit" element={<RecipeForm />} />
+                <Route path="food" element={<FoodsForm />} />
+              </Route>
+            </Route>
+            <Route path="/recipebook" element={<Recipebook />}/>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/register" element={<UserRegistrationForm />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthContext.Provider>
   );
-  
 }
 
 export default App;
