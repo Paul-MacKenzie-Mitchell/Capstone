@@ -39,15 +39,13 @@ create table tags (
 create table food (
 	food_id int not null primary key auto_increment,
     food_name varchar(50) not null,
-    amount decimal(7,2) not null,
-    measurement_unit varchar(100),
-    food_category varchar(100),
-    food_description varchar(500)
+    food_category varchar(100) not null,
+    food_description varchar(500) not null
 );
 
 create table meal (
 	meal_id int not null primary key auto_increment,
-    `time` time not null,
+    `time` time(0) not null,
     meal_category varchar(50) null
 );
 
@@ -78,6 +76,8 @@ create table recipebook (
 create table ingredients (
 	recipe_id int not null,
     food_id int not null,
+	amount decimal(7,2) not null,
+    measurement_unit varchar(100) null,
     constraint fk_ingredients_recipe_id
 		foreign key (recipe_id)
         references recipe(recipe_id),
@@ -90,6 +90,8 @@ create table meal_components (
 	meal_id int not null,
     recipe_id int null,
     food_id int null,
+	amount decimal(7,2) not null,
+    measurement_unit varchar(100) null,
     constraint fk_meal_components_meal_id
 		foreign key (meal_id)
         references meal(meal_id),
