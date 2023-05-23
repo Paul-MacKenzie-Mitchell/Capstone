@@ -3,9 +3,15 @@ import { useParams } from "react-router-dom";
 
 import AuthContext from "../contexts/AuthContext";
 
-import { findById as findByRecipeId, deleteById } from "../services/recipeService";
+import {
+  findById as findByRecipeId,
+  deleteById,
+} from "../services/recipeService";
 import { findById as findByUserId } from "../services/appUserService";
-import { deleteRecipebookEntry, addRecipebookEntry } from "../services/recipebookService";
+import {
+  deleteRecipebookEntry,
+  addRecipebookEntry,
+} from "../services/recipebookService";
 import { useNavigate } from "react-router-dom";
 
 function RecipeDetails() {
@@ -17,26 +23,23 @@ function RecipeDetails() {
 
   const auth = useContext(AuthContext);
 
-  const hasAdminPrivileges = auth.user && auth.user.authorities.includes("ADMIN");
+  const hasAdminPrivileges =
+    auth.user && auth.user.authorities.includes("ADMIN");
   const hasUserPrivileges = auth.user && auth.user.authorities.includes("USER");
   let recipeEntry = false;
-
 
   useEffect(() => {
     findByRecipeId(recipeId).then(setRecipe);
     if (auth.user) {
-      findByUserId(auth.user.appUserId)
-      .then((result) => {
+      findByUserId(auth.user.appUserId).then((result) => {
         setUserRecipes(result.recipes);
-      })
+      });
     }
   }, [recipeId]);
-
 
   if (!recipe) {
     return null;
   }
-
 
   let userRecipeIds = [];
   if (userRecipes.length > 0) {
@@ -46,22 +49,18 @@ function RecipeDetails() {
     recipeEntry = true;
   }
 
-
   const handleDatabaseDelete = (id) => {
-    deleteById(id)
-    .then(() => navigate("/recipes"));
-  }
-  
+    deleteById(id).then(() => navigate("/recipes"));
+  };
+
   const handleAdd = (userId, recipeId) => {
-    const newRecipeEntry = { appUserId: userId, recipeId: recipeId  };
-    addRecipebookEntry(newRecipeEntry)
-    .then(() => navigate("/recipebook"));
-  }
+    const newRecipeEntry = { appUserId: userId, recipeId: recipeId };
+    addRecipebookEntry(newRecipeEntry).then(() => navigate("/recipebook"));
+  };
 
   const handleRecipebookDelete = (userId, recipeId) => {
-    deleteRecipebookEntry(userId, recipeId)
-    .then(() => navigate("/recipebook"));
-  }
+    deleteRecipebookEntry(userId, recipeId).then(() => navigate("/recipebook"));
+  };
 
   return (
     <>
@@ -83,11 +82,13 @@ function RecipeDetails() {
               Cook Time: {recipe.cookTime}
             </p>
             <ul className="mt-6">
-              {recipe.ingredients.length > 0 ?
-                (<li className="p-4 border-b text-center border-gray-600">
+              {recipe.ingredients.length > 0 ? (
+                <li className="p-4 border-b text-center border-gray-600">
                   Ingredients List
-                </li>) : <div></div>
-              }
+                </li>
+              ) : (
+                <div></div>
+              )}
               {recipe.ingredients.map((i) => (
                 <li className="p-4 border-b border-gray-600">
                   {i.amount} {i.measurementUnit} {i.food.foodName}
@@ -102,27 +103,45 @@ function RecipeDetails() {
           <pre className="font-sans ...">{recipe.instructions}</pre>
         </p>
       </div>
-      { hasAdminPrivileges && (
+      {hasAdminPrivileges && (
         <div className="flex items-center justify-center mt-6 gap-x-6">
-          <button onClick={() => handleDatabaseDelete(recipeId)} className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
-            Delete This Recipe<br/><em><sub>Careful&mdash;once you hit this button, this recipe will be gone forever!</sub></em>
+          <button
+            onClick={() => handleDatabaseDelete(recipeId)}
+            className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
+          >
+            Delete This Recipe
+            <br />
+            <em>
+              <sub>
+                Careful&mdash;once you hit this button, this recipe will be gone
+                forever!
+              </sub>
+            </em>
           </button>
         </div>
-      ) }
-      { ((hasAdminPrivileges || hasUserPrivileges) && recipeEntry) && (
+      )}
+      {(hasAdminPrivileges || hasUserPrivileges) && recipeEntry && (
         <div className="flex items-center justify-center mt-6 gap-x-6">
-          <button onClick={() => handleRecipebookDelete(auth.user.appUserId,recipeId)} className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
+          <button
+            onClick={() =>
+              handleRecipebookDelete(auth.user.appUserId, recipeId)
+            }
+            className="rounded-md bg-[#900603] justify-center px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D0312D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
+          >
             Delete This Recipe From My Recipebook
           </button>
         </div>
-      ) }
-      { ((hasAdminPrivileges || hasUserPrivileges) && !recipeEntry) && (
+      )}
+      {(hasAdminPrivileges || hasUserPrivileges) && !recipeEntry && (
         <div className="flex items-center justify-center mt-6 gap-x-6">
-           <button onClick={() => handleAdd(auth.user.appUserId,recipeId)} className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900">
+          <button
+            onClick={() => handleAdd(auth.user.appUserId, recipeId)}
+            className="rounded-md bg-[#6a8f6b] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-900"
+          >
             Add This Recipe to My Recipebook
           </button>
         </div>
-      ) }
+      )}
     </>
   );
 }
@@ -209,8 +228,6 @@ export default RecipeDetails;
 //   );
 // }
 
-
-
 // working buttons version
 
 // import { useEffect, useState, useContext } from "react";
@@ -234,7 +251,6 @@ export default RecipeDetails;
 //   const hasUserPrivileges = auth.user && auth.user.authorities.includes("USER");
 //   let recipeEntry = false;
 
-
 //   useEffect(() => {
 //     findByRecipeId(recipeId).then(setRecipe);
 //     if (auth.user) {
@@ -245,11 +261,9 @@ export default RecipeDetails;
 //     }
 //   }, [recipeId]);
 
-
 //   if (!recipe) {
 //     return null;
 //   }
-
 
 //   let userRecipeIds = [];
 //   if (userRecipes.length > 0) {
@@ -259,11 +273,10 @@ export default RecipeDetails;
 //     recipeEntry = true;
 //   }
 
-
 //   const handleDatabaseDelete = (id) => {
 //     deleteById(id);
 //   }
-  
+
 //   const handleAdd = (userId, recipeId) => {
 //     const newRecipeEntry = { appUserId: userId, recipeId: recipeId  };
 //     addRecipebookEntry(newRecipeEntry);
